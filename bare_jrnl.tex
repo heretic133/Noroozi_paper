@@ -511,34 +511,71 @@
 	
 	In recent years, brain imaging techniques like Positron Emission Tomography(PET) \cite{r21}, Electroencephalography (EEG)\cite{r22} and functional Magnetic Resonance Imaging (fMRI)\cite{r23} have been used in analysis of AD. Due to the high spatial resolution and relatively lower costs, fMRI is vastly used among researchers in order to monitor brain activities especially in AD and all it's stages in which detecting abnormalities within small brain regions is essential. 
 	An fMRI sample is naturally a 4D tensor consisting of 3D voxels moving in time, and each voxel contains an intensity value that is proportional to the strength of the Blood Oxygenation Level Dependent(BOLD) signal , which is a measure of the changes in blood flow, to estimate the active regions in the brain\cite{r07}.
-	Resting State fMRI(rs-fMRI) is an fMRI technique in which the patient is asked to rest(without sleeping) during the whole scan, is usually used in order to analyze the brain diseases like AD or autism. rs-fMRI focuses on the low-frequency $\left( < 0.1 Hz \right)$  oscillations of BOLD signal, which presents the underlying neuronal activation patterns of brain regions[8]–[10]. 
-	
-Since the number of voxels within a single full scan is high 
-($5000$ up to roughly $200,000$[ref(Definingnodes)]) and they form strong spatial relations, parcellation of the brain for further analysis has moved toward the use
+	Resting State fMRI(rs-fMRI) is an fMRI technique in which the patient is asked to rest during the whole scan, focuses on the low-frequency $\left( < 0.1 Hz \right)$  oscillations of BOLD signal, which presents the underlying neuronal activation patterns of brain regions[8]–[10]. rs-fMRI is usually used in order to analyze the brain diseases like AD or autism\cite{r33,r34}
+%
+%Since the number of voxels within a single full scan is high 
+%($5000$ up to roughly $200,000$[ref(Definingnodes)]) and they form strong spatial relations, 
+
+Since each fMRI volume consist of hundreds of thousands of voxels which are often highly correlated with the surrounding voxels in the brain volume, parcellation of the brain for further analysis has moved toward the use
 of anatomical atlases. These atlases are strictly defined using
 anatomical features of the brain, like locations of common gyri
-and do not rely on any functional information. To generate data
-using an atlas based approach, the BOLD signal from all voxels is averaged within each brain region called Region of Interest(ROI).
-By putting together the average time-series for all the ROIs, the $i$th volume would become $X_i \in \mathbb{R}^{T \times R} , i = \{1,2,\cdots, S\}$ in which $R$, $T$ and $S$ represents the number of ROIs, time points and samples respectively. The process of obtaining such matrix is shown in Figure \eqref{g1.1}. 
-Two major studies could carry out using these  $X_i$s: 
+and do not rely on any functional information.
+To generate data
+using an atlas based approach, the BOLD signal from all voxels is averaged within each brain region called Region of Interest(ROI)\cite{r09}.
+By putting together the average time-series for all the ROIs, the $i$th volume would become $X_i \in \mathbb{R}^{T \times R} , i = \{1,2,\cdots, S\}$ in which $R$, $T$ and $S$ are the number of ROIs, time points and samples respectively. The process of obtaining such matrix is shown in Figure \eqref{g1.1}. 
+
+There are two major studies associated with rs-fMRI data: finding common brain disorders caused by diseases like Alzheimer's or autism, and more recently detecting patients with brain disorders using classification techniques. Due to the high dimensionality of data and the nature of diseases like eMCI which does not show any reliable clinical symptoms, achieving both above goals requires advanced data analysis tools such as machine learning techniques. 
+
+   
+
+
+%Two major studies could carry out using these  $X_i$s: 
+%\begin{itemize}
+%	\item Identifying patients with brain disorders: Because of the nature of the data, advance machine learning techniques should be deployed inorder to detect any abnormalities within an individual scan. 
+%	In recent years, classification techniques has been deployed  to classify the $X_i$s. These studies holds great promise for eMCI detection.     
+%	\item Extracting common patterns caused by a disease: An other useful information that could be extracted from such data, is the detection of common patterns emerging from a certain brain disorder such as eMCI. For example, compared with the healthy,  MCI patients have been observed both increased and decreased activities within  different brain regions [4].
+%\end{itemize}
+
+A powerful tool that is commonly used in order to achieve aforementioned goals is Functional Connectivity(FC) network.  FC is a $region \times region$ matrix $\bar{X}_i$ in which $\bar{x}_{ij}$ represents the functional connectivity between the $i$th and $j$th ROI. Functional connectivity is an observable
+phenomenon quantifiable with measures of statistical dependencies, such as correlations, coherence, or transfer entropy([][]).  Recent studies have shown that some brain disorders like AD could alter the way that some brain regions interact with each other. For example, compared with the healthy, AD patients have been found decreased functional connectivity between hippocampus and other brain regions, and MCI patients have been observed increased functional connectivity between the frontal lobe and other brain regions[4]. 
+Although FCs show promising results, there are two main criticisms towards using them. Variety of methods such as Pairwise Pearson’s correlation coefficient \cite{r10, r11}, sparse representation \cite{r10, r12, r13}  and Sparse Inverse Covariance Estimation (SICE) exists to obtain an FC which results in sevier different networks. On the other hand, computing the correlation based on the entire time series of fMRI data simply measures the FC between ROIs with a scalar value, which is fixed across time. This actually implicitly hypothesizes the stationary interaction patterns among ROIs. As a result, this method may overlook the complex and dynamic interaction patterns among ROIs, which are essentially time-varying \cite{r16}\textendash \cite{r19}. 
+
+
+
+ 
+
+%There are two major issues associated with FC networks:
+%\begin{itemize}
+%	\item There are variety of methods for obtaining the FC matrix which heavily affect the quality of the network. Pairwise Pearson’s correlation coefficient \cite{r10, r11}, sparse representation \cite{r10, r12, r13}  and Sparse Inverse Covariance Estimation (SICE) are of the popular ones \cite{r14, r15}. While the first two are easy to understand and can capture pairwise functional relationship based on a pair of ROIs, the latter can account for more complex interactions among multiple ROIs, but the estimation of partial correlation involves an inversion of a covariance matrix, which may be ill-posed due to the singularity of the covariance matrix. 
+%	
+%	\item On the other hand, computing the correlation based on the entire time series of fMRI data simply measures the FC between ROIs with a scalar value, which is fixed across time. This actually implicitly hypothesizes the stationary interaction patterns among ROIs. As a result, this method may overlook the complex and dynamic interaction patterns among ROIs, which are essentially time-varying \cite{r16}\textendash \cite{r19}.
+%	
+%\end{itemize}
+
+
+In order to use FC networks for finding common brain alterations caused by a disease, an FC is usually extracted for each sample, and then a representative is obtained from the combination of these FCs. 
+There are two main issues associated with this approach:
 \begin{itemize}
-	\item Identifying patients with brain disorders: Because of the nature of the data, advance machine learning techniques should be deployed inorder to detect any abnormalities within an individual scan. 
-	In recent years, classification techniques has been deployed  to classify the $X_i$s. These studies holds great promise for eMCI detection.     
-	\item Extracting common patterns caused by a disease: An other useful information that could be extracted from such data, is the detection of common patterns emerging from a certain brain disorder such as eMCI. For example, compared with the healthy,  MCI patients have been observed both increased and decreased activities within  different brain regions [4].
+	\item There are variety of methods for obtaining the FC matrix which heavily affect the quality of the network. Pairwise Pearson’s correlation coefficient \cite{r10, r11}, sparse representation \cite{r10, r12, r13}  and Sparse Inverse Covariance Estimation (SICE) are of the popular ones \cite{r14, r15}. While the first two are easy to understand and can capture pairwise functional relationship based on a pair of ROIs, the latter can account for more complex interactions among multiple ROIs, but the estimation of partial correlation involves an inversion of a covariance matrix, which may be ill-posed due to the singularity of the covariance matrix. 
+	
+	
 \end{itemize}
 
-A common and yet powerful tool for fMRI analysis is Functional Connectivity (FC) network.  In
-functional brain networks, nodes represent ROIs, and edges measure functional connectivity
-between pairs of nodes. Functional connectivity is an observable
-phenomenon quantifiable with measures of statistical dependencies, such as correlations, coherence, or transfer entropy([][]). FC is simply a $region \times region$ matrix $\bar{X}_i$ in which $\bar{x_{ij}}$ represents the functional connectivity between the $i$th and $j$th ROI. Recent studies have shown that some brain disorders like AD could alter the way that some brain regions interact with each other. For example, compared with the healthy, AD patients have been found decreased functional connectivity between hippocampus and other brain regions, and MCI patients have been observed increased functional connectivity between the frontal lobe and other brain regions[4].  
+ Since the common patterns are not considered in the first place, additional data such as noise or outliers could heavily affect the results.
 
-FCs could be used for both mentioned tasks. In order to extract common patterns caused by a disease, usually an FC network is constructed for each individual and then a representative would be calculated(by averaging over FCs of using data-driven methods like PCA) based on these single FCs. The problem with such methods is that they rely on single FCs(?) * * *.
+
+
+
+
+
+
+
 Since FCs have been proved to highlight alteration within brain connectivity patterns, they became the favorite candidate for classification purposes. So instead of using $X_i$s, their corresponding FCs i.e. $\bar{X}_i$s are classified in order to detect the patients with eMCI. Two issues are generally
 involved with this strategy:
   
 \begin{itemize}
 	\item \textbf{Obtaining the proper FC:}
-	For correlation computations, different methods have been explored, among which the pairwise Pearson’s correlation coefficient \cite{r10, r11}, sparse representation \cite{r10, r12, r13}  and Sparse Inverse Covariance Estimation (SICE) are of the popular ones \cite{r14, r15}. While the first two are easy to understand and can capture pairwise functional relationship based on a pair of ROIs, the latter can account for more complex interactions among multiple ROIs, but the estimation of partial correlation involves an inversion of a covariance matrix, which may be ill-posed due to the singularity of the covariance matrix. On the other hand, computing the correlation based on the entire time series of fMRI data simply measures the FC between ROIs with a scalar value, which is fixed across time. This actually implicitly hypothesizes the stationary interaction patterns among ROIs. As a result, this method may overlook the complex and dynamic interaction patterns among ROIs, which are essentially time-varying \cite{r16}\textendash \cite{r19}.
+	
 	
 	\item \textbf{Extracting key features from FCs:}
 	Since the majority of classification techniques such as SVM or KNN uses vectors as their input, the obtained FC should be vectorized which leads to serious problems such as curse of dimensionality or over-fitting. Moreover, vectorization may destroy some useful property embedded within data. For example SICE matrix is naturally SPD, but this property gets destroyed in the vectorization. Several dimension reduction methods have been proposed in order to overcome this issue. As an example [] uses the SPD property of SICE in order to reduce it's dimensionality using kernel PCA and obtaining a much smaller set of features for each sample. 
@@ -1634,8 +1671,10 @@ It is noteworthy that non of these techniques consider the multi-linearity natur
 		
 		\bibitem{r32}Jacobs, Heidi IL, et al. "The cerebellum in Alzheimer’s disease: evaluating its role in cognitive decline." Brain 141.1 (2017): 37-47.
 		
-		\bibitem{r33}
-		\bibitem{r34}
+		\bibitem{r33}de Vos, Frank, et al. "A comprehensive analysis of resting state fMRI measures to classify individual patients with Alzheimer's disease." Neuroimage 167 (2018): 62-72.
+		
+		\bibitem{r34}Dvornek, Nicha C., Pamela Ventola, and James S. Duncan. "Combining phenotypic and resting-state fMRI data for autism classification with recurrent neural networks." 2018 IEEE 15th International Symposium on Biomedical Imaging (ISBI 2018). IEEE, 2018.
+		
 		\bibitem{r35}
 		
 		
