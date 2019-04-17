@@ -513,8 +513,6 @@
 	An fMRI sample is naturally a 4D tensor consisting of 3D voxels moving in time, and each voxel contains an intensity value that is proportional to the strength of the Blood Oxygenation Level Dependent(BOLD) signal , which is a measure of the changes in blood flow, to estimate the active regions in the brain\cite{r07}.
 	Resting State fMRI(rs-fMRI) is an fMRI technique in which the patient is asked to rest(without sleeping) during the whole scan, is usually used in order to analyze the brain diseases like AD or autism. rs-fMRI focuses on the low-frequency $\left( < 0.1 Hz \right)$  oscillations of BOLD signal, which presents the underlying neuronal activation patterns of brain regions[8]–[10]. 
 	
-{\color{red} * * * * * * * * * * * * * * * *}
-
 Since the number of voxels within a single full scan is high 
 ($5000$ up to roughly $200,000$[ref(Definingnodes)]) and they form strong spatial relations, parcellation of the brain for further analysis has moved toward the use
 of anatomical atlases. These atlases are strictly defined using
@@ -554,7 +552,6 @@ involved with this strategy:
 		\caption{Simulation results for the network.}
 		\label{g1.1}
 	\end{figure*}
-{\color{red}  * * * * * * * * * * * * * * * *}
 
 
 in this paper we show that tensor representation is the natural form to present fMRI images. by this representation, we would be able to work with time and region features seperately in the same time. also with this representation we an easy and affordable multilinear dimension reduction that works with time and region features seperately this will be done by high order singular value decomposition of of the normal and eMCI subjects.
@@ -632,38 +629,16 @@ in this paper we show that tensor representation is the natural form to present 
 	%%Dr.Rezghi
 	
 	
-	\section{Related Works}
-	
-	
-	\subsection{Tensor Factorization and tensor learning} 
-	is a higher-order extension of matrix
-	factorization that elicit intrinsic multi-way structure and capture the underlying patterns in tensor data. There are
-	many excellent works for tensor factorization The two most commonly used factorization techniques are CP and Tucker. Compared to Tucker, CP is more frequently used due to its properties of uniqueness and simplicity. A comprehensive survey on
-	tensor factorization can be found in. However, the existing works are mainly based on multilinear factorization schemes, and are difficult to model nonlinear relationships and to discover complex patterns in data.
-	Supervised tensor learning has been extensively studied
-	in recent years. For example, proposed a supervised
-	tensor learning framework, which extends the standard
-	linear SVM learning framework to tensor patterns by constructing multilinear models. Under this learning framework,
-	several linear tensor-based models
-	are developed, whereas the problem of how to build nonlinear
-	models directly on tensor data has not been well studied.
-	In order to apply kernel modeling for tensor data, several
-	works have been presented to convert
-	the tensors into vectors (or matrices), which are then
-	used to construct kernels. However, this kind of conversion
-	will result in the following two problems: 1) break
-	the natural multi-way structure and correlation in the original
-	data; 2) lead to the curse of dimensionality and
-	small sample size problems. The problem of how to
-	build kernel modeling directly on tensor data has not been
-	well studied. Most recent attempt in this direction is related
-	to CP factorization proposed in, while it has the same
-	drawback as CP factorization.
-	
-	\subsection{Brain network classification:}
-	Classification techniques has been one of the most powerful tools in order to investigate in brain diseases. Here we briefly explain two state of the art methods which differs in their core hypothesis which is the stationary property of time in order to construct the FC.  
-	
-	\subsubsection{Compact SICE}
+	\section{eMCI classification techniques}
+
+	As it was discussed before, classification techniques have become a favorable method for Alzheimer disease early detection. early classification methods used $X_{i}$s as the representative for each subject and used them directly in the classification process. 
+	As the functional connectivity matrix gain popularity among researchers, the majority of these classification methods shifted towards classifying the functional connectivity matrices. There are two main paradigms towards obtaining the FCs. Stationary and non-stationary methods, Stationary methods use a single scaler value in order to determine the functional connectivity between two ROIs. Non-stationary methods consider a more complex relation between ROIs that can not be best captured with a single scaler value. 
+	    
+	In order to demonstrate the power of our proposed framework, we have implemented an state of the art method from each of these paradigms. The first method which is an stationary one uses the Sparse Inverse Covariance matrix in order to establish a functional connectivity matrix and then using the SPD property of SICE, propose a dimension reduction technique in order to find a set of low dimensional features for classification. The second method which is non-stationary, uses sliding windows to  construct a more complex connectivity matrix and uses clustering in order to obtain low dimensial features for classification.     
+
+
+\begin{itemize}
+	\item \textbf{Compact SICE:}
 	In this method, first the SICE matrix is extracted from the data sample $S$ using the following optimization: 
 	\begin{align}
 	S^* = \operatorname{arg} \max\limits_{S\succ 0} \hspace{3mm} \log \left( \det(S) \right) - \operatorname{tr}(CS) - \lambda \norm{S}_1
@@ -673,7 +648,7 @@ in this paper we show that tensor representation is the natural form to present 
 	Since SICE is an SPD matrix, specific distance functions such as Log-Euclidean distance or Root Stein divergence can be used as the distance function in the Gaussian kernel.
 	After extracting key features, conventional methods like SVM or Knn could be deployed for classification.
 	
-	\subsubsection{High Order Networks(HON)}
+	\item \textbf{High Order Networks(HON)}
 	This method uses so called High Order Networks as features for classification purposes. it uses the sliding window technique in order to split the time-series into smaller pieces and then find the relation between them. Let $x_{i}^{(l)}(k) \in \mathbb{R}^N$ denote the $k$-th segment of subseries extracted from $x_{i}^{(l)}$, which comprises $N$ image volumes. by taking each $x_{i}^{(l)}(k)$ as a node A network can be constructed with edges defined using:
 	\[
 	C_{ij}^{(l)}(k) = \operatorname{corr}\left(x_{i}^{(l)}(k),x_{j}^{(l)}(k)
@@ -707,6 +682,9 @@ in this paper we show that tensor representation is the natural form to present 
 	converted into that between the respective mean correlation
 	time series in clusters. After reducing the network size, the
 	weighted-graph local clustering coefficients was used to select the key features for each network and then SVM is used in order to classify the obtained features.  
+\end{itemize}
+
+It is noteworthy that non of these techniques consider the multi-linearity nature of the data, and since both methods use traditional classifiers like SVM or KNN, they follow a rather complex path to find vector features as the representative of each FC matrix.
 	
 	\section{Preliminaries} \label{Chap_3}
 	In this section, we briefly introduce some preliminary knowledge from tensor algebra. For a deeper introduction
