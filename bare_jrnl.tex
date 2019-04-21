@@ -552,12 +552,14 @@
 	%	
 	%\end{itemize}
 	
-	Finding an FC that highlights the patterns caused by a disease has been a common goal in rs-fMRI study for a long time. Several approaches exists to find common patterns among different brain scans. Data driven methods such as kernel-PCA or clustering techniques have been proposed for this task. But ultimately most of them rely on calculating a network for each volume. This may overlook the role of noises or outliers within the data. As we will show later, our proposed method does not rely on any individual FC calculations and treats the each class as a whole in order to calculate the FC.  
+	Finding an FC that highlights the patterns caused by a disease has been a common goal in rs-fMRI study for a long time. Several approaches exists to find common patterns among different brain scans. Data driven methods such as kernel-PCA or clustering techniques have been proposed for this task. But ultimately most of them rely on calculating a network for each volume. This may overlook the role of noises or outliers within the data. As we will show later, our proposed method does not rely on any individual FC calculations and treats each class as a whole in order to calculate the FC.  
 	
-	FCs are also used as features for classification. So instead of using $X_i$s, their corresponding FCs i.e. $\bar{X}_i$s are classified in order to detect the patients with eMCI. A straightforward way is to vectorize the FCs into high-dimensional vectors as features as in \cite{r33}, which are then used to train a SVM or k-NN classifier. this method produces poor performance due to the phenomena known as Curse of Dimensionality. Variety of techniques have been proposed in order to reduce the dimensionality of these FCs but since they all use conventional classifiers like SVM or k-NN, one way or an other they have to vectorize the data in order to feed it to these classifiers. Alongside  the curse of dimensionality, vectorization also destroys potential information that are embedded in the structure of data. This problem have been studied specially in image processing in which vectorization destroys the spatial relations within an image.
-	
-	So far we have listed two goals: finding an FC for a whole class and detecting a disorder via classification, along with common methods to reach them. In this paper we propose a framework based on high dimensional data structures known as tensors, in order to achieve both goals with a single operation.  
-	
+	FCs are also used as features for classification. So instead of using $X_i$s, their corresponding FCs i.e. $\bar{X}_i$s are classified in order to detect the patients with eMCI. A straightforward way is to vectorize the FCs into high-dimensional vectors as features as in \cite{r33}, which are then used to train a SVM or k-NN classifier. this method produces poor performance due to the phenomena known as Curse of Dimensionality. Variety of techniques have been proposed in order to reduce the dimensionality of these FCs but since they all use conventional classifiers like SVM or k-NN, one way or an other they have to vectorize the data in order to feed it to these classifiers. Alongside  the curse of dimensionality, vectorization also destroys potential information that are embedded in the structure of data. 
+	{\color{red}
+	This problem have been studied specially in image processing in which vectorization destroys the spatial relations within an image.
+	}
+
+	In this paper, based on high order tensor decomposition, we have created a framework in which the mentioned goals i.e. finding an FC for a whole  class and detecting a disorder via classification  could be achieved via a single High Order Singular Value Decomposition (HOSVD). The proposed framework reveals both functional connectivities related to eMCI that are confirmed by empirical methods along with novel connectivities. The proposed classifier also outperforms state of the art eMCI classification methods. 
 	\begin{figure*}[!t]
 		\centering
 		\includegraphics[width=6in]{Data}
@@ -566,52 +568,53 @@
 		\label{g1.1}
 	\end{figure*}
 	
-	Viewing each class as a tensor allows us to work with time and region features separately but simultaneously. This multilinear view ables us to use high dimensional tensor decomposition techniques such as HOSVD, affordable multilinear dimension reduction,  could be deployed 
+	Viewing each class as a tensor allows us to work with \textit{time} and \textit{region} features separately but simultaneously. This multilinear view
+	ables us to design a proper dimension reduction relative to the nature of each feature along with a discriminant function based on linear regression that uses the test data to enhance the quality of the training set without forcing any apriory knowledge to the classifier, a task which is not possible through well known classifiers like SVM, logistic regression or k-NN. It is also notable that the proposed discriminant function  
+	directly classifies the $X_i$s. Having the FC calculation step omitted not only heavily affects on the computational performance of the method, it also saves us from the troubles of FCs mentioned before.        
 	
 	
+%	in this paper we show that tensor representation is the natural form to present fMRI images. by this representation, we would be able to work with time and region features seperately in the same time. also with this representation we an easy and affordable multilinear dimension reduction that works with time and region features seperately this will be done by high order singular value decomposition of of the normal and eMCI subjects.
 	
-	in this paper we show that tensor representation is the natural form to present fMRI images. by this representation, we would be able to work with time and region features seperately in the same time. also with this representation we an easy and affordable multilinear dimension reduction that works with time and region features seperately this will be done by high order singular value decomposition of of the normal and eMCI subjects.
+%	also we show that by this representation and using the obtained HOSVD, dimension reduction step we can obtain tensor based discriminat features for classification. this discriminant method furthermore simplicity is very effective. here we show that by this framework the test data also could have effect in construction of discriminant function which is impossible in well known classification methods like SVM, logistic regression and etc. 
 	
-	also we show that by this representation and using the obtained HOSVD, dimension reduction step we can obtain tensor based discriminat features for classification. this discriminant method furthermore simplicity is very effective. here we show that by this framework the test data also could have effect in construction of discriminant function which is impossible in well known classification methods like SVM, logistic regression and etc. 
+%	by this approach the construction of FC feature that was time consuming is ignored and we represent an other method that at the same time with simple structure and low computation cost gives very high quality results with the other state of the art methods. 
 	
-	by this approach the construction of FC feature that was time consuming is ignored and we represent an other method that at the same time with simple structure and low computation cost gives very high quality results with the other state of the art methods. 
-	
-	in fMRI data, one other feature is the fnctional connectivity of normal and abnormal subjects. as the third innovation of this paper we showed that based on hosvd of normal and eMCI patients and effective and high quality functional connectivity network can be extracted for both classes. we will show that some connectivities that are discovered via these FCs are well studied in recent clinical documents and thus . . . 
+%	in fMRI data, one other feature is the fnctional connectivity of normal and abnormal subjects. as the third innovation of this paper we showed that based on hosvd of normal and eMCI patients and effective and high quality functional connectivity network can be extracted for both classes. we will show that some connectivities that are discovered via these FCs are well studied in recent clinical documents and thus . . . 
 	
 	%%ostad 3
 	
+%	
+%	Distinguishing two rs-fMRI volumes in the machine learning viewpoint can be considered as a two class classification problem.
+%	%
+%	%in the first view, usualy and fMRI image in learning is considered as a time x region matrix $X_i \in T \times R$.
+%	Some methods use the vectorized version of samples ie, $x_i = vec(X_i)\in \mathbb{R}^T$ as  inputs of the learning process. However as we will discuss later, this vectorization may cause the loss of some important properties within the structure of data, and because of that the dominant approaches tend to find different set of features for each sample. These methods  construct a $region \times region$ matrix $\bar{X}_i \in \mathbb{R}^{R \times R}$ which is often called functional connectivity (FC) matrix and indicates the between correlation of ROIs. Since in most fMRI samples the number of timepoints is larger that the number of ROIs i.e.  $ T  > R$, substituting $X_i$ with $\bar{X}_i$ reduce the number of features and the effects of the \textit{curse of dimensionality}, also 
+%	it has been shown that using FC can enhance small between region connections hence turns FC into a powerful tool for rs-fMRI data analysis. For correlation computation, different methods have been explored, among which the pairwise Pearson’s correlation coefficient \cite{r10, r11}, sparse representation \cite{r10, r12, r13}  and Sparse Inverse Covariance Estimation (SICE) are of the popular ones \cite{r14, r15}. While the first two are easy to understand and can capture pairwise functional relationship based on a pair of ROIs, the latter can account for more complex interactions among multiple ROIs, but the estimation of partial correlation involves an inversion of a covariance matrix, which may be ill-posed due to the singularity of the covariance matrix. On the other hand, computing the correlation based on the entire time series of RS-fMRI data simply measures the FC between ROIs with a scalar value, which is fixed across time. This actually implicitly hypothesizes the stationary interaction patterns among ROIs. As a result, this method may overlook the complex and dynamic interaction patterns among ROIs, which are essentially time-varying \cite{r16}\textendash \cite{r19}.
+%	In order to overcome this issue, some methods have been proposed that consider the time as a non-stationery property. As for an example [] uses sliding-window technique in order to divide the time series into several smaller parts and then calculate the between correlation of these parts.[][] although these methods show promissing classification results, they are not computational favorable and since the aspect of region is not preserved in the final model, the relation between the high-order FC and the real world FC is somewhat ambigues. After calculating the FC, conventional classifiers like SVM or KNN is deployed in order to classify the vectorized FC for each sample \cite{r20}. 
 	
-	Distinguishing two rs-fMRI volumes in the machine learning viewpoint can be considered as a two class classification problem.
-	%
-	%in the first view, usualy and fMRI image in learning is considered as a time x region matrix $X_i \in T \times R$.
-	Some methods use the vectorized version of samples ie, $x_i = vec(X_i)\in \mathbb{R}^T$ as  inputs of the learning process. However as we will discuss later, this vectorization may cause the loss of some important properties within the structure of data, and because of that the dominant approaches tend to find different set of features for each sample. These methods  construct a $region \times region$ matrix $\bar{X}_i \in \mathbb{R}^{R \times R}$ which is often called functional connectivity (FC) matrix and indicates the between correlation of ROIs. Since in most fMRI samples the number of timepoints is larger that the number of ROIs i.e.  $ T  > R$, substituting $X_i$ with $\bar{X}_i$ reduce the number of features and the effects of the \textit{curse of dimensionality}, also 
-	it has been shown that using FC can enhance small between region connections hence turns FC into a powerful tool for rs-fMRI data analysis. For correlation computation, different methods have been explored, among which the pairwise Pearson’s correlation coefficient \cite{r10, r11}, sparse representation \cite{r10, r12, r13}  and Sparse Inverse Covariance Estimation (SICE) are of the popular ones \cite{r14, r15}. While the first two are easy to understand and can capture pairwise functional relationship based on a pair of ROIs, the latter can account for more complex interactions among multiple ROIs, but the estimation of partial correlation involves an inversion of a covariance matrix, which may be ill-posed due to the singularity of the covariance matrix. On the other hand, computing the correlation based on the entire time series of RS-fMRI data simply measures the FC between ROIs with a scalar value, which is fixed across time. This actually implicitly hypothesizes the stationary interaction patterns among ROIs. As a result, this method may overlook the complex and dynamic interaction patterns among ROIs, which are essentially time-varying \cite{r16}\textendash \cite{r19}.
-	In order to overcome this issue, some methods have been proposed that consider the time as a non-stationery property. As for an example [] uses sliding-window technique in order to divide the time series into several smaller parts and then calculate the between correlation of these parts.[][] although these methods show promissing classification results, they are not computational favorable and since the aspect of region is not preserved in the final model, the relation between the high-order FC and the real world FC is somewhat ambigues. After calculating the FC, conventional classifiers like SVM or KNN is deployed in order to classify the vectorized FC for each sample \cite{r20}. 
+%	Although FC grants us certain useful structural properties such as being SPD and having relatively low dimensionality, using  it in the classification process has its own drawbacks such as calculating the proper FC and extracting key features from it. Considering these issues we have come up with a framework that eliminate the need for finding the FC in the classification process. Also the proposed framework works directly with the sample matrix and preserve its structural integrity by avoiding the vectorization using novel multilinear techniques.    
+%	(more about vectorization?)
 	
-	Although FC grants us certain useful structural properties such as being SPD and having relatively low dimensionality, using  it in the classification process has its own drawbacks such as calculating the proper FC and extracting key features from it. Considering these issues we have come up with a framework that eliminate the need for finding the FC in the classification process. Also the proposed framework works directly with the sample matrix and preserve its structural integrity by avoiding the vectorization using novel multilinear techniques.    
-	(more about vectorization?)
-	
-	In this paper we claim that by considering $X_i \in \mathbb{R}^ {T \times R}$ as the sample, the dataset could be considered as an order three tensor. Using this representation we have shown that by extremely lower computational cost compared with other methods, and without the need to construct FC, a framework can be designed that only by one High Order Singular Value Decomposition (HOSVD) for each class could give us the desired results. This framework which we call it \textbf{TBNA} (High Order Feature Selection and Extraction) does three main tasks: 
-	\begin{itemize}
-		\item
-		\textbf{Dimension Reduction:}
-		The proposed frameworks allows us to select key features of each mode  (i.e. \textit{Time}, \textit{Region} and \textit{sample}) of the constructed tensor seperately and differently. This feature extraction would cause a massive reduction of the dimensions.
-		
-		\item
-		\textbf{Classification:} 
-		Based on the properties of the HOSVD, we have eliminated the vectorization at any step and hence assure that no information is lost in the vectorization process. Moreover we have formed a novel  classification enhancement technique that allows the test samples to cooperate in the training phase. This technique increases the tendency of the test sample to it's true class without forcing any apriory knowledge about it's label to the trainer. 
-		
-		\item
-		\textbf{Functional Connectivity Network Construction:}
-		Being able to see the class as a whole ables us to derive a Functional Connectivity network for each class. Such FCs allows us to investigate on shared properties within each class such as functional abnormalities of some ROIs or the connection between them.  
-		
-	\end{itemize}
-	
-	change
-	
-	
-	%The novelty of this paper can be categorized in two cases:  The dimension reduction of fMRI samples, and the enhanced classifier. 
-	
+%	In this paper we claim that by considering $X_i \in \mathbb{R}^ {T \times R}$ as the sample, the dataset could be considered as an order three tensor. Using this representation we have shown that by extremely lower computational cost compared with other methods, and without the need to construct FC, a framework can be designed that only by one High Order Singular Value Decomposition (HOSVD) for each class could give us the desired results. This framework which we call it \textbf{TBNA} (High Order Feature Selection and Extraction) does three main tasks: 
+%	\begin{itemize}
+%		\item
+%		\textbf{Dimension Reduction:}
+%		The proposed frameworks allows us to select key features of each mode  (i.e. \textit{Time}, \textit{Region} and \textit{sample}) of the constructed tensor seperately and differently. This feature extraction would cause a massive reduction of the dimensions.
+%		
+%		\item
+%		\textbf{Classification:} 
+%		Based on the properties of the HOSVD, we have eliminated the vectorization at any step and hence assure that no information is lost in the vectorization process. Moreover we have formed a novel  classification enhancement technique that allows the test samples to cooperate in the training phase. This technique increases the tendency of the test sample to it's true class without forcing any apriory knowledge about it's label to the trainer. 
+%		
+%		\item
+%		\textbf{Functional Connectivity Network Construction:}
+%		Being able to see the class as a whole ables us to derive a Functional Connectivity network for each class. Such FCs allows us to investigate on shared properties within each class such as functional abnormalities of some ROIs or the connection between them.  
+%		
+%	\end{itemize}
+%	
+%	change
+%	
+%	
+%	%The novelty of this paper can be categorized in two cases:  The dimension reduction of fMRI samples, and the enhanced classifier. 
+%	
 	To verify our approach, we conduct an extensive experimental study on rs-fMRI data from the
 	benchmark dataset ADNI\footnote{http://adni.loni.usc.edu/} As will be seen, the results well demonstrate the effectiveness and advantages of our method. Specifically, the proposed TBNA system, not only grants us superior classification accuracy to that from other methods, it is also much faster. We have also confirmed our achieved FC matrix using empirical data on the eMCI functional connectivity patterns.
 	
@@ -1558,14 +1561,18 @@ since $X$ added to both data sets, so we did not its labe and the method in true
 	%\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
 	% or if you just want to reserve a space for a photo:
 	
-	\begin{IEEEbiography}{Ali Noroozi}
+	\begin{IEEEbiography}{Mansoor Rezghi}
 		
+	\end{IEEEbiography}
+
+	\begin{IEEEbiography}{Ali Noroozi}
+	
 	\end{IEEEbiography}
 	
 	% if you will not have a photo at all:
-	\begin{IEEEbiographynophoto}{Mansoor Rezghi}
-		
-	\end{IEEEbiographynophoto}
+%	\begin{IEEEbiographynophoto}{Mansoor Rezghi}
+%		
+%	\end{IEEEbiographynophoto}
 	
 	% insert where needed to balance the two columns on the last page with
 	% biographies
