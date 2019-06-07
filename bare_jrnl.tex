@@ -389,7 +389,9 @@
 	% Do not put math or special symbols in the title.
 	%\title{Bare Demo of IEEEtran.cls\\ for IEEE Journals}
 	%
-	\title{Multi-way Feature Extraction and Selection for  Alzheimer’s Disease Early Detection } 
+	\title{A Tensor Based Framework for fMRI Classification and Functional Connectivity Construction} 
+%	
+%	\title{A tensor based classification and functional connectivity construction for fMRI images of Alzheimer's Disease in Early stages } 
 	%
 	% author names and IEEE memberships
 	% note positions of commas and nonbreaking spaces ( ~ ) LaTeX will not break
@@ -400,13 +402,15 @@
 	% was not built to handle multiple paragraphs
 	%
 	
-	\author{AA ~AA,
-		AA~AA% <-this % stops a space
-		\thanks{M. Shell was with the Department
-			of Electrical and Computer Engineering, Georgia Institute of Technology, Atlanta,
-			GA, 30332 USA e-mail: (see http://www.michaelshell.org/contact.html).}% <-this % stops a space
-		\thanks{J. Doe and J. Doe are with Anonymous University.}% <-this % stops a space
-		\thanks{Manuscript received April 19, 2005; revised August 26, 2015.}}
+	\author{Ali. Noroozi,
+		% \thanks{A. Noroozi was with the Department
+		%		of Computer science , Atlanta,
+		%		GA, 30332 USA e-mail: (see http://www.michaelshell.org/contact.html).}
+		Mansoor Rezghi% <-this % stops a space
+		% <-this % stops a space
+		\thanks{A. Noroozi and M. Rezghi are with Computer Science, Tarbiat Modares university, Tehran-Iran.}% <-this % stops a space
+		%\thanks{Manuscript received April 19, 2005; revised August 26, 2015.}
+	}
 	
 	% note the % following the last \IEEEmembership and also \thanks - 
 	% these prevent an unwanted space from occurring between the last author name
@@ -466,14 +470,14 @@
 		Considering these problems and based on the 4D nature of the data, we have came up with a novel framework which omits the FC construction part and preserve the structural integrity of data for the classification.
 		The proposed framework uses the High Order Singular Value Decomposition (HOSVD) in order to prune the classes and select the proper basis for each of them. This framework also allows us to obtain an FC matrix based on a class but not a single sample which helps us to shed more lights on the brain abnormalities in the Alzheimers disease at its early stages. 
 		Extensive experiments using the ADNI dataset demonstrate that
-		our proposed framework effectively boosts the fMRI classification performance in Alzheimer's disease.
+		our proposed framework effectively boosts the fMRI classification performance and reveals novel connectivity patterns in Alzheimer's disease at its early stages.
 	\end{abstract}
 	
 	
 	
 	% Note that keywords are not normally used for peerreview papers.
 	\begin{IEEEkeywords}
-		IEEE, IEEEtran, journal, \LaTeX, paper, template.
+		Alzheimer’s disease (AD) classification, Functional Connectivity, Tensor, High Order Singular Value Decomposition, Dimension Reduction.
 	\end{IEEEkeywords}
 	
 	
@@ -509,12 +513,14 @@
 	% 
 	% Here we have the typical use of a "T" for an initial drop letter
 	% and "HIS" in caps to complete the first word.
-	\IEEEPARstart{A}{lzheimer’s} disease (AD) is a progressive neurodegenerative disorder with a long pre-morbid asymptomatic period \cite{r01} which affects millions of elderly individuals worldwide. It is predicted that the number of affected people will double in the next 20 years, and 1 in 85 people will be affected by 2050 \cite{r02}. The predominant clinical symptoms of AD include a decline in some important brain cognitive and intellectual abilities, such as memory, thinking, and reasoning. Precise diagnosis of AD, especially at its early warning stage: early Mild Cognitive Impairment (eMCI), enables treatments to delay or even avoid such disorders \cite{r03}.  
+	\IEEEPARstart{A}{lzheimer’s} disease (AD) is a progressive neurodegenerative disorder with a long pre-morbid asymptomatic period which affects millions of elderly individuals worldwide\cite{r01}. It is predicted that the number of affected people will double in the next 20 years, and 1 in 85 people will be affected by 2050 \cite{r02}. The predominant clinical symptoms of AD include a decline in some important brain cognitive and intellectual abilities, such as memory, thinking, and reasoning. Precise diagnosis of AD, especially at its early warning stage: early Mild Cognitive Impairment (eMCI), enables treatments to delay or even avoid such disorders \cite{r03}.  
 	
 	
-	In recent years, brain imaging techniques like Positron Emission Tomography(PET) \cite{r21}, Electroencephalography (EEG)\cite{r22} and functional Magnetic Resonance Imaging (fMRI)\cite{r23} have been used in analysis of AD. Due to the high spatial resolution and relatively lower costs, fMRI is vastly used among researchers in order to monitor brain activities especially in AD and all it's stages in which detecting abnormalities within small brain regions is essential. 
-	An fMRI sample is naturally a 4D tensor consisting of 3D voxels moving in time, and each voxel contains an intensity value that is proportional to the strength of the Blood Oxygenation Level Dependent(BOLD) signal , which is a measure of the changes in blood flow, to estimate the active regions in the brain\cite{r07}.
-	Resting State fMRI(rs-fMRI) is an fMRI technique in which the patient is asked to rest during the whole scan, focuses on the low-frequency $\left( < 0.1 Hz \right)$  oscillations of BOLD signal, which presents the underlying neuronal activation patterns of brain regions[8]–[10]. rs-fMRI is usually used in order to analyze the brain diseases like AD or autism\cite{r33,r34}
+	In recent years, brain imaging techniques like Positron Emission Tomography(PET)\cite{r21}, Electroencephalography (EEG)\cite{r22}
+	 and functional Magnetic Resonance Imaging (fMRI)\cite{r23} 
+	 have been used in analysis of AD. Due to the high spatial resolution and relatively lower costs, fMRI is vastly used among researchers in order to monitor brain activities especially in AD and all its stages in which detecting abnormalities within small brain regions is essential \cite{r04}. 
+	An fMRI sample is naturally a 4D tensor consisting of 3D voxels moving in time, and each voxel contains an intensity value that is proportional to the strength of the Blood Oxygenation Level Dependent(BOLD) signal, which is a measure of the changes in blood flow, to estimate the activity of different brain regions\cite{r07}.
+	Resting-state fMRI(rs-fMRI) is an fMRI technique in which the patient is asked to rest during the whole scan, focuses on the low-frequency $\left( < 0.1 Hz \right)$  oscillations of BOLD signal, which presents the underlying neuronal activation patterns of brain regions[8]–[10]. rs-fMRI is usually used in order to analyze brain diseases like AD or autism\cite{r33,r34}.
 	%
 	%Since the number of voxels within a single full scan is high 
 	%($5000$ up to roughly $200,000$[ref(Definingnodes)]) and they form strong spatial relations, 
@@ -524,11 +530,17 @@
 	anatomical features of the brain, like locations of common gyri
 	and do not rely on any functional information.
 	To generate data
-	using an atlas based approach, the BOLD signal from all voxels is averaged within each brain region called Region of Interest(ROI)\cite{r09}.
-	By putting together the average time-series for all the ROIs, the $i$th volume would become $X_i \in \mathbb{R}^{T \times R} , i = \{1,2,\cdots, S\}$ in which $R$, $T$ and $S$ are the number of ROIs, time points and samples respectively. The process of obtaining such matrix is shown in Figure \eqref{g1.1}. 
+	using an Atlas based approach, the BOLD signal from all voxels is averaged within each brain region called Region of Interest(ROI)\cite{r09}.
+	By putting together the average time-series for all the ROIs, the $i$th volume would become $X_i \in \mathbb{R}^{T \times R} , i = \{1,2,\cdots, S\}$ in which $R$, $T$ and $S$ are the number of ROIs, time points and samples respectively. %The process of obtaining such a matrix is shown in Figure \ref{g1.1}.% 
+%		\begin{figure*}[!t]
+%		\centering
+%		\includegraphics[width=6in]{Data}
+%		\caption{The process of extracting ROI time-series from the original 4D volume. }
+%		\label{g1.1}
+%	\end{figure*}
 	
-	There are two major studies associated with rs-fMRI data: finding common brain disorders caused by diseases like Alzheimer's or autism, and more recently detecting patients with brain disorders using classification techniques. Due to the high dimensionality of data and the nature of diseases like eMCI which does not show any reliable clinical symptoms,
-	researchers moved towards advanced machine learning techniques in order to achieve more reliable analysis.
+	There are two major studies associated with rs-fMRI data: finding common brain disorders caused by diseases like Alzheimer's or autism, and more recently detecting patients with brain disorders using classification techniques \cite{r35,r36}. Due to the high dimensionality of data and the nature of diseases like eMCI which does not show any reliable clinical symptoms,
+	researchers moved towards advanced machine learning techniques in order to achieve more reliable analysis \cite{r37}.
 	
 	
 	%Two major studies could carry out using these  $X_i$s: 
@@ -539,10 +551,10 @@
 	%\end{itemize}
 	
 	A powerful tool that is commonly used in order to achieve aforementioned goals is Functional Connectivity(FC) network.  FC is a $region \times region$ matrix $\bar{X}$ in which $\bar{x}_{ij}$ represents the functional connectivity between the $i$th and $j$th ROI. Functional connectivity is an observable
-	phenomenon quantifiable with measures of statistical dependencies, such as correlations, coherence, or transfer entropy([][]).  Recent studies have shown that some brain disorders like AD could alter the way that some brain regions interact with each other. For example, compared with the healthy, AD patients have been found decreased functional connectivity between hippocampus and other brain regions, and MCI patients have been observed increased functional connectivity between the frontal lobe and other brain regions[4]. 
-	Although FCs show promising results, they bring their own challenges. Variety of methods such as Pairwise Pearson’s correlation coefficient \cite{r10, r11}, sparse representation \cite{r10, r12, r13}  and Sparse Inverse Covariance Estimation (SICE) exists to obtain an FC,
-	While the first two are easy to understand and can capture pairwise functional relationship based on a pair of ROIs, the latter can account for more complex interactions among multiple ROIs, but the estimation of partial correlation involves an inversion of a covariance matrix, which may be ill-posed due to the singularity of the covariance matrix. 
-	These methods results in vastly different networks. On the other hand, computing the correlation based on the entire time series of fMRI data simply measures the FC between ROIs with a scalar value, which is fixed across time. This actually implicitly hypothesizes the \textbf{Stationary} interaction patterns among ROIs. As a result, this method may overlook the complex and dynamic interaction patterns among ROIs, which are essentially time-varying \cite{r16}\textendash \cite{r19}. In order to overcome this issue, \textbf{Non-stationary} methods have been proposed which results in more complex networks.
+	phenomenon quantifiable with measures of statistical dependencies, such as correlations, coherence, or transfer entropy \cite{r38}.  Recent studies have shown that some brain disorders like AD could alter the way that some brain regions interact with each other. For example, compared with the healthy, AD patients have been found decreased functional connectivity between the hippocampus and other brain regions, and MCI patients have been observed increased functional connectivity between the frontal lobe and other brain regions[4]. 
+	Although FCs show promising results, they bring their own challenges. 
+	Variety of methods exists in order to calculate the FC which cause in vastly different results. 
+	
 	
 	%There are two major issues associated with FC networks:
 	%\begin{itemize}
@@ -552,71 +564,95 @@
 	%	
 	%\end{itemize}
 	
-	Finding an FC that highlights the patterns caused by a disease has been a common goal in rs-fMRI study for a long time. Several approaches exists to find common patterns among different brain scans. Data driven methods such as kernel-PCA or clustering techniques have been proposed for this task. But ultimately most of them rely on calculating a network for each volume. This may overlook the role of noises or outliers within the data. As we will show later, our proposed method does not rely on any individual FC calculations and treats each class as a whole in order to calculate the FC.  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
-	FCs are also used as features for classification. So instead of using $X_i$s, their corresponding FCs i.e. $\bar{X}_i$s are classified in order to detect the patients with eMCI. A straightforward way is to vectorize the FCs into high-dimensional vectors as features as in \cite{r33}, which are then used to train a SVM or k-NN classifier. this method produces poor performance due to the phenomena known as Curse of Dimensionality. Variety of techniques have been proposed in order to reduce the dimensionality of these FCs but since they all use conventional classifiers like SVM or k-NN, one way or an other they have to vectorize the data in order to feed it to these classifiers. Alongside  the curse of dimensionality, vectorization also destroys potential information that are embedded in the structure of data. 
-	{\color{red}
-	This problem have been studied specially in image processing in which vectorization destroys the spatial relations within an image.
-	}
+%	Finding an FC that highlights the patterns caused by a disease has been a common goal in the rs-fMRI study for a long time. Several approaches exist to find common patterns among different brain scans. Data-driven methods such as kernel-PCA or clustering techniques have been proposed for this task\textcolor{red}{ref?}. But ultimately most of them rely on calculating a network for each volume. This may overlook the role of noises or outliers within the data. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-	In this paper, based on high order tensor decomposition, we have created a framework in which the mentioned goals i.e. finding an FC for a whole  class and detecting a disorder via classification  could be achieved via a single High Order Singular Value Decomposition (HOSVD). The proposed framework reveals both functional connectivities related to eMCI that are confirmed by empirical methods along with novel connectivities. The proposed classifier also outperforms state of the art eMCI classification methods. 
-	\begin{figure*}[!t]
-		\centering
-		\includegraphics[width=6in]{Data}
-		
-		\caption{Simulation results for the network.}
-		\label{g1.1}
-	\end{figure*}
+	%As we will show later, our proposed method does not rely on any individual FC calculations and treats each class as a whole in order to calculate the FC.  
 	
+	In recent years FCs are also used as features in classification. 
+		So, instead of using $X_i$ as the $i^{th}$ sample its corresponding  FC i.e. $\bar{X}_i$ is used as a feature.
+		Since the conventional classifiers like SVM work on data in vector format, these matrix features should be vectorized in order to feed them to classifiers.
+		This vectorization leads to high-dimensional vectors which produce poor performance due to the phenomena known as the Curse of Dimensionality. 
+		%So dimensionality reduction is a main steps in learning of such high dimensional data.
+		% are then used to train a SVM or k-NN classifier\cite{r33}.
+		%So, instead of using $X_i$s, their corresponding FCs i.e. $\bar{X}_i$s are classified in order to detect the patients with eMCI.
+		% A straightforward way is to vectorize the FCs into high-dimensional vectors as features as in \cite{r33}, which are then used to train a SVM or k-NN classifier.
+		Alongside the curse of dimensionality, vectorization also destroys potential information that are embedded in the structure of data. 
+		This problem has been studied especially in image data in which vectorization destroys the spatial relations within an image.\textcolor{red}{REF}		
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		Recently, a Kernel PCA method is proposed for dimensionality reduction of SICE matrices, which uses
+%		the SPD property in the computation of distance of these matrices.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%Although, recently  a dimension reduction method that uses the spd property of SICI matrices in
+		%dimension reduction, finally for each sample a vector	
+
+	
+	
+	In this paper, based on high order tensor decomposition, we have created a framework in which the mentioned goals i.e. finding an FC for a whole class and detecting a disorder via classification could be achieved with a single High Order Singular Value Decomposition (HOSVD) of each class.
+	Here based on latent variables obtained by HOSVD a general representative pattern of FC for eMCI and Normal subjects is obtained. 
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+%	Experiments show that the discovered functional connectivities by the proposed method are confirmed by empirical methods. Also, The proposed classifier outperforms state of the art eMCI classification methods. 
+%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	Viewing each class as a tensor allows us to work with \textit{time} and \textit{region} features separately but simultaneously. This multilinear view
-	ables us to design a proper dimension reduction relative to the nature of each feature along with a discriminant function based on linear regression that uses the test data to enhance the quality of the training set without forcing any apriory knowledge to the classifier, a task which is not possible through well known classifiers like SVM, logistic regression or k-NN. It is also notable that the proposed discriminant function  
-	directly classifies the $X_i$s. Having the FC calculation step omitted not only heavily affects on the computational performance of the method, it also saves us from the troubles of FCs mentioned before.        
+	ables us to design a proper dimension reduction relative to the nature of each feature along with a discriminant function based on linear regression \textcolor{red}{on latent space of samples} that uses the test data to enhance the quality of the training set without forcing any a prior knowledge to the classifier, a task which is not possible through well known classifiers like SVM, logistic regression or k-NN. It is also notable that the proposed discriminant function directly works with the $X_i$s as features. Having the FC calculation step omitted not only heavily affects the computational performance of the method,  it also saves us from the troubles of FCs mentioned before.        
 	
 	
-%	in this paper we show that tensor representation is the natural form to present fMRI images. by this representation, we would be able to work with time and region features seperately in the same time. also with this representation we an easy and affordable multilinear dimension reduction that works with time and region features seperately this will be done by high order singular value decomposition of of the normal and eMCI subjects.
+	%	in this paper we show that tensor representation is the natural form to present fMRI images. by this representation, we would be able to work with time and region features seperately in the same time. also with this representation we an easy and affordable multilinear dimension reduction that works with time and region features seperately this will be done by high order singular value decomposition of of the normal and eMCI subjects.
 	
-%	also we show that by this representation and using the obtained HOSVD, dimension reduction step we can obtain tensor based discriminat features for classification. this discriminant method furthermore simplicity is very effective. here we show that by this framework the test data also could have effect in construction of discriminant function which is impossible in well known classification methods like SVM, logistic regression and etc. 
+	%	also we show that by this representation and using the obtained HOSVD, dimension reduction step we can obtain tensor based discriminat features for classification. this discriminant method furthermore simplicity is very effective. here we show that by this framework the test data also could have effect in construction of discriminant function which is impossible in well known classification methods like SVM, logistic regression and etc. 
 	
-%	by this approach the construction of FC feature that was time consuming is ignored and we represent an other method that at the same time with simple structure and low computation cost gives very high quality results with the other state of the art methods. 
+	%	by this approach the construction of FC feature that was time consuming is ignored and we represent an other method that at the same time with simple structure and low computation cost gives very high quality results with the other state of the art methods. 
 	
-%	in fMRI data, one other feature is the fnctional connectivity of normal and abnormal subjects. as the third innovation of this paper we showed that based on hosvd of normal and eMCI patients and effective and high quality functional connectivity network can be extracted for both classes. we will show that some connectivities that are discovered via these FCs are well studied in recent clinical documents and thus . . . 
+	%	in fMRI data, one other feature is the fnctional connectivity of normal and abnormal subjects. as the third innovation of this paper we showed that based on hosvd of normal and eMCI patients and effective and high quality functional connectivity network can be extracted for both classes. we will show that some connectivities that are discovered via these FCs are well studied in recent clinical documents and thus . . . 
 	
 	%%ostad 3
 	
-%	
-%	Distinguishing two rs-fMRI volumes in the machine learning viewpoint can be considered as a two class classification problem.
-%	%
-%	%in the first view, usualy and fMRI image in learning is considered as a time x region matrix $X_i \in T \times R$.
-%	Some methods use the vectorized version of samples ie, $x_i = vec(X_i)\in \mathbb{R}^T$ as  inputs of the learning process. However as we will discuss later, this vectorization may cause the loss of some important properties within the structure of data, and because of that the dominant approaches tend to find different set of features for each sample. These methods  construct a $region \times region$ matrix $\bar{X}_i \in \mathbb{R}^{R \times R}$ which is often called functional connectivity (FC) matrix and indicates the between correlation of ROIs. Since in most fMRI samples the number of timepoints is larger that the number of ROIs i.e.  $ T  > R$, substituting $X_i$ with $\bar{X}_i$ reduce the number of features and the effects of the \textit{curse of dimensionality}, also 
-%	it has been shown that using FC can enhance small between region connections hence turns FC into a powerful tool for rs-fMRI data analysis. For correlation computation, different methods have been explored, among which the pairwise Pearson’s correlation coefficient \cite{r10, r11}, sparse representation \cite{r10, r12, r13}  and Sparse Inverse Covariance Estimation (SICE) are of the popular ones \cite{r14, r15}. While the first two are easy to understand and can capture pairwise functional relationship based on a pair of ROIs, the latter can account for more complex interactions among multiple ROIs, but the estimation of partial correlation involves an inversion of a covariance matrix, which may be ill-posed due to the singularity of the covariance matrix. On the other hand, computing the correlation based on the entire time series of RS-fMRI data simply measures the FC between ROIs with a scalar value, which is fixed across time. This actually implicitly hypothesizes the stationary interaction patterns among ROIs. As a result, this method may overlook the complex and dynamic interaction patterns among ROIs, which are essentially time-varying \cite{r16}\textendash \cite{r19}.
-%	In order to overcome this issue, some methods have been proposed that consider the time as a non-stationery property. As for an example [] uses sliding-window technique in order to divide the time series into several smaller parts and then calculate the between correlation of these parts.[][] although these methods show promissing classification results, they are not computational favorable and since the aspect of region is not preserved in the final model, the relation between the high-order FC and the real world FC is somewhat ambigues. After calculating the FC, conventional classifiers like SVM or KNN is deployed in order to classify the vectorized FC for each sample \cite{r20}. 
+	%	
+	%	Distinguishing two rs-fMRI volumes in the machine learning viewpoint can be considered as a two class classification problem.
+	%	%
+	%	%in the first view, usualy and fMRI image in learning is considered as a time x region matrix $X_i \in T \times R$.
+	%	Some methods use the vectorized version of samples ie, $x_i = vec(X_i)\in \mathbb{R}^T$ as  inputs of the learning process. However as we will discuss later, this vectorization may cause the loss of some important properties within the structure of data, and because of that the dominant approaches tend to find different set of features for each sample. These methods  construct a $region \times region$ matrix $\bar{X}_i \in \mathbb{R}^{R \times R}$ which is often called functional connectivity (FC) matrix and indicates the between correlation of ROIs. Since in most fMRI samples the number of timepoints is larger that the number of ROIs i.e.  $ T  > R$, substituting $X_i$ with $\bar{X}_i$ reduce the number of features and the effects of the \textit{curse of dimensionality}, also 
+	%	it has been shown that using FC can enhance small between region connections hence turns FC into a powerful tool for rs-fMRI data analysis. For correlation computation, different methods have been explored, among which the pairwise Pearson’s correlation coefficient \cite{r10, r11}, sparse representation \cite{r10, r12, r13}  and Sparse Inverse Covariance Estimation (SICE) are of the popular ones \cite{r14, r15}. While the first two are easy to understand and can capture pairwise functional relationship based on a pair of ROIs, the latter can account for more complex interactions among multiple ROIs, but the estimation of partial correlation involves an inversion of a covariance matrix, which may be ill-posed due to the singularity of the covariance matrix. On the other hand, computing the correlation based on the entire time series of RS-fMRI data simply measures the FC between ROIs with a scalar value, which is fixed across time. This actually implicitly hypothesizes the stationary interaction patterns among ROIs. As a result, this method may overlook the complex and dynamic interaction patterns among ROIs, which are essentially time-varying \cite{r16}\textendash \cite{r19}.
+	%	In order to overcome this issue, some methods have been proposed that consider the time as a non-stationery property. As for an example [] uses sliding-window technique in order to divide the time series into several smaller parts and then calculate the between correlation of these parts.[][] although these methods show promissing classification results, they are not computational favorable and since the aspect of region is not preserved in the final model, the relation between the high-order FC and the real world FC is somewhat ambigues. After calculating the FC, conventional classifiers like SVM or KNN is deployed in order to classify the vectorized FC for each sample \cite{r20}. 
 	
-%	Although FC grants us certain useful structural properties such as being SPD and having relatively low dimensionality, using  it in the classification process has its own drawbacks such as calculating the proper FC and extracting key features from it. Considering these issues we have come up with a framework that eliminate the need for finding the FC in the classification process. Also the proposed framework works directly with the sample matrix and preserve its structural integrity by avoiding the vectorization using novel multilinear techniques.    
-%	(more about vectorization?)
+	%	Although FC grants us certain useful structural properties such as being SPD and having relatively low dimensionality, using  it in the classification process has its own drawbacks such as calculating the proper FC and extracting key features from it. Considering these issues we have come up with a framework that eliminate the need for finding the FC in the classification process. Also the proposed framework works directly with the sample matrix and preserve its structural integrity by avoiding the vectorization using novel multilinear techniques.    
+	%	(more about vectorization?)
 	
-%	In this paper we claim that by considering $X_i \in \mathbb{R}^ {T \times R}$ as the sample, the dataset could be considered as an order three tensor. Using this representation we have shown that by extremely lower computational cost compared with other methods, and without the need to construct FC, a framework can be designed that only by one High Order Singular Value Decomposition (HOSVD) for each class could give us the desired results. This framework which we call it \textbf{TBNA} (High Order Feature Selection and Extraction) does three main tasks: 
-%	\begin{itemize}
-%		\item
-%		\textbf{Dimension Reduction:}
-%		The proposed frameworks allows us to select key features of each mode  (i.e. \textit{Time}, \textit{Region} and \textit{sample}) of the constructed tensor seperately and differently. This feature extraction would cause a massive reduction of the dimensions.
-%		
-%		\item
-%		\textbf{Classification:} 
-%		Based on the properties of the HOSVD, we have eliminated the vectorization at any step and hence assure that no information is lost in the vectorization process. Moreover we have formed a novel  classification enhancement technique that allows the test samples to cooperate in the training phase. This technique increases the tendency of the test sample to it's true class without forcing any apriory knowledge about it's label to the trainer. 
-%		
-%		\item
-%		\textbf{Functional Connectivity Network Construction:}
-%		Being able to see the class as a whole ables us to derive a Functional Connectivity network for each class. Such FCs allows us to investigate on shared properties within each class such as functional abnormalities of some ROIs or the connection between them.  
-%		
-%	\end{itemize}
-%	
-%	change
-%	
-%	
-%	%The novelty of this paper can be categorized in two cases:  The dimension reduction of fMRI samples, and the enhanced classifier. 
-%	
+	%	In this paper we claim that by considering $X_i \in \mathbb{R}^ {T \times R}$ as the sample, the dataset could be considered as an order three tensor. Using this representation we have shown that by extremely lower computational cost compared with other methods, and without the need to construct FC, a framework can be designed that only by one High Order Singular Value Decomposition (HOSVD) for each class could give us the desired results. This framework which we call it \textbf{TBNA} (High Order Feature Selection and Extraction) does three main tasks: 
+	%	\begin{itemize}
+	%		\item
+	%		\textbf{Dimension Reduction:}
+	%		The proposed frameworks allows us to select key features of each mode  (i.e. \textit{Time}, \textit{Region} and \textit{sample}) of the constructed tensor seperately and differently. This feature extraction would cause a massive reduction of the dimensions.
+	%		
+	%		\item
+	%		\textbf{Classification:} 
+	%		Based on the properties of the HOSVD, we have eliminated the vectorization at any step and hence assure that no information is lost in the vectorization process. Moreover we have formed a novel  classification enhancement technique that allows the test samples to cooperate in the training phase. This technique increases the tendency of the test sample to it's true class without forcing any apriory knowledge about it's label to the trainer. 
+	%		
+	%		\item
+	%		\textbf{Functional Connectivity Network Construction:}
+	%		Being able to see the class as a whole ables us to derive a Functional Connectivity network for each class. Such FCs allows us to investigate on shared properties within each class such as functional abnormalities of some ROIs or the connection between them.  
+	%		
+	%	\end{itemize}
+	%	
+	%	change
+	%	
+	%	
+	%	%The novelty of this paper can be categorized in two cases:  The dimension reduction of fMRI samples, and the enhanced classifier. 
+	%	
 	To verify our approach, we conduct an extensive experimental study on rs-fMRI data from the
-	benchmark dataset ADNI\footnote{http://adni.loni.usc.edu/} As will be seen, the results well demonstrate the effectiveness and advantages of our method. Specifically, the proposed TBNA system, not only grants us superior classification accuracy to that from other methods, it is also much faster. We have also confirmed our achieved FC matrix using empirical data on the eMCI functional connectivity patterns.
+	benchmark dataset ADNI
+	%\footnote{http://adni.loni.usc.edu/} 
+	As will be seen, the results well demonstrate the effectiveness and advantages of our method. Specifically, the proposed framework, not only grants us superior classification accuracy to that from other methods, it is also much faster and more stable against different data selection schemes. We have also confirmed our achieved whole-class FC matrix using empirical data on the eMCI and Normal functional connectivity patterns.
 	
 	
 	%The rest of the paper is organized as follows: Section II contains the . In section III contains some basic concepts. We propose our novel Framework based on High order SVD and our classification enhancement method. And section IV presents some experimental results.   
@@ -650,58 +686,101 @@
 	
 	\section{eMCI classification techniques}
 	
-	As it was discussed before, classification techniques have become a favorable method for Alzheimer disease early detection. early classification methods used $X_{i}$s as the representative for each subject and used them directly in the classification process. 
-	As the functional connectivity matrix gain popularity among researchers, the majority of these classification methods shifted towards classifying the functional connectivity matrices. There are two main paradigms towards obtaining the FCs. Stationary and non-stationary methods, Stationary methods use a single scaler value in order to determine the functional connectivity between two ROIs. Non-stationary methods consider a more complex relation between ROIs that can not be best captured with a single scaler value. 
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	
+%	As it was discussed before, classification techniques have become a favorable method for Alzheimer disease early detection. early classification methods used $X_{i}$s as the representative for each subject and used them directly in the classification process\textcolor{red}{ref?}. 
+%	As the functional connectivity matrix gain popularity among researchers, the majority of these classification methods shifted towards classifying the functional connectivity matrices\textcolor{red}{add some references!!}. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	As it was mentioned before, obtaining and classifying FC matrices have become the dominant approach towards eMCI classification. 
+	Variety of methods such as Pairwise Pearson’s correlation coefficient \cite{r10, r11}, sparse representation \cite{r10, r12, r13}  and Sparse Inverse Covariance Estimation (SICE)\cite{r15} exists to obtain an FC,
+	While the first two are easy to understand and can capture pairwise functional relationship based on a pair of ROIs, the latter can account for more complex interactions among multiple ROIs, but the estimation of partial correlation involves an inversion of a covariance matrix, which may be ill-posed due to the singularity of the covariance matrix. 
+	These methods result in vastly different networks\cite{r35}. On the other hand, computing the correlations, based on the entire time series of fMRI data simply measures the FC between ROIs with a scalar value, which is fixed across time. This actually implicitly hypothesizes the \textbf{Stationary} interaction patterns among ROIs. As a result, this method may overlook the complex and dynamic interaction patterns among ROIs, which are essentially time-varying. In order to overcome this issue, \textbf{Non-stationary} methods have been proposed which results in more complex networks\cite{r16}\textendash \cite{r19}.
+		
+%	There are two main paradigms towards obtaining the FCs: Stationary and non-stationary methods. Stationary methods use a single scaler value like Partial correlation or \textcolor{red}{sparse coefficients} in order to determine the functional connectivity between two ROIs. Non-stationary methods consider a more complex relation between ROIs that can not be best captured with a single scaler value. 
 	
-	In order to demonstrate the power of our proposed framework, we have implemented an state of the art method from each of these paradigms. The first method which is an stationary one uses the Sparse Inverse Covariance matrix in order to establish a functional connectivity matrix and then using the SPD property of SICE, propose a dimension reduction technique in order to find a set of low dimensional features for classification. The second method which is non-stationary, uses sliding windows to  construct a more complex connectivity matrix and uses clustering in order to obtain low dimensial features for classification.     
+	In the following we briefely discuss two state of the art eMCI classification techniques belonging to these two paradigms:
+	
+%	In the following for future comparisons with our method, we explain  the mentioned state of the art  candidates from  these two approaches in details. As one of the main methods in this approch we can mentioed a method proposed in??. This method
+%	uses the Sparse Inverse Covariance matrix in order to establish a functional connectivity matrix and then using the SPD property of SICE, propose a dimension reduction technique in order to find a set of low dimensional features for classification. The reported results in ?? demonstrate the quality of this method over other ones.
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%	\textcolor{red}{In this approach different kinds of methods has been used to obtain Fc matrix, like methods based on Pearson's correlation, sparse coding and SICE. Ref????. In classification steps the vectorization of these FC matrices are used.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+	
+	
+		
+	
+	%In order to demonstrate the power of our proposed framework, we have implemented an state of the art method from each of these paradigms.
+	
+	
+	% The first method which is an stationary one The second method which is non-stationary,     
+	
+	
+	
 	
 	
 	\begin{itemize}
-		\item \textbf{Compact SICE:}
-		In this method, first the SICE matrix is extracted from the data sample $S$ using the following optimization: 
-		\begin{align}
-		S^* = \operatorname{arg} \max\limits_{S\succ 0} \hspace{3mm} \log \left( \det(S) \right) - \operatorname{tr}(CS) - \lambda \norm{S}_1
-		\end{align}
-		where $C$ is the sample-based covariance matrix; $\det(·)$, $\operatorname{tr}(·)$,
-		and $\norm{.}_1$ denote the determinant, trace, and the sum of the absolute values of the entries of a matrix. Since the dimensions of SICE matrix is $R^2$, with $R$ representing the number of ROIs, the obtained matrix is still relatively large. Principal Component Analysis(PCA) has proved itself to be one of the most powerful methods of dimension reduction and this method uses Kernel-PCA with a Gaussian kernel in order to extract the key features of SICE.
-		Since SICE is an SPD matrix, specific distance functions such as Log-Euclidean distance or Root Stein divergence can be used as the distance function in the Gaussian kernel.
-		After extracting key features, conventional methods like SVM or Knn could be deployed for classification.
-		
-		\item \textbf{High Order Networks(HON)}
-		This method uses so called High Order Networks as features for classification purposes. it uses the sliding window technique in order to split the time-series into smaller pieces and then find the relation between them. Let $x_{i}^{(l)}(k) \in \mathbb{R}^N$ denote the $k$-th segment of subseries extracted from $x_{i}^{(l)}$, which comprises $N$ image volumes. by taking each $x_{i}^{(l)}(k)$ as a node A network can be constructed with edges defined using:
-		\[
-		C_{ij}^{(l)}(k) = \operatorname{corr}\left(x_{i}^{(l)}(k),x_{j}^{(l)}(k)
-		\right)
-		\]
-		which represents the pairwise Pearson’s correlation coefficients
-		between the $i$-th and the $j$-th ROIs of the $l$-th subject using the $k$-th segment of subseries. 
-		%\[
-		%G_l^{(l)}(k) = \left( 
-		%\{ x_i^{(l)}(k) \} , \{ C_{ij}^{(l)}(k) \}
-		%\right)
-		%\]
-		by taking  
-		\[
-		y_{ij}^{(l)} = \left[ 
-		C_{ij}^{(l)}(1), C_{ij}^{(l)}(2), \cdots , C_{ij}^{(K)}(1) 
-		\right] \in \mathbb{R}^K
-		\]
-		as new nodes, an other network can be calculated as follow: 
-		\[
-		H_{ij,pq}^{(l)} = \operatorname{corr} \left(
-		y_{ij}^{(l)},y_{pq}^{(l)}
-		\right)
-		\]
-		for each pair of correlation time series $y_{ij}$ and $y_{pq}$ thus, $H_{ij,pq}^{(l)}$ indicates how the correlation between the $i$-th and the $j$-th ROIs influence the correlation between the $p$-th and the $q$-th ROIs.
-		The total number of the high-order correlation coefficients
-		$\{ H_{ij,pq}^{(l)} \}$ is proportional to $R^4$ which will lead to a large-scale high-order FC
-		network, containing at least thousands of vertices and millions
-		of edges. In order to overcome this issue, the correlation time series within each subject is grouped into different clusters. Then, the correlation calculation
-		between the original correlation time series can be
-		converted into that between the respective mean correlation
-		time series in clusters. After reducing the network size, the
-		weighted-graph local clustering coefficients was used to select the key features for each network and then SVM is used in order to classify the obtained features.  
+		\item $\mathbf{Kernel Compact SICE(K-SIEC):}$ 
 	\end{itemize}
+	This method which belongs to the stationary paradigm was proposed in \cite{r14}. In this method, the SICE matrix is chosen as the FC for each sample, then using the SPD property of this matrix, kernel-PCA is deployed in order to reduce its dimensions.
+
+	The SICE matrix is extracted from the data sample $S$ using the following optimization: 
+	\begin{align}
+	S^* = \operatorname{arg} \max\limits_{S\succ 0} \hspace{3mm} \log \left( \det(S) \right) - \operatorname{tr}(CS) - \lambda \norm{S}_1
+	\end{align}
+	where $C$ is the sample-based covariance matrix; $\det(·)$, $\operatorname{tr}(·)$,
+	and $\norm{.}_1$ denote the determinant, trace, and the sum of the absolute values of the entries of a matrix. 
+	%\textcolor{red}{Since the  SICE matrix is in $\mathbb{R}^{R\times R}$}, with $R$ representing the number of ROIs, the obtained matrix is still relatively large. 
+%	Principal Component Analysis(PCA) has proved itself to be one of the most powerful methods of dimension reduction and this method uses Kernel-PCA with a Gaussian kernel in order to extract the key features of SICE.
+In order to reduce the dimensionality of the obtained SICE matrix, Kernel-PCA with a Gaussian kernel is used  to extract the key features.
+	\textcolor{red}{Since SICE is an SPD matrix, specific distance functions such as Log-Euclidean distance\cite{r49} or Root Stein divergence\cite{r50} can be used as the distance function in the Gaussian kernel. Analogous to linear PCA, and by defining 
+	$\Phi(\cdot) = Sym^{+}_{d} \mapsto \mathcal{F}$ as the kernel map, 
+	 for a given SICE matrix $S$,$\Phi(S)$ can then be projected onto the top $m$ eigenvectors to obtain an $m$-dimensional principal
+	component vector. These vectors are used to train an SVM classifier. The performance of this method heavily relies on the choice of sparsity parameter $\lambda$ and the number of top eigenvectors $m$. }   
+	
+	\begin{itemize}
+		\item $\mathbf{High Order Networks(HON):}$
+	\end{itemize}
+ This method which belongs to non-stationary paradigm uses so called
+	 High Order Networks as features for classification purposes. It uses the sliding window technique  in order to split the time-series into smaller pieces and then find the relation between them\cite{r51}\textendash \cite{r52}. Let $x_{i}^{(l)}(k) \in \mathbb{R}^N$ denote the $k$-th segment of subseries extracted from $x_{i}^{(l)}$, which comprises $N$ image volumes. by taking each $x_{i}^{(l)}(k)$ as a node, A network can be constructed with edges defined using:
+	\[
+	C_{ij}^{(l)}(k) = \operatorname{corr}\left(x_{i}^{(l)}(k),x_{j}^{(l)}(k)
+	\right)
+	\]
+	which represents the pairwise Pearson’s correlation coefficients
+	between the $i$-th and the $j$-th ROIs of the $l$-th subject using the $k$-th segment of subseries. 
+	%\[
+	%G_l^{(l)}(k) = \left( 
+	%\{ x_i^{(l)}(k) \} , \{ C_{ij}^{(l)}(k) \}
+	%\right)
+	%\]
+	by taking  
+	\[
+	y_{ij}^{(l)} = \left[ 
+	C_{ij}^{(l)}(1), C_{ij}^{(l)}(2), \cdots , C_{ij}^{(K)}(1) 
+	\right] \in \mathbb{R}^K
+	\]
+	as new nodes, an other network can be calculated as follow: 
+	\[
+	H_{ij,pq}^{(l)} = \operatorname{corr} \left(
+	y_{ij}^{(l)},y_{pq}^{(l)}
+	\right)
+	\]
+	for each pair of correlation time series $y_{ij}$ and $y_{pq}$ thus, $H_{ij,pq}^{(l)}$ indicates how the correlation between the $i$-th and the $j$-th ROIs influence the correlation between the $p$-th and the $q$-th ROIs.
+	The total number of the high-order correlation coefficients
+	$\{ H_{ij,pq}^{(l)} \}$ is proportional to $R^4$ which will lead to a large-scale high-order FC
+	network, containing at least thousands of vertices and millions
+	of edges. In order to overcome this issue, the correlation time series within each subject is grouped into different clusters. Then, the correlation calculation
+	between the original correlation time series can be
+	converted into that between the respective mean correlation
+	time series in clusters. After reducing the network size, the
+	weighted-graph local clustering coefficients was used to select the key features for each network and then an SVM classifier is trained in order to classify the obtained features.  
+	%	\end{itemize}
 	
 	It is noteworthy that non of these techniques consider the multi-linearity nature of the data, and since both methods use traditional classifiers like SVM or KNN, they follow a rather complex path to find vector features as the representative of each FC matrix.
 	
@@ -709,200 +788,214 @@
 	\section{Proposed fMRI analysis Framework Based On Tensor framework}
 	% needed in second column of first page if using \IEEEpubid
 	%\IEEEpubidadjcol
-	{\color{blue}
-		All main mentioned eMCI classification methods use FC of each sample as input feature. So, the computational complexity of these method due to construction of FC matrices are high and also the quality  of these FC matrices have a direct effect in the quality of classification.
-		
-		Also know of them did not used the multi-linear propriety of such data. In this section by tensor viewpoint we show that only by one tensor decomposition we could doe the following analysis on fMRI data
-		\begin{itemize}
-			\item Classification: Based on  HOSVd decomposition we define a discriminant function to classify matrix data $X_i$ without folding  and  without construction of FC matrix per- sample. 
-			\begin{itemize}
-				\item By the obtained base vector from HOVD  By using High order singular value eecomposition (HOSVD), all region-time matrices are projected to
-				smaller matrices (without folding the data to vectors)
-				\item 
-				\item As the first time we propose a novel method that alow test data have a contribution in constructions of discriminant function of each class. This idea hav a big effect in the quality of the propped method
-			\end{itemize}
-			Since this method directly works on region-time matrices as input features, its computatonal complexity is more smaller than state of the aret methods that use FC matrices as input feature. Also the experimental results confirm the quality of this method in recognition of normal and obnormal data.
-			\item  By the previous HOSVD decomposition we proposed a novel method that could 
-			find a general representative FC for eMCI and Normal data. In this method computing the FC of all smaple is not necessary to find FC of all samples. 
-			{\color{red} In the experiments the obtained FC contains a relations that recently  
-				founded expermentaly(cilinically).} 
-			% By using High order singular value eecomposition
-			% (HOSVD), all region-time matrices are projected to
-			% smaller matrices (without flding the data to vectors
-		\end{itemize}
-	}
-%}
-%By using the properties of HOSVD, the proposed framework allows us to reduce the dimensionality of data, create a discriminant function and enhance it and also calculate an FC network. These four features are discussed in full detail in the following sections:
+	All main mentioned eMCI classification methods use FC of each sample as an input feature. So, the computational complexity of these methods are high due to the construction of FC matrices. In addition, the quality of the obtained FC heeavily affects the  classification performance. Moreover, none of these methods  attend  the multi-linear propriety of such data.
+	In this section by tensor viewpoint we show that only by one tensor decomposition we could do the following analysis on fMRI data:
+
+\textbullet\ $\mathbf{Classification:}$
+\textcolor{red}{
+	Viewing each class as a 3D tensor ables us to separately project each mode into a smaller one, without the necessity of unfolding it into matrices or vectors, and thus preserving the structural integrity of data along with reducing its dimensions. Transferring each sample matrix $X_i\in \mathbb{R}^{T \times R}$ into the new feature space granted by tensor viewpoint, obsoletes the necessity of constructing the FC for each sample by producing a high quality and low-dimensional feature $\bar{X}_i \in \mathbb{R}^{\bar{T} \times \bar{R}}$ in which $\bar{T}$ and $\bar{R}$ are drastically smaller that $T$ and $R$. This viewpoint also ables us to design a novel discriminant function in which the test data is used in the training process without forcing any apriory knowledge about its label to the classifier, a task which is impossible via the conventional classifiers such as SVM, K-NN or logistic regression.  
+}
 
 
-%%Begin Dr.Rezghi Suggestions
-\subsection{ Dimension reduction and classification based on Tensor framework}
-In region based fMRI data  each data is a region-Time matrix $X\in \mathbb{R}^{T\times R}$, where $T, R$ denote the length of time and regions of the data. For reducing the computational complexity and reducing the  occurrence of over fitting, specially for data with large features (Like fMRI data), using  dimesionality reduction is inevitable. Although each sampe $X$ have two different king features (time and region), the classical methds like PCA, SVD ,... only could works on vectorizaed version $x=vec(X)$ of such data. In these methods by having projection matrix $U$(Due to method), the projected dat will be $y=U^{\sf T}x$.
-Although this approach is easy to deploy, it has several drawbacks, one main drawback would be the Curse of dimensionality that appears when the proportion of the number of features to the number of samples is relatively high (which results in over-fitting). 
-Also in this view different kind of features(like \emph{Time} and \emph{region} in our case) would be mixed together which may discard some important information within these features. The second approach is to deploy multilinear methods. 
+	 
+%	time-region matrices  without folding and construction of FC matrix per-sample. Here data set of each class is denoted by a tensor and by using the HOSVD of such data
+%	all region-time matrices are projected to smaller ones(without folding the data to vectors). Also based on this HOSVD decpmoistion  we design a tensor based discriminant function for classification.As the first time we propose a novel method that allows test data have a contribution in constructions of discriminant function of each class without using extra information. This idea have a big effect in the quality of propped method.
+%	
+%	Since this method directly works on region-time matrices as input features, its computational complexity is more smaller than state of the art methods that use FC matrices as input feature. Also the experimental results confirm the quality of this method in recognition of normal and eMCI data.
 
-This vectorizatin forthermore inceasing the computatina coplexity, mixed the metioed two type of vectors. Recently some worls like MPCA, GLRAM methods have been proposec that are able to reduce sample with matrix data types witout folding them to vectores. In these methods there is a freedom to selectio spesific reduction for each sample. In this mutilinear methods  for each feare its corresponding projection metrix is obtained. In this section we will used wellknown tensor decompostion named HOSVD for dimension reduction and also classification of fMRI data.
-
-Let ${X_1,\ldots,X_{s_1}}$ and  ${X_1,\ldots,X_{s_2}}$ be the train data of eMCI and Normal classes, respectively. Now we substitute these data at tensors $\mathcal{X}\in \mathbb{R}^{T\times R \times S_i}$, where  each mode-2 slice show 
-sample data. Since the same process will be done on these tesors, So for simplicity we explain our proposed process on tensor $\mathcal{X}$ without up-script. 
-
-Let $\mathcal{X}\in \mathbb{R}^{T \times R \times S}$, where each slice $X(:,:,i)$ denotes the time-region feature of the $i^{th}$ sample.
-If 
-\begin{equation}
-\label{ho}
-\mathcal{X} = 
-\left(  
-U^{(i)},V^{(i)},W^{(i)}
-\right)\boldsymbol{\cdot} \mathcal{S},
-\end{equation}
-where otrhogonal matrices $U\in \mathbb{R}^{T\times T}, V\in \mathbb{R}^{R\times R} $ and $W\in \mathbb{R}^{S\times S}$ are modes-1,2,3 singular matrices of 
-$\mathcal{X}$, and $S$ is the corresponding core tensor. As it was mentioned in \eqref{Chap_3} $U$ is a base of all mode-$ 1 $ fibers $\mathcal{X}(:,i,j)$ which indicates the behavior of $i$th region of the $j$th sample in all times. Also  $V$ is a base of all mode-$ 2 $ fibers $\mathcal{X}(i,:,j)$ which indicates the behavior of all regions of  $i$th $j$th sample in  the $i$th time.
-Also due to the properties of HOSVD inherited from svd, the first columns of mode-k (k=1,2,3) has more ability in construction of main parts of $k$th fibers and on the other hand, the last columns of  this singular matrix, are corresponding to noise parts of the fibers of the corresponding mode.  Therefore for appropriate values of $k_1$ and $k_2$ projection mode-1 and mode-2 fibers into space spanned by  the first $k_1$ and $k_2$ singular vecotes of modes-1,2, i.e., matrices $U_{k_1}=[u_1,\ldots,u_{k_1}]$ and $V_{k_2}=[v_1,\ldots,v_{k_2}]$
-is a suitable  dimension reduction. This dimensionality reduction could be done as
-\begin{align}
-\mathbb{R}^{k_1 \times k_2 \times S} \ni  \bar{{\mathcal{X}}} = \left( 
-U_{k_1}^{\sf T}, V_{k_2}^{\sf T} 
-\right)_{1,2}\boldsymbol{\cdot} \mathcal{X} \label{DR_Ven}
-\end{align}
-So, by having mode-2 and mode-2 singular matrices of tensor $\mathcal{X}$, its reduced versin $\overline{\mathcal{X}}$ without folding the data into vecores could be otained. Here its clear that the reduced version of the $i^{th}$ sample, i.e.,$\overline{\mathcal{X}}(:,:,i)\in \mathbb{R}^{k_1\times k_2}$ could be reduced separatlty in each mode. This means thnat in this case the structure of data is preserved in the reducing process. ??
-So, if 
-\begin{equation}
-\label{ho}
-\mathcal{X}^{(i)} = 
-\left(  
-U^{(i)},V^{(i)},W^{(i)}
-\right)\boldsymbol{\cdot} \mathcal{S}^{(i)},
-\end{equation}
-be the HOSVD decomposition of the data of $i^th$ class, for apploerite $k_1^i, k_2^i$, indices, its reduced
-data will be
-\begin{align}
-\mathbb{R}^{k_1^i \times k_2^i \times S_i} \ni  \bar{{\mathcal{X}}}^{(i)} = \left( 
-U_{k_1^i}^{{(i)}\sf T}, V_{k_2^i}^{{(i)}\sf T} 
-\right)_{1,2}\boldsymbol{\cdot} \mathcal{X}^{(i)} \label{DR_class}.
-\end{align}
-The error analysis and the property of HOSVd, it could b shown that by small number of $k_1^1, k_2^i$, the reduced data have good reconstruction error. 
-
-In the following  in spired by the structure of this reduction, we present a tensor based discrimination function.
-By substituting $\mathcal{X}^{(i)}$ in ?? by its HOSVD decomposition \eqref{ho}, the projected data $\overline{\mathcal{X}}^{(i)}$ becomes
-\begin{align}
-\bar{\mathcal{X}}^{(i)}= & \notag
-\left(
-\begin{bmatrix}
-I_{k_1^i} &  0
-\end{bmatrix},
-\begin{bmatrix}
-I_{k_2^i} &  0
-\end{bmatrix},
-W
-\right)\boldsymbol{\cdot} \mathcal{S}^{(i)} \notag
-\\&=\left( 
-W
-\right)_{3} \boldsymbol{\cdot} \mathcal{S}^{(i)}(1:k_1, 1:k_2, :) \notag &
-\end{align}
-By this equation, ne can see that each sample of the $i^{th}$ class in the the reduced space have the following form
-\begin{align*}
-\bar{{\mathcal{X}}}^{(i)}(:,:,k) &= \left(  
-W^{(i)}(k,:)
-\right)_{3} \boldsymbol{\cdot} \mathcal{S}^{(i)}(1:k_1^i, 1:k_2^i, :)\\
-=& \sum_{k' = 1}^{S_i} W^{(i)}(k,k') \boldsymbol{\cdot} \mathcal{S}^{(i)}(1:k_1^i, 1:k_2^i, k').
-\end{align*}
-For simplicity, if we define $\overline{\mathcal{S}}^{(i)}=\mathcal{S}^{(i)}(1:k_1^i, 1:k_2^i, :)$, it is cear that each sample in the $i^{th}$ calss could be represented as linear combination of slices $\overline{\mathcal{S}}^{(i)}$. So if a test data like $X\in \mathbb{R}^{T\times R}$, be in the $i^{th}$ class
-its natural to expect that it's
-projected version into principle region and times spaces  spanned by $U_{k_1^i},V_{k_2^i}$, i.e,
-\[
-Z^{(i)}=??
-\]
-could be approximated well as a linear combination of slices of $\overline{\mathcal{S}}^{(i)}$ as follows
-\[
-Z^{(i)} \approx \sum_{k=1}^{S_i} \lambda_k^i \overline{\mathcal{S}}^{(i)}(:,:,k).
-\]
-
-So, for each test data $X$, the best approximation its projection versions  for spaces of two normal and obnormal is computed and then $X$ assighen to one class with best approximation. mathematically this could be written as follows: For given test data $X$, its projection  data $Z^{(i)}$ for two calss is obtained. Then the best approximation of these projected data in coreesponding spaces are obtained as follows
-
-
-\begin{equation}
-\label{ls}
-r_{i}=\min_{{\lambda^{i}}} \|Z^{(i)} -\sum_{k=1}^{S_i} \lambda_k^i \overline{\mathcal{S}}^{(i)}(:,:,k)\|,\quad
-\lambda^i=\begin{pmatrix}
-\lambda_1^i\\
-\vdots\\
-\lambda_{s_i}
-\end{pmatrix}
-\end{equation}
-
-Here $r^{(i)}$ show the  reconstruction error of the projected version of $X$ in the $i^{th}$ class. So we assigen $X$ to $l^{th}$ class if 
-\[
-r_{l}=\min_{i=1,2} {r_{i}}.
-\]
-The minimization problem \eqref{ls} is a simple least square problem that could be solved easily.
-The proposed method have an interesting property that  bring us to propose a novel method to improve its 
-quality.
-By the properties of HOSVD, the priciple propertires of the $i^{th}$ class could be reflected in the  slices of
-$\overline{\mathcal{S}}^{(i)}(:,:,i)$. Also for small indices these Slices have a  better   role in construction of main properties of this class. So the first slices of $\overline{\mathcal{S}}$
-could represent signal parts, while laste slices donse not this role and sometimes represents the wast parts.
-Now consider a data $X$ added to data set $\mathcal{X}^{(i)}$ of the $i^{th}$ class. So new data set will be
-$\mathcal{\widetilde{X}}\in \mathbb{R}^{T\times R \times (S_{i}+1)}$. For example
-\begin{eqnarray*}
-	\widetilde{\mathcal{X}}^{(i)}(:,:,1:S_i)&=&\widetilde{\mathcal{X}}^{(i)},\\
-	\widetilde{\mathcal{X}}^{(i)}(:,:,S_i+1)&=&X.
-\end{eqnarray*}
-
-If $X$ belongs to this class then in HOSVD of this tensor $X$ reinforce the slices of core tensor with small indices. But when it  dose not belong to this class then it  will changes the behavior of last slices of core tensor of new tensor. This meas that befor classification of a test data $X$, We could added it to both classes. This addition,  will changed the first slices of core tensor when it beloges to this  class or
-will cahged the last Slices  when dose not belog to this class. But in our classification method only the first Slices of core tensor are exits. Also the elements of $S$ in the first and second modes are filtered and we work with $S(1:k_1^i,1:k_2^i,1:k_3^i)$.  This means that by addition of $X$ in both classes for class that it beloge to it, the first slices in ??, will be  adapted to have good reconstruction for this data. But for a class that dose not beloge to, this addition have small chages in the slices in ??.
-
-It shoul be mentioed that
-since $X$ added to both data sets, so we did not its labe and the method in true. After computing the HOSDVD of this new data sets $\widetilde{\mathcal{X}^^{(i)}$, we apply the approach in ??. In summery this algorith coul be summerized as follows:
-	\begin{algorithm}
-		\label{AlgITLS}
+\textbullet\ $\mathbf{General~FC:}$
+\textcolor{red}{
+Using the components of HOSVD extracted in the previous step, a general FC could be constructed for each class that reveals patterns common shared among all samples within each class. This technique allows us to discard the role of outliers or noisy samples.  
+}
+%By this HOSVD decomposition we	
+%	proposed a novel method that could 
+%	find a general representative FC for eMCI and Normal data. In this method having the FC of all samples is not necessary. 
+%	{\color{red} In the experiments we show that the obtained FC contains  relations that recently  
+%		founded experimentally(clinically).} 
+	% By using High order singular value eecomposition
+	% (HOSVD), all region-time matrices are projected to
+	% smaller matrices (without flding the data to vectors
+	%\end{itemize}
+	%}
+	%By using the properties of HOSVD, the proposed framework allows us to reduce the dimensionality of data, create a discriminant function and enhance it and also calculate an FC network. These four features are discussed in full detail in the following sections:
+	%%Begin Dr.Rezghi Suggestions
+	\subsection{ A Classification of Region-Time data of eMCI and normal data based on  Tensor framework}
+	%In region based fMRI data  each data is a region-Time matrix $X\in \mathbb{R}^{T\times R}$, where $T, R$ denote the length of time and regions of the data.
+	For reducing the computational complexity and reducing the  occurrence of over fitting, specially for data with large features (Like fMRI data), using  dimensionality reduction is inevitable. Although each sample $X\in \mathbb{R}^{T\times R}$ has two different time and region features, the classical methods like PCA, SVD ,... only could work on vectorized version $x=vec(X)$ of such data.
+	% In these methods by having projection matrix $U$(Due to method), the projected data will be $y=U^{\sf T}x$.
+	Although this approach is easy to deploy, it has several drawbacks like occurrence of Curse of dimensionality and mixing different features(time and region).
+	% would be the Curse of dimensionality that appears when the proportion of the number of features to the number of samples is relatively high (which results in over-fitting). 
+	%Also in this view different kind of features(like \emph{Time} and \emph{region} in our case) would be mixed together which may discard some important information within these features. The second approach is to deploy multilinear methods. 
+	%This vectorizatin forthermore inceasing the computatina coplexity, mixed the metioed two type of vectors. 
+	Recently multilinear dimension reduction methods like MPCA, GLRAM  have been proposed that
+	could works with multidimensional data, without folding them into vectors.
+	In these methods there is a freedom to select specific reduction for each kind of feature. In this section we will used well known tensor decomposition named HOSVD for dimension reduction and also classification of fMRI data.
+	
+	%Let ${X_1,\ldots,X_{s_1}}$ and  ${X_1,\ldots,X_{s_2}}$ be the train data of eMCI and Normal classes, respectively.
+	Let tensors $\mathcal{X}^{(i)}\in \mathbb{R}^{T\times R \times S_i}$, consists normal and eMCI data, for i=1,2, respectively.  Here $S_1,S_2$ are the number of normal and eMCI data.
+	% Also
+	% mode-2 slices of each tensor show  the sample data.
+	%the sample data. 
+	%Let $\mathcal{X}^{(i)}\in \mathbb{R}^{T \times R \times S_i}$, where each slice $X(:,:,i)$ denotes the time-region feature of the $i^{th}$ sample.
+	For tensor $\mathcal{X}^{(i)}$, the decomposition
+	\begin{equation}
+	\label{ho}
+	\mathcal{X}^{(i)} = 
+	\left(  
+	U^{(i)},V^{(i)},W^{(i)}
+	\right)\boldsymbol{\cdot} \mathcal{S}^{(i)},
+	\end{equation}
+	is known as higher order singular decomposition(HOSVD),
+	where orthogonal matrices $U^{(i)}\in \mathbb{R}^{T\times T}, V^{(i)}\in \mathbb{R}^{R\times R} $ and $W^{(i)}\in \mathbb{R}^{S_i\times S_i}$ are known as modes-1,2,3 singular matrices of 
+	and $\mathcal{S}^{(i)}$ is the corresponding core tensor \textcolor{red}{Ref?}. Here $U^{(i)}$ is a base of all mode-$ 1 $ fibers $\mathcal{X}(:,l,k)$. Here  $\mathcal{X}^{(i)}(:,l,k)$ indicates the behavior of $l$th region of the $k$th sample of the $i$th class in all times. Also  $V^{(i)}$ is a base of all mode-$ 2 $ fibers $\mathcal{X}(l,:,k)$ which indicates the behavior of all regions of  $l$th  sample of the $i$th class in  the $k$th time.
+	Also, due to the properties of HOSVD inherited from svd, the first columns of mode-k (k=1,2,3) has more ability in construction of main parts of $k$th fibers and on the other hand, the last columns of  this singular matrix, are corresponding to noise parts of the fibers of the mode \textcolor{red}{ref??}. Therefore, with appropriate values of $k^i_1$ and $k^i_2$ projection of mode-1 and mode-2 fibers into space spanned by  the first $k_1$ and $k_2$ singular vectors of modes-1,2, which  are denoted by  $U^{(i)}_{k^i_1}$ and $V_{k^i_2}^{(i)}$, respectively,
+	is a suitable  dimension reduction. This dimensionality reduction could be done as
+	\begin{align}
+	\label{m1}
+	\mathbb{R}^{k_1 \times k_2 \times S_i} \ni  \bar{{\mathcal{X}}}^{(i)} = \left( 
+	U^{(i) {\sf {T}}}_{k^i_1}, V_{k^i_2}^{\sf {T}}
+	\right)_{1,2}\boldsymbol{\cdot} \mathcal{X}^{(i)}
+	\end{align}
+	%So, by having mode-2 and mode-2 singular matrices of tensor $\mathcal{X}$, its reduced versin $\overline{\mathcal{X}}$ without folding the data into vecores could be otained.
+	Here it's clear that the reduced version of the $k^{th}$ sample, i.e.,$\overline{\mathcal{X}}(:,:,k)\in \mathbb{R}^{k_1\times k_2}$ could be reduced separately  in each mode without folding. This means that the structure of data is preserved in the reducing process.
+	Base on the properties of the  HOSVD, it could b shown that by small number of $k_1^1, k_2^i$, the reduced data have good reconstruction error. 
+	
+	In the following  in spired by the structure of this reduction, we present a tensor based discrimination function.
+	By HOSVD decomposition of
+	$\mathcal{X}^{(i)}$ the projected data $\overline{\mathcal{X}}^{(i)}$ in equation \eqref{m1} becomes
+	\begin{align}
+	\bar{\mathcal{X}}^{(i)}= & \notag
+	\left(
+	\begin{bmatrix}
+	I_{k_1^i} &  0
+	\end{bmatrix},
+	\begin{bmatrix}
+	I_{k_2^i} &  0
+	\end{bmatrix},
+	W
+	\right)\boldsymbol{\cdot} \mathcal{S}^{(i)} \notag
+	\\&=\left( 
+	W
+	\right)_{3} \boldsymbol{\cdot} \mathcal{S}^{(i)}(1:k_1, 1:k_2, :) \notag &
+	\end{align}
+	So,  each sample of the $i^{th}$ class in the reduced space has the following form
+	\begin{align*}
+	\bar{{\mathcal{X}}}^{(i)}(:,:,k) &= \left(  
+	W^{(i)}(k,:)
+	\right)_{3} \boldsymbol{\cdot} \mathcal{S}^{(i)}(1:k_1^i, 1:k_2^i, :)\\
+	=& \sum_{k' = 1}^{S_i} W^{(i)}(k,k') \boldsymbol{\cdot} \mathcal{S}^{(i)}(1:k_1^i, 1:k_2^i, k').
+	\end{align*}
+	This means that each sample in the $i^{th}$ class could be represented as linear combination of the slices  of the tensor $\overline{\mathcal{S}}^{(i)}=\mathcal{S}^{(i)}(1:k_1^i, 1:k_2^i, :)$.
+	So if a test data like $X\in \mathbb{R}^{T\times R}$, be in the $i^{th}$ class
+	it's natural to expect that its
+	projected version into principle region and times spaces, spanned by $U_{k_1^i},V_{k_2^i}$, i.e,
+	\[
+	Z^{(i)}= \left( U_{k_1^i}^{(i)\sf T}, V_{k_2^i}^{(i)\sf T} 
+	\right)_{1,2}\boldsymbol{\cdot} X
+	\]
+	could be approximated well as a linear combination of the slices of the tensor $\overline{\mathcal{S}}^{(i)}$ as follows
+	\begin{equation}
+	\label{m2}
+	Z^{(i)} \approx \sum_{k=1}^{S_i} \lambda_k^i \overline{\mathcal{S}}^{(i)}(:,:,k).
+	\end{equation}
+	Based on this viewpoint, each test data $X$ could be assigned to a class that its prjected version have the best approximation in the form??. 
+	Due to importance of core tensor elements with small indices in reconstruction of the signal part of data in comparison with the last parts,
+	the small number $k_3^i< S_i$  of slices $\overline{\mathcal{S}}^{(i)}(:,:,k)$ could be used  in  \eqref{m2}. 
+	
+	In this viewpoint each test data
+	$X$ assignment to the $l^{th}$class, if
+	\[
+	r_{l}=\min_{i=1,2} {r_{i}},
+	\]
+	where
+	\begin{equation}
+	\label{ls}
+	r_{i}=\min_{{\lambda^{i}}} \|Z^{(i)} -\sum_{k=1}^{k_3^i} \lambda_k^i \overline{\mathcal{S}}^{(i)}(:,:,k)\|,\quad
+	\lambda^i=\begin{pmatrix}
+	\lambda_1^i\\
+	\vdots\\
+	\lambda_{s_i}
+	\end{pmatrix}
+	\end{equation}
+	shows the  reconstruction error of the projected version of $X$ in the $i^{th}$ class.
+	The minimization  \eqref{ls} is a simple least square problem that could be solved easily.
+	The proposed method have an interesting property that  bring us to propose a novel method to improve its 
+	quality.
+	By the properties of HOSVD, the principle properties of the $i^{th}$ class could be reflected in the  slices of
+	$\overline{\mathcal{S}}^{(i)}$. Also, for small indices these Slices have a  better   role in construction of main properties of this class. So the first slices of $\overline{\mathcal{S}}$
+	could represent signal parts, while last ones do not this role and sometimes represents the wast parts.
+	Now consider the test data $X$ added to data set $\mathcal{X}^{(i)}$ of the $i^{th}$ class. So new data set will be
+	$\mathcal{\widetilde{X}}\in \mathbb{R}^{T\times R \times (S_{i}+1)}$. For example
+	\begin{eqnarray*}
+		\widetilde{\mathcal{X}}^{(i)}(:,:,1:S_i)&=&{\mathcal{X}}^{(i)},\\
+		\widetilde{\mathcal{X}}^{(i)}(:,:,S_i+1)&=&X.
+	\end{eqnarray*}
+	
+	If $X$ belongs to this class then in HOSVD of this tensor $X$ reinforce the slices of core tensor with small indices. But when it  dose not belong to this class  it  will changes the behavior of last slices of core tensor of new tensor. This meas that before classification of a test data $X$, We could added it to both classes. This addition,  will changed the first slices of core tensor when it belongs to this  class or
+	will changed the last Slices  when dose not belong. But in our classification method only the first Slices of core tensor are exits. Also the elements of $S$ in the first and second modes are filtered and we work with $S(1:k_1^i,1:k_2^i,1:k_3^i)$.  This means that by addition of $X$ in both classes for class that it belongs to it, the first slices in \eqref{ls}, will be  adapted to have good reconstruction for this data. But for a class that dose not belong to, this addition have small changes in the slices in \eqref{ls}.
+	It should be mentioned that
+	since $X$ added to both data sets, so we did not use its label and the method in true. After computing the HOSDVD of this new data sets $\widetilde{\mathcal{X}}^{(i)}$, we apply the method in \eqref{ls} for classification.  Algorithm 1 summarized the proposed classification method.
+	\begin{algorithm}[h!]
+		\label{ATNB}
 		\caption{\textbf{TNBeMCI}: Tensor based Classification method}
 		\begin{algorithmic}
 			\STATE 1) \textbf{Input}: Normal train data $\mathcal{X}^{(1)}$, eMCI train data $\mathcal{X}^{(2)}$
 			\STATE~~~    $k_i^j, i=1,2,3, \quad j=1,2$.\\
 			\STATE~~~ Test data $X$
-			\STATE 2) Construct $\widetilde{\mathcal{X}}^{(i)}$ for $i=1,2$ by adding $X$ as ??
-			\STATE 3) Compute $U_{k_1^i}, V_{k_2^i}$ and $\mathcal{S}(1:k_1^i,1:k_2^i,k_3^i)$ for  $\widetilde{\mathcal{X}}^{(i)}$.
+			\STATE 2) Construct $\widetilde{\mathcal{X}}^{(i)}$ for $i=1,2$ by adding $X$.
+			\STATE 3) Compute $U_{k_1^i}, V_{k_2^i}$ and $\mathcal{S}(1:k_1^i,1:k_2^i,k_3^i)$ of  $\widetilde{\mathcal{X}}^{(i)}$.
 			\STATE 4) Compute $Z^{(i)} = \left( U_{k_1^i}^{(i)\sf T}, V_{k_2^i}^{(i)\sf T} 
 			\right)_{1,2}\boldsymbol{\cdot} X$, $i=1,2.$
-			\STATE 5)~~Comput $r_1,r_2$ from ??
+			\STATE 5)~~Comput $r_1,r_2$ from \eqref{ls}
 			\STATE  6 )~~Assign $X$ to class $l$, if $l= \arg \min_{i} \{r_i\}$
 		\end{algorithmic}
 	\end{algorithm}
-	In this section by HOSVD decomposition on both normal and eMCI data, we proposed a novel tensor based classification. The benifits of the proposed tensor based classification method could be summerized as follows
+	
+	
+	In this section by HOSVD decomposition on both normal and eMCI data, we proposed a novel tensor based classification. The benifits of the proposed tensor based classification method could be summarized as follow
 	\begin{itemize}
-		\item This method  use multilinear propert of these data and works could works with time and region features separatly based on their specific onbatned bases(corresponding singular matrices).
-		\item The classification works on data without folding them ti vectors.
-		\item  As we mentioed the test data has a role in construction of bases for both classes, without knowing the class of test data. This  incearse the quality of the discrimination. This could not applied on important classification ,methods like SVM, logistic regression classifier and neroual networks. This is also could be applied on classifications based on matrix factorization.
+		\item This method  uses multi linear property of region-Time matrix data and  could works with time and region features separately based on their specific bases(corresponding singular matrices). This means that the classification works on data without folding them into vectors.
+		\item  In this classification,  the test data has a role in construction of bases for both classes, without using its label. This  increase the quality of the discrimination. This could not applied on important classification methods like SVM, logistic regression classifier and neuronal networks. 
 		\item This method works with time-region features, and dose not need to have FC matrices for each sample. So
-		its computational complexity is more less than other state of the art methods  like methods mentied in this paper. It should be mentioed that our method also could be applied on FC matrices as input featur. But in experments the propoed method gives better results on original time-region faetres. So, in this feature we do not warry about the qaulity of FC methods. 
+		its computational complexity is more less than other state of the art methods  based on FC features. Also in this method we do not wary about the quality of FC methods.	
+		It should be mentioned that our method also could be applied on FC matrices as input features. But in experiments the proposed method gives better results on original time-region features.  
 	\end{itemize}
-	In the expermental results we compaire the quality of the method with some of the sate of the art methods for recognition of eMCI  based on accuray nad elapsed times. 
-	
-	\subsection{General Functional Connectivity for normal and eMCI by tensor framework} \label{FC_Construction}
-	
-	
-	Functional connectivity simply means the relation between different ROIs. As we mentioed the FC could be used for two different pouroses. Some classification methods for each samle by time-region matrix compute a region-region matrix wich shows the FC per sample. These method use this new fearure insead of time-region feature.  But, in other view point we want to obtaine only one representative functional connectivity for each normal or eMCI classes. Here the classification is not our goal, instaed  finding a gereral and represetative
-	realtion of regions for eMCI and normal preson is our demand. This general pattern could be used clinically by expert congnitive scinticts to found  
-	functional relation Disorders accrued by eMCI.
+	In the experiments we compare the quality of the method with some of the sate of the art methods for recognition of eMCI like mentioned k-SICE and HON .
+	Experimental results confirm the quality of the proposed method. In the next section we show that based the obtained HOSVD decomposition for both classes one could obtain appropriate General patters for normal and eMCI data.	
+	\subsection{General Functional Connectivity for Normal and eMCI by tensor framework} \label{FC_Construction}
 	
 	
+	As it was mentioned before, one of the main studies associated with rs-fMRI analysis is finding common functional disorders cause by a disease like AD. This can be done via constructing proper FC matrices. The majority of techniques calculate the FC matrix for each individual subject(like SICE). This may overlook tiny but common connectivities shared within a class. It is also noteworthy that the majority of non-stationary methods are not capable of constructing a relatable FC since the concept of a physical ROI is not well defined in them.    
 	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
+%	Functional connectivity simply means the relation between different ROIs. As it was mentioned the FC could be used for two different purposes. In one approach for each sample its per sample FC matrix is obtained by its time-region matrix  and this new matrix is used in classification instead of time-region matrix. The obtained FC matrices in mentioned k-SICE and HON bloges to this type of application of FC.  ???ref 
+%	
+%	In other approach the general pattern of normal and abnormal data is desired. So in this approach based on all data only one FC for normal and one FC for abnormal data are obtained.
+%	These general FC matrices could helps the experts persons to found the effects of desis in the??
+%	{\color{blue}
+%		Although several approaches have been proposed in order to find the functional connectivity, the majority of them focus on the individual samples rather that the whole class. This may overlook tiny but common connectivities shared within a class like the class of people in their early Alzheimer's disease.  
+%		\textcolor{red}{ref?}
+%	}
+%v
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
+	In this section we show that based on HOSVD decomposition one could  obtain  one representative functional connectivity for each normal or eMCI classes without obtaining the per-sample FC of all data separately. Here the classification is not our goal, instead  finding a general and representative
+	relation of regions for eMCI and normal person is our demand. This general pattern could be used clinically by expert cognitive scientists to found  
+	functional relation disorders caused by Alzheimer's disease.
 	
-	{\color{blue}
-		??Although several approaches have been proposed in order to find the functional connectivity, the majority of them focus on the individual samples rather that the whole class. This may overlook tiny but common connectivities shared within a class like the class of people in their early Alzheimer's disease.  
-	}
+	As we know in HOSVD  the singular matrices $U,V,W$, are the base of time, region features and also the samples, receptively. In the laset section by property of these matrices we designed our classification method.  know in this section we show that
+	, the same idea could helps us to define a general FC matrix based on HOSVD decomposition for normal and
+	eMCI data. It should be mentioned that here we did not use the FC of per-samples to construct this general FC matrix.
 	
-	
-	As we know in HOSVD  the singular matrices $U,V,W$, are the base of time, region features and also the samples, receptively. By property of these matrices we desigen our classification method. In this section we show that
-	, the same idea could helps us to define a general FC matrix based on HOSVd decomposition for normal and
-	eMCI data. It show be mentioed that here we did not use the FC of per-samples to construct this gerenral FC matrix.
-	
-	Due to structure of data for $\mathcal{X}^{(i)}$ , the slice $\mathcal{X}^{(i)}(:,l,:)$, denotes
-	the  behavior of $l^{th}$  region of all samples in all times. So this could be consider as features of the $l^{th}$ region  of the $i^{th}$ class and each region is shown with an Times-sample feature matrix. Viewing each region as a slice would allow us to consider it's behavior in all time points and across all samples, which itself allows us to shed more light on common properties and ignore individual differences that is highly possible due to the presence of noise and outliers.
-	So, by the properties of singula matrices in modes-1,3, for approprite values
-	$k_1^i,k_3^i$, each regin $\mathcal{X}(:,l,:)$ could be reduced in bith time and sample dfeatures
-	based on mode-1 and mode-3 truncated  singular matrices $U_{k_1^i}^{(i)}$ and $W_{k_3}^{(i)}$
+	In tensor  $\mathcal{X}^{(i)}$ of the $l^{th}$ class, the slice $\mathcal{X}^{(i)}(:,l,:)$ denotes
+	the  behavior of $l^{th}$  region of all samples in all times in the $i^{th}$ class. So this could be consider as a feature of the $l^{th}$ region  of the $i^{th}$ class and each region is shown with an Times-sample feature matrix. Viewing each region as a slice would allow us to consider it's behavior in all time points and across all samples, which itself allows us to shed more light on common properties and ignore individual differences that is highly possible due to the presence of noise and outliers.
+	So, by the properties of singular matrices in modes-1,3, for appropriate values
+	$k_1^i,k_3^i$, each region $\mathcal{X}(:,l,:)$ could be reduced in both time and sample features, separately
+	based on mode-1 and mode-3 truncated singular matrices $U_{k_1^i}^{(i)}$ and $W_{k_3}^{(i)}$
 	as follows
 	\begin{eqnarray}
 	\mathcal{Y}^{(i)}(:,l,:) = \left( 
@@ -911,13 +1004,12 @@ since $X$ added to both data sets, so we did not its labe and the method in true
 	\end{eqnarray}
 	Here $\mathcal{Y}^{(i)}(:,l,:)$  denotes a reduced version of $\mathcal{X}^{(i)}(:,l,:)$ into space
 	spanned by $U_{k_1^i}^{(i)}$ and $W_{k_3}^{(i)}$ in modes-1,3. So,
-	
 	\begin{align}
 	\mathbb{R}^{k_1^i \times R \times k_3^i} \ni  {{\mathcal{Y}^{(i)}}} = \left( 
-	{U_{k_1^i}^{(i)}}^{\trans}, {U_{k^i_3}^{(i)}}^{\trans} 
-	\right)_{1,3}\boldsymbol{\cdot} \mathcal{X}^{(i)} \label{DR_Version_FC}
+	{U_{k_1^i}^{(i)}}^{\trans}, {W_{k^i_3}^{(i)}}^{\trans} 
+	\right)_{1,3}\boldsymbol{\cdot} \mathcal{X}^{(i)} \label{DR_Version_FC1}
 	\end{align} 
-	denote all reduced regions of the $i^{th}$ class. By this structure  and subsituting the HOSVD decomposition of $\mathcal{X}^{(i)}$ in \eqref{DR_Version_FC},  we obtain
+	denote all reduced regions of the $i^{th}$ class. By this structure  and substituting the HOSVD decomposition of $\mathcal{X}^{(i)}$ in \eqref{DR_Version_FC1},  we obtain
 	\begin{align}
 	{\mathcal{Y}}^{(i)}= & \notag
 	\left(
@@ -937,40 +1029,45 @@ since $X$ added to both data sets, so we did not its labe and the method in true
 	and so
 	
 	\begin{align}
+	\label{ok}
 	{\mathcal{Y}}^{(i)}(:,k,:) &= \sum_{k'}^{R} V^{(i)}(k,k')\bar{\mathcal{C}}^{(i)}(:,k',:) \notag
-	\\&= \left( U_{2}^{(i)}(k,:)\right)_2 \boldsymbol{\cdot} {\mathcal{C}}^{(i)}
+	\\&= \left( V^{(i)}(k,:)\right)_2 \boldsymbol{\cdot} {\mathcal{C}}^{(i)}
 	\end{align}
 	in which 
 	\[
-	\mathbb{R}^{k_1^i,R,k_3^i}\ni {\mathcal{C}}^{(i)} = \mathcal{S}(1:k_1^i,:,1:k_3^i).
+	\mathbb{R}^{k_1^i\times R \times k_3^i}\ni {\mathcal{C}}^{(i)} = \mathcal{S}(1:k_1^i,:,1:k_3^i).
 	\]
 	% Although we do not use the FCs in the classification process, FC networks would allow further investigations on the brain activities. Let $\mathcal{X} \in \mathbb{R}^{T \times R \times S}$, finding the FC for this class means finding the relation between mode-2 slices of $\mathcal{X}$. Viewing each region as a slice would allow us to consider it's behavior in all time points and across all samples, which itself allows us to shed more light on common properties and ignore individual differences that is highly possible due to the presence of noise and outliers. 
 	
-	In order to calculate the FC, we first reduced the dimensions of our data similar to what we did in the previous part: 
-	\begin{align}
-	\mathbb{R}^{k_1^i \times R \times k_3^i} \ni  \bar{{\mathcal{X}}} = \left( 
-	{U_{k_1^i}^{(i)}}^{\trans}, {U_{k^i_3}^{(i)}}^{\trans} 
-	\right)_{1,3}\boldsymbol{\cdot} \mathcal{X} \label{DR_Version_FC}
-	\end{align}
-	it can be seen that each region slice can be written as:
-	\begin{align}
-	\label{ok}
-	\bar{\mathcal{X}}^{(i)}(:,k,:) &= \sum_{k'}^{N_i} U_2^{(i)}(k,k')\bar{\mathcal{C}}^{(i)}(:,k',:) \notag
-	\\&= \left( U_{2}^{(i)}(k,:)\right)_2 \boldsymbol{\cdot} \bar{\mathcal{C}}^{(i)}
-	\end{align}
-	in which 
-	\[
-	\bar{\mathcal{C}}^{(i)} = \mathcal{C}(1:k_1^i,:,1:k_3^i).
-	\]
-	The equation \eqref{ok}, show that the reduced version of each region in the $i^{th}$ class could 
-	written as the linear combinations of  mode-2 slices of $\mathcal{C}$. So the coeffienvt of slices in this linear combination could be considered as a new feature for the $l^{the}$ region of the $i^{th}$ class. Also as we mentioed the first slices are better than to reflect the pricipp of the data So for approperite $k_3^i$ we could select anly the fits coefficient in ?? as new features for the $l^{th}$ region. Mathematically this means each region  in the $i^{th}$ class could be represen by new feaure $V(l,1;k_3)\in \mathbb{R}^{3}$.   The benefits of this approach is that each
-	region coulb be represented only be a vecor with size $k_3$, instead  large feature matrix  time-sample. Now different methods could be used to find the correlation of regins based on this small and clean matrix $V(:,1:k_{3})$ which its rows corresponding to different regions and columns are new features. In this due to quality of  Sparse Inverse Covariance ,  this method is applied the obained  feature-region matrix  $V(:,1:k_3^i)^{\sf T}$  in order to find the functional connectivity of the $i^{th}$ class.
-	\begin{figure}[!t]
-		\centering
-		\includegraphics[width=3.5in]{SVDiff}
-		\caption{The blue line with the star indicator, shows the difference between the mode-$3$ singular values of the original data and the data appended with a \emph{same} label subject. The orange line indicated with circles, shows the difference between the mode-$3$ singular values of the original data and the data appended with a \emph{different} label subject.}
-		\label{g3.1}
-	\end{figure}
+	%In order to calculate the FC, we first reduced the dimensions of our data similar to what we did in the previous part: 
+	%\begin{align}
+	%	\mathbb{R}^{k_1^i \times R \times k_3^i} \ni  \bar{{\mathcal{X}}} = \left( 
+	%{U_{k_1^i}^{(i)}}^{\trans}, {U_{k^i_3}^{(i)}}^{\trans} 
+	%	\right)_{1,3}\boldsymbol{\cdot} \mathcal{X} \label{DR_Version_FC}
+	%	\end{align}
+	%	it can be seen that each region slice can be written as:
+	%	\begin{align}
+	%	\label{ok}
+	%	\bar{\mathcal{X}}^{(i)}(:,k,:) &= \sum_{k'}^{N_i} U_2^{(i)}(k,k')\bar{\mathcal{C}}^{(i)}(:,k',:) \notag
+	%	\\&= \left( U_{2}^{(i)}(k,:)\right)_2 \boldsymbol{\cdot} \bar{\mathcal{C}}^{(i)}
+	%	\end{align}
+	%	in which 
+	%	\[
+	%	\bar{\mathcal{C}}^{(i)} = \mathcal{C}(1:k_1^i,:,1:k_3^i).
+	%	\]
+	The equation \eqref{ok}, show that the reduced version of each region in the $i^{th}$ class could be
+	written as the linear combinations of  mode-2 slices of $\mathcal{C}^{(i)}$. So the coefficients of slices in this linear combination could be considered as a new feature for the $l^{the}$ region of the $i^{th}$ class. Also as we mentioned the first slices are better than the last ones to reflect the principle properties of the data. So for appropriate $k_3^i$ we could select only the fits coefficient in \eqref{ok} as  new features for the $l^{th}$ region. Mathematically this means each region  in the $i^{th}$ class could be represented by new feature $V(l,1;k_3^i)\in \mathbb{R}^{k_3^i}$.   
+	
+	The main benefit of this approach is that each
+	region could be represented only be a vector with size $k_3^i$, instead large feature matrix  time-sample. Now different methods could be used to find the correlation of reigns based on this new type of feature and clean matrix $V(:,1:k_{3}^i)$ which its rows corresponding to different regions and columns are new features. Due to quality of  Sparse Inverse Covariance ,  this method is applied the obtained  feature-region matrix  $V(:,1:k_3^i)^{\sf T}$  in order to find the functional connectivity of the $i^{th}$ class.
+%	\begin{figure}[!t]
+%		\centering
+%		\includegraphics[width=3.5in]{images/SVDiff}
+%		\caption{The blue line with the star indicator, shows the difference between the mode-$3$ singular values of the original data and the data appended with a \emph{same} label subject. The orange line indicated with circles, shows the difference between the mode-$3$ singular values of the original data and the data appended with a \emph{different} label subject.}
+%		\label{g3.1}
+%	\end{figure}
+
+
 	\section{EXPERIMENTAL STUDY}
 	\subsection{Data Preprocessing and Experimental Settings}
 	
@@ -991,11 +1088,13 @@ since $X$ added to both data sets, so we did not its labe and the method in true
 	
 	\subsection{Classification}
 	
-	Almost every subject in ADNI dataset has several scans. Usually a random scan data is selected and enters the processing step. This random selection may cause several problems. Since the number of train data is very low, a small perturbation in it could drastically change the set of input parameters in order to achieve the highest prediction accuracy and other classification evaluation methods. Also achieving high quality results with a classifier does not guarantee its effectiveness on other datasets even with fine tuning the parameters since the training set may contain outliers and unidentified corrupted data. 
+	Almost every subject in ADNI dataset has several scans. Usually a random scan data is selected and enters the processing step. This random selection may cause several problems \textcolor{red}{ref}. Since the number of train data is very low, a small perturbation in it could drastically change the set of input parameters in order to achieve the highest prediction accuracy and other classification evaluation methods. Also achieving high quality results with a classifier does not guarantee its effectiveness on other datasets even with fine tuning the parameters since the training set may contain outliers and unidentified corrupted data. 
 	In order to show that the proposed framework is less sensitive against the choice of different perturbations and is less vulnerable towards the aforementioned issues, we have selected $18$ different perturbations and two test state of the art classification methods on them: \textbf{HON} and \textbf{k-SICE}.   
 	To make full use of the limited subjects, a leave-one-out procedure is used for training and test. That is, each sample is reserved for test in turn, while the remaining samples are used for training.
 	We have use five
-	evaluation measures: accuracy (ACC), sensitivity (SEN), Youden’s index(YI), F-score, and balanced accuracy (BAC). 
+	evaluation measures: accuracy (ACC), sensitivity (SEN), Youden’s index(YI), F-score, and balanced accuracy (BAC).
+	\textcolor{red}{Tan Book} 
+	
 	%The detailed definitions
 	%of these seven statistical measures are provided in Table \eqref{Table_1}, where TP, TN, FP, and FN denote the true positive, true negative, false positive, and false negative, respectively, and 
 	%$precision =  \frac{TP}{TP + FP}  $ 
@@ -1025,14 +1124,14 @@ since $X$ added to both data sets, so we did not its labe and the method in true
 	%\end{table}
 	
 	\subsubsection{Classification performance}
-	The classification accuracy measure(ACC), After fine-tuning the input parameter set for each method, shows that for $16$ out of $18$ different perturbations, our approach works better than k-SICE, the same also holds for $15$ datasets comparing to HON. i.e. in $88.8 \%$ of datasets, TBNA works better than k-SICE and in $83.3 \%$ of datasets, it works better that FON.  
-	The highest classification accuracy($86.59\%$) is achieved with the TBNA in the $15$th perturbation. The highest accuracy for the HON ($84.15\%$) is achieved in the $14$th, and the highest accuracy for the SICE method ($85.37\%$) is achieved in the $6$th perturbation. As it was mentioned before, being stable when the input dataset changes is a very important aspect for a classifier, in order to measure the stability, standard deviation of accuracy along with other measures are
-	calculated. The std. of accuracy for TBNA is $0.64$ times less than HON and $1.73$ times less than SICE method. Similar results also holds for other classification measures.
+	The classification accuracy measure(ACC), After fine-tuning the input parameter set for each method, shows that for $16$ out of $18$ different perturbations, our approach works better than k-SICE, the same also holds for $15$ datasets comparing to HON. i.e. in $88.8 \%$ of datasets, proposed method works better than k-SICE and in $83.3 \%$ of datasets, it works better that FON.  
+	The highest classification accuracy($86.59\%$) is achieved with the proposed method in the $15$th perturbation. The highest accuracy for the HON ($84.15\%$) is achieved in the $14$th, and the highest accuracy for the SICE method ($85.37\%$) is achieved in the $6$th perturbation. As it was mentioned before, being stable when the input dataset changes is a very important aspect for a classifier, in order to measure the stability, standard deviation of accuracy along with other measures are
+	calculated. The std. of accuracy for proposed method is $0.64$ times less than HON and $1.73$ times less than SICE method. Similar results also holds for other classification measures.
 	\begin{figure*}
 		\centering
-		\includegraphics[width=7in]{Final}
+		\includegraphics[width=7in]{images/Final-eps.pdf}
 		\caption{
-			sdsss 
+			Comparison of proposed method(Prop) with K-SICE and HON in five different classification evaluation measures along with the standard deviation of each one. As it can be seen, the both the minimum and maximum of the proposed methods in these measurements are higher that the other two. Also the lower std. of our method indicates its stability.   
 		}
 		\label{g3.2}
 	\end{figure*}
@@ -1052,7 +1151,7 @@ since $X$ added to both data sets, so we did not its labe and the method in true
 				\\
 				FON   &75.66& 77.44 & 78.40 & 72.48 & 50.89 & 75.44  
 				\\
-				TBNA &\textbf{80.43}& \textbf{82.20} & \textbf{84.60} & \textbf{75.59} & \textbf{60.20} & \textbf{80.09}
+				Proposed &\textbf{80.43}& \textbf{82.20} & \textbf{84.60} & \textbf{75.59} & \textbf{60.20} & \textbf{80.09}
 				
 				\\
 				
@@ -1062,11 +1161,11 @@ since $X$ added to both data sets, so we did not its labe and the method in true
 			%}
 		\end{center}
 	\end{table}
-	As it can be seen in this table, the average accuracy of TBNA which is $80.43 \%$ is $4.77\%$ higher than the next method HON, and $4.86 \%$ better than k-SICE. It is noteworthy that The other two methods i.e HON and SICE shows similar results in average.  
+	As it can be seen in this table, the average accuracy of Proposed method which is $80.43 \%$ is $4.77\%$ higher than the next method HON, and $4.86 \%$ better than k-SICE. It is noteworthy that The other two methods i.e HON and SICE shows similar results in average.  
 	
 	\begin{figure*}
 		\centering
-		\includegraphics[width=7in]{FG}
+		\includegraphics[width=6in]{images/FG}
 		\caption{
 			The difference graph. This graph is obtained via subtracting the functional connectivity of eMCI subjects from normal subjects. Each circle represents a ROI in AAL atlas and the color and size of each circle is proportional to the graph clustering coefficient of the difference graph. red = more activity in EMCI, green: less. 
 		}
@@ -1074,14 +1173,14 @@ since $X$ added to both data sets, so we did not its labe and the method in true
 	\end{figure*}
 	
 	\subsubsection{Runtime Comparison}
-	One other key features of TBNA is that it works significantly faster that the other two methods. Table \eqref{Time} shows the average elapsed time (Training plus Testing) of each method for all selected permutations. These methods were executed in matlab R2017b and carried with an intel Core-i7 processor and $16$GB of RAM. As it can be seen in this table, TBNA is more that $600$ times faster than HON and $20$ times faster that SICE.   
+	One other key features of proposed method is that it works significantly faster that the other two methods. Table \eqref{Time} shows the average elapsed time (Training plus Testing) of each method for all selected permutations. These methods were executed in matlab R2017b and carried with an intel Core-i7 processor and $16$GB of RAM. As it can be seen in this table, proposed method is more that $600$ times faster than HON and $20$ times faster that SICE.   
 	\begin{table}
 		\begin{center}
 			\caption{Elapsed time of the test and train phase in seconds}
 			%\resizebox{\textwidth}{!}{  
 			\begin{tabular}{@{}c*{4}{c}}
 				\hline\hline
-				Method& HON & k-SICE& TBNA  
+				Method& HON & k-SICE& proposed method 
 				\\
 				\hline
 				Elapsed Time  &6950& 230 & 11 
@@ -1100,23 +1199,23 @@ since $X$ added to both data sets, so we did not its labe and the method in true
 	
 	
 	\subsection{Functional connectivity Network}
-	The functional connectivity networks of the Normal and eMCI classes was obtained via TBNA as it is described in \eqref{FC_Construction}.
+	The functional connectivity networks of the Normal and eMCI classes was obtained via proposed method as it is described in \eqref{FC_Construction}.
 	In order to better highlight the differences between Normal and eMCI subjects, a difference graph $D$ is constructed by subtracting the Normal FC from the eMCI FC. This graph could be seen in Figure\eqref{g3.3}. 
 	The nodes of $D$ shows the ROIs according to the AAL atlas. The size of each node is proportional to its graph clustering coefficient, i.e. the bigger node, demonstrates higher activity in eMCI subjects in the corresponding ROI. 
 	Similar to nodes, the size of each edge is also proportional to the correlation between two ROI's. In addition, the edges are also color coded in a way that the green edges shows the positive edges in $D$ and the orange edges shows the negative edges in $D$. In this manner, the green edges demonstrates decreasing in activity between the corresponding nodes in eMCI subjects and vice versa, the orange edges shows increasing activity between corresponding ROIs in the eMCI subjects.   
 	
-	As it can be seen in the difference graph, the big nodes i.e. ROIs with higher activities does not necessarily establish strong connections with the other nodes. As an obvious example, higher activities in Lingual gyrus(ROI index: 47,48)\cite{r24,r25}, Calcarine sulcus(ROI index: 43, 44)\cite{r26,r27}, Supplementary motor area(ROI index: 19,20)\cite{r27,r28} and Temporal\_mid\_L(ROI index: 85)\cite{r29} are easily detectable. The majority of ROIs located in frontal lobe also shows rather high activities comparing to normal subjects\cite{r31,r30}.
+	As it can be seen in the difference graph, the big nodes i.e. ROIs with higher activities does not necessarily establish strong connections with the other nodes. As an obvious example, higher activities in Lingual gyrus(ROI index: 47,48)\cite{r24,r25}, Calcarine sulcus(ROI index: 43, 44)\cite{r26,r27}, Supplementary motor area(ROI index: 19,20)\cite{r27,r28} and Temporal\_mid\_L(ROI index: 85)\cite{r29} are easily detectable. The majority of ROIs located in frontal lobe also shows rather high activities comparing to normal subjects\cite{r30,r31}.
 	
 	Similar to the nodes, strong edge between two ROIs does not necessarily requires the nodes to be highly active in eMCI. Although a strong edge does indicate high activities and functional connectivity between the two corresponding ROIs. The difference Graph shows significant increase in connectivity between 
 	Rectus(ROI index: 28, 27 in Frontal lobe) and 
-	Parietal\_Sup\_R(ROI index: 60 in Parietal lobe),
+	Parietal\_Sup\_R(ROI index: 60 in Parietal lobe) \cite{r40, r41},
 	Frontal\_Inf\_Orb\_R(ROI index: 16 in Frontal lobe) and
-	Cingulum\_Ant(ROI index: 31,32 in Limbic lobe), 
+	Cingulum\_Ant(ROI index: 31,32 in Limbic lobe)\cite{r42},
 	Insula\_L, Temporal\_Pole\_Sup\_L(ROI index: 29,83 in Limbic lobe) and
-	Pallidum\_R, Caudate\_R(ROI index: 29,83 in Sub Cortical Grey Nuclei). It can also be seen that within activities in frontal lobe also increased in patients with eMCI. There is a decrease in connectivity between Amygdala\_L(ROI index: 41 in Sub Cortical Grey Nuclei) with Frontal\_Mid\_Orb\_R(ROI index: 10 in Sub Frontal lobe) and ParaHippocampal\_L(ROI index: 39 in Sub Limbic lobe). The connectivity between Heschl\_L(ROI index: 79 in Temporal lobe) and two ROIs Temporal\_Mid\_R(ROI index: 86 also in Temporal lobe) and Occipital\_Inf\_R(ROI index: 54 in Occipital lobe) also decreased in eMCI.  
+	Pallidum\_R, Caudate\_R(ROI index: 29,83 in Sub Cortical Grey Nuclei)\cite{r43}. It can also be seen that within activities in frontal lobe also increased in patients with eMCI\cite{r44}. There is a decrease in connectivity between Amygdala\_L(ROI index: 41 in Sub Cortical Grey Nuclei) with Frontal\_Mid\_Orb\_R(ROI index: 10 in Sub Frontal lobe) and ParaHippocampal\_L(ROI index: 39 in Sub Limbic lobe)\cite{r45}. The connectivity between Heschl\_L(ROI index: 79 in Temporal lobe) and two ROIs Temporal\_Mid\_R(ROI index: 86 also in Temporal lobe) and Occipital\_Inf\_R(ROI index: 54 in Occipital lobe) also decreased in eMCI\cite{r46}.  
 	
-	\subsubsection*{Regarding the Cerebellum and Vermis}
-	In fMRI data analysis and especially in Alzheimer's disease studies, ROIs within the Cerebellum and Vermis are usually excluded[ref] since their role was regarded as insignificant. Recent studies have shown that the traditional assumption that Cerebral area is essential only for the coordination of voluntary motor activity and motor learning is not valid and indicates the significant role of cerebellum in nervous system function, cognition and emotion\cite{r32}. 
+	\subsubsection*{\textbf{Regarding the Cerebellum and Vermis}}
+	In fMRI data analysis and especially in Alzheimer's disease studies, ROIs within the Cerebellum and Vermis are usually excluded since their role was regarded as insignificant\cite{r47, r48}. Recent studies have shown that the traditional assumption that Cerebral area is essential only for the coordination of voluntary motor activity and motor learning is not valid and indicates the significant role of cerebellum in nervous system function, cognition and emotion\cite{r32}. 
 	
 	As it can be seen in the difference graph that we obtained, ROIs within Cerebellum and Vermis are highly active and both their intra and inter connections are noticeable. There is an increasing functional connectivity between the Limbic lobe especially 
 	Hippocampus\_R, Temporal\_Pole\_Mid(ROI index: 38,87,88)
@@ -1259,7 +1358,7 @@ since $X$ added to both data sets, so we did not its labe and the method in true
 	% if using array.sty, it might be a good idea to tweak the value of
 	% \extrarowheight as needed to properly center the text within the cells
 	
-	\
+	
 	
 	
 	
@@ -1410,11 +1509,11 @@ since $X$ added to both data sets, so we did not its labe and the method in true
 	%Appendix two text goes here.
 	
 	
-	% use section* for acknowledgment
-	\section*{Acknowledgment}
-	
-	
-	The authors would like to thank...
+%	% use section* for acknowledgment
+%	\section*{Acknowledgment}
+%	
+%	
+%	The authors would like to thank...
 	
 	
 	% Can use something like this to put references on a page
@@ -1458,22 +1557,24 @@ since $X$ added to both data sets, so we did not its labe and the method in true
 		\bibitem{r03}
 		Musha, Toshimitsu, et al. "EEG markers for characterizing anomalous activities of cerebral neurons in NAT (neuronal activity topography) method." IEEE Transactions on Biomedical Engineering 60.8 (2013): 2332-2338.
 		
-		\bibitem{r04}
-		Gould, R. L., et al. "Brain mechanisms of successful compensation during learning in Alzheimer disease." Neurology 67.6 (2006): 1011-1017.
+%		\bibitem{r04}
+%		Gould, R. L., et al. "Brain mechanisms of successful compensation during learning in Alzheimer disease." Neurology 67.6 (2006): 1011-1017.
 		
-		\bibitem{r05}
-		Richiardi, Jonas, et al. "Classifying minimally disabled multiple sclerosis patients from resting state functional connectivity." Neuroimage 62.3 (2012): 2021-2033.
+		\bibitem{r04}Dennis, Emily L., and Paul M. Thompson. "Functional brain connectivity using fMRI in aging and Alzheimer’s disease." Neuropsychology review 24.1 (2014): 49-62.
 		
-		\bibitem{r06}
-		Yang, Xue, et al. "Evaluation of statistical inference on empirical resting state fMRI." IEEE Transactions on Biomedical Engineering 61.4 (2014): 1091-1099.
+%		\bibitem{r05}
+%		Richiardi, Jonas, et al. "Classifying minimally disabled multiple sclerosis patients from resting state functional connectivity." Neuroimage 62.3 (2012): 2021-2033.
+		
+%		\bibitem{r06}
+%		Yang, Xue, et al. "Evaluation of statistical inference on empirical resting state fMRI." IEEE Transactions on Biomedical Engineering 61.4 (2014): 1091-1099.
 		
 		\bibitem{r07}
 		R. Graaf and K. Kevin. Methods and apparatus for
 		compensating eld inhomogeneities in magnetic resonance
 		studies. US Patent No. 8035387, 2011.
 		
-		\bibitem{r08}
-		Zhang, Xiaowei, et al. "Resting-state whole-brain functional connectivity networks for mci classification using l2-regularized logistic regression." IEEE transactions on nanobioscience 14.2 (2015): 237-247.
+%		\bibitem{r08}
+%		Zhang, Xiaowei, et al. "Resting-state whole-brain functional connectivity networks for mci classification using l2-regularized logistic regression." IEEE transactions on nanobioscience 14.2 (2015): 237-247.
 		
 		\bibitem{r09}
 		Stanley, Matthew Lawrence, et al. "Defining nodes in complex brain networks." Frontiers in computational neuroscience 7 (2013): 169.
@@ -1499,17 +1600,17 @@ since $X$ added to both data sets, so we did not its labe and the method in true
 		\bibitem{r16}
 		Allen, Elena A., et al. "Tracking whole-brain connectivity dynamics in the resting state." Cerebral cortex 24.3 (2014): 663-676.
 		
-		\bibitem{r17}
-		Damaraju, Eswar, et al. "Dynamic functional connectivity analysis reveals transient states of dysconnectivity in schizophrenia." NeuroImage: Clinical 5 (2014): 298-308.
+%		\bibitem{r17}
+%		Damaraju, Eswar, et al. "Dynamic functional connectivity analysis reveals transient states of dysconnectivity in schizophrenia." NeuroImage: Clinical 5 (2014): 298-308.
 		
-		\bibitem{r18}
-		Hutchison, R. Matthew, et al. "Dynamic functional connectivity: promise, issues, and interpretations." Neuroimage 80 (2013): 360-378.
+%		\bibitem{r18}
+%		Hutchison, R. Matthew, et al. "Dynamic functional connectivity: promise, issues, and interpretations." Neuroimage 80 (2013): 360-378.
 		
 		\bibitem{r19}
 		Leonardi, Nora, et al. "Principal components of functional connectivity: a new approach to study dynamic brain connectivity during rest." NeuroImage 83 (2013): 937-950.
 		
-		\bibitem{r20}
-		Leonardi, Nora, et al. "Principal components of functional connectivity: a new approach to study dynamic brain connectivity during rest." NeuroImage 83 (2013): 937-950.
+%		\bibitem{r20}
+%		Leonardi, Nora, et al. "Principal components of functional connectivity: a new approach to study dynamic brain connectivity during rest." NeuroImage 83 (2013): 937-950.
 		
 		\bibitem{r21}
 		Nordberg, Agneta. "PET imaging of amyloid in Alzheimer's disease." The lancet neurology 3.9 (2004): 519-527.
@@ -1544,8 +1645,52 @@ since $X$ added to both data sets, so we did not its labe and the method in true
 		new approach to study dynamic brain connectivity during rest,” NeuroImage,
 		vol. 83, pp. 937–950, 2013.
 		
-		\bibitem{r34}
-		\bibitem{r35}
+		\bibitem{r34}Cherkassky, Vladimir L., et al. "Functional connectivity in a baseline resting-state network in autism." Neuroreport 17.16 (2006): 1687-1690.
+	
+		
+		
+		\bibitem{r35}Du, Yuhui, Zening Fu, and Vince D. Calhoun. "Classification and prediction of brain disorders using functional connectivity: promising but challenging." Frontiers in neuroscience 12 (2018).
+		
+		\bibitem{r36}de Vos, Frank, et al. "A comprehensive analysis of resting state fMRI measures to classify individual patients with Alzheimer's disease." Neuroimage 167 (2018): 62-72.
+		
+		\bibitem{r37}Cuingnet, Rémi, et al. "Automatic classification of patients with Alzheimer's disease from structural MRI: a comparison of ten methods using the ADNI database." neuroimage 56.2 (2011): 766-781.
+		
+		\bibitem{r38}Friston, Karl J. "Functional and effective connectivity: a review." Brain connectivity 1.1 (2011): 13-36.
+		
+%		\bibitem{r39}Jones, David T., et al. "Non-stationarity in the “resting brain’s” modular architecture." PloS one 7.6 (2012): e39731.
+		
+		\bibitem{r40}Brickman, Adam M., et al. "Reconsidering harbingers of dementia: progression of parietal lobe white matter hyperintensities predicts Alzheimer's disease incidence." Neurobiology of aging 36.1 (2015): 27-32.
+		
+		\bibitem{r41}De Reuck, J., et al. "Topography of cortical microbleeds in Alzheimer’s disease with and without cerebral amyloid angiopathy: a post-mortem 7.0-tesla MRI Study." Aging and disease 6.6 (2015): 437.
+		
+		\bibitem{r42}Perani, Daniela, et al. "The impact of bilingualism on brain reserve and metabolic connectivity in Alzheimer's dementia." Proceedings of the National Academy of Sciences 114.7 (2017): 1690-1695.
+		
+		\bibitem{r43}Subcortical volume changes in dementia with Lewy bodies and Alzheimer's disease. A comparison with healthy aging
+		
+		\bibitem{r44}Cai, Suping, et al. "Changes in thalamic connectivity in the early and late stages of amnestic mild cognitive impairment: a resting-state functional magnetic resonance study from ADNI." PloS one 10.2 (2015): e0115573.
+		
+		\bibitem{r45}Ortner, Marion, et al. "Progressively Disrupted intrinsic Functional connectivity of Basolateral amygdala in Very early alzheimer’s Disease." Frontiers in neurology 7 (2016): 132.
+		
+		\bibitem{r46}Steketee, Rebecca ME, et al. "Early-stage differentiation between presenile Alzheimer’s disease and frontotemporal dementia using arterial spin labeling MRI." European radiology 26.1 (2016): 244-253.
+		
+		\bibitem{r47}Sanz-Arigita, Ernesto J., et al. "Loss of ‘small-world’networks in Alzheimer's disease: graph analysis of FMRI resting-state functional connectivity." PloS one 5.11 (2010): e13788.
+		
+		\bibitem{r48}Zhang, Daoqiang, et al. "Multimodal classification of Alzheimer's disease and mild cognitive impairment." Neuroimage 55.3 (2011): 856-867.
+		
+		\bibitem{r49}V.Arsigny et al.,. (2006). Log-euclidean metrics for fast and simple calculus
+		on diffusion tensors. Magn. Reson. Med.. [Online]. 56(2), pp. 411–421.
+		Available: http://dx.doi.org/10.1002/mrm.20965
+		
+		\bibitem{r50}S. Sra, “A new metric on the manifold of kernel matrices with application
+		to matrix geometric mean,” in Advances in Neural Information Processing
+		Systems 25, F. Pereira, C. J. C. Burges, L. Bottou, K. Q.Weinberger, Eds.,
+		New York, NY: Curran Associates, Inc., 2012, pp. 144–152.
+		
+		\bibitem{r51}Allen, Elena A., et al. "Tracking whole-brain connectivity dynamics in the resting state." Cerebral cortex 24.3 (2014): 663-676.
+		
+		\bibitem{r51}Chang, Catie, and Gary H. Glover. "Time–frequency dynamics of resting-state brain connectivity measured with fMRI." Neuroimage 50.1 (2010): 81-98.
+		
+		\bibitem{r52}Handwerker, Daniel A., et al. "Periodic changes in fMRI connectivity." Neuroimage 63.3 (2012): 1712-1719.
 		
 		
 	\end{thebibliography}
@@ -1564,15 +1709,15 @@ since $X$ added to both data sets, so we did not its labe and the method in true
 	\begin{IEEEbiography}{Mansoor Rezghi}
 		
 	\end{IEEEbiography}
-
-	\begin{IEEEbiography}{Ali Noroozi}
 	
+	\begin{IEEEbiography}{Ali Noroozi}
+		
 	\end{IEEEbiography}
 	
 	% if you will not have a photo at all:
-%	\begin{IEEEbiographynophoto}{Mansoor Rezghi}
-%		
-%	\end{IEEEbiographynophoto}
+	%	\begin{IEEEbiographynophoto}{Mansoor Rezghi}
+	%		
+	%	\end{IEEEbiographynophoto}
 	
 	% insert where needed to balance the two columns on the last page with
 	% biographies
