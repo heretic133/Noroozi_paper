@@ -49,8 +49,41 @@
 %% The amssymb package provides various useful mathematical symbols
 \usepackage{amssymb}
 \usepackage{xcolor}
+
+%\ifCLASSINFOpdf
+%\usepackage[pdftex]{graphicx}
+%% declare the path(s) where your graphic files are
+%%\graphicspath{{../pdf/}{../jpeg/}}
+%\graphicspath{{images/}}
+%% and their extensions so you won't have to specify these with
+%% every instance of \includegraphics
+%% \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+%\else
 %% The amsthm package provides extended theorem environments
 %% \usepackage{amsthm}
+\usepackage{amsmath}
+%\usepackage{calrsfs}
+%\usepackage{bm}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{tabu}
+\usepackage{float}
+\usepackage{svg}
+%\usepackage[]{algorithm2e}
+%\usepackage{algorithm}
+%\usepackage[]{algorithmic}
+\usepackage{algorithm, algorithmic}
+%\usepackage[colorlinks]{hyperref}
+\usepackage{xcolor}
+
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{N}{@{}m{0pt}@{}}
+
+
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+
+\newcommand{\trans}{\mathsf{T}}
+
 
 %% The lineno packages adds line numbers. Start line numbering with
 %% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
@@ -148,7 +181,7 @@ This framework also allows us to obtain a general FC pattern for normal and eMCI
 \label{Intro}
 Alzheimer’s disease (AD) is a progressive neurodegenerative disorder with a long pre-morbid asymptomatic period which affects millions of elderly individuals worldwide\cite{r01}. It is predicted that the number of affected people will double in the next 20 years, and 1 in 85 people will be affected by 2050 \cite{r02}. The predominant clinical symptoms of AD include a decline in some important brain cognitive and intellectual abilities, such as memory, thinking, and reasoning. Precise diagnosis of AD, especially at its early warning stage: early Mild Cognitive Impairment (eMCI), enables treatments to delay or even avoid such disorders \cite{r03}.
 
-In recent years, brain imaging techniques like Positron Emission Tomography(PET)\cite{r21}, Electroencephalography (EEG)\cite{r22}
+In recent years, brain imaging techniques like Positron Emission Tomography (PET)\cite{r21}, Electroencephalography (EEG)\cite{r22}
 	 and functional Magnetic Resonance Imaging (fMRI)\cite{r23} 
 	 have been used in analysis of AD. Due to the high spatial resolution and relatively lower costs, fMRI is vastly used among researchers in order to monitor brain activities especially in AD and all its stages in which detecting abnormalities within small brain regions is essential \cite{r04}. 
 	An fMRI sample is naturally a 4D tensor consisting of 3D voxels moving in time, and each voxel contains an intensity value that is proportional to the strength of the Blood Oxygenation Level Dependent(BOLD) signal, which is a measure of the changes in blood flow, to estimate the activity of different brain regions\cite{r07}.
@@ -200,9 +233,869 @@ In recent years, brain imaging techniques like Positron Emission Tomography(PET)
 	  	As will be seen, the results well demonstrate the effectiveness and advantages of our method. Specifically, the proposed framework, not only grants us superior classification accuracy to that from other methods, it is also much faster and more stable against different data selection schemes. We have also confirmed our achieved whole-class FC matrix using empirical data on the eMCI and Normal functional connectivity patterns.
 	  	
 							 
-				
-				
-\section{}
+	\section{eMCI classification techniques}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	
+%	As it was discussed before, classification techniques have become a favorable method for Alzheimer disease early detection. early classification methods used $X_{i}$s as the representative for each subject and used them directly in the classification process\textcolor{red}{ref?}. 
+%	As the functional connectivity matrix gain popularity among researchers, the majority of these classification methods shifted towards classifying the functional connectivity matrices\textcolor{red}{add some references!!}. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+As it was mentioned before, obtaining and classifying FC matrices have become the dominant approach towards eMCI classification. 
+Variety of methods such as Pairwise Pearson’s correlation coefficient \cite{r10, r11}, sparse representation \cite{r10, r12, r13}  and Sparse Inverse Covariance Estimation (SICE)\cite{r15} exists to obtain an FC,
+While the first two are easy to understand and can capture pairwise functional relationship based on a pair of ROIs, the latter can account for more complex interactions among multiple ROIs, but the estimation of partial correlation involves an inversion of a covariance matrix, which may be ill-posed due to the singularity of the covariance matrix. 
+These methods result in vastly different networks\cite{r35}. On the other hand, computing the correlations, based on the entire time series of fMRI data simply measures the FC between ROIs with a scalar value, which is fixed across time. This actually implicitly hypothesizes the \textbf{Stationary} interaction patterns among ROIs. As a result, this method may overlook the complex and dynamic interaction patterns among ROIs, which are essentially time-varying. In order to overcome this issue, \textbf{Non-stationary} methods have been proposed which results in more complex networks\cite{r16}\textendash \cite{r19}.
+
+%	There are two main paradigms towards obtaining the FCs: Stationary and non-stationary methods. Stationary methods use a single scaler value like Partial correlation or \textcolor{red}{sparse coefficients} in order to determine the functional connectivity between two ROIs. Non-stationary methods consider a more complex relation between ROIs that can not be best captured with a single scaler value. 
+
+In the following we briefely discuss two state of the art eMCI classification techniques belonging to these two paradigms:
+
+%	In the following for future comparisons with our method, we explain  the mentioned state of the art  candidates from  these two approaches in details. As one of the main methods in this approch we can mentioed a method proposed in??. This method
+%	uses the Sparse Inverse Covariance matrix in order to establish a functional connectivity matrix and then using the SPD property of SICE, propose a dimension reduction technique in order to find a set of low dimensional features for classification. The reported results in ?? demonstrate the quality of this method over other ones.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%	\textcolor{red}{In this approach different kinds of methods has been used to obtain Fc matrix, like methods based on Pearson's correlation, sparse coding and SICE. Ref????. In classification steps the vectorization of these FC matrices are used.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%In order to demonstrate the power of our proposed framework, we have implemented an state of the art method from each of these paradigms.
+
+
+% The first method which is an stationary one The second method which is non-stationary,     
+
+
+
+
+
+\begin{itemize}
+	\item $\mathbf{Kernel Compact SICE(K-SIEC):}$ 
+\end{itemize}
+This method which belongs to the stationary paradigm was proposed in \cite{r14}. In this method, the SICE matrix is chosen as the FC for each sample, then using the SPD property of this matrix, kernel-PCA is deployed in order to reduce its dimensions.
+
+The SICE matrix is extracted from the data sample $S$ using the following optimization: 
+\begin{align}
+S^* = \operatorname{arg} \max\limits_{S\succ 0} \hspace{3mm} \log \left( \det(S) \right) - \operatorname{tr}(CS) - \lambda \norm{S}_1
+\end{align}
+where $C$ is the sample-based covariance matrix; $\det(·)$, $\operatorname{tr}(·)$,
+and $\norm{.}_1$ denote the determinant, trace, and the sum of the absolute values of the entries of a matrix. 
+%\textcolor{red}{Since the  SICE matrix is in $\mathbb{R}^{R\times R}$}, with $R$ representing the number of ROIs, the obtained matrix is still relatively large. 
+%	Principal Component Analysis(PCA) has proved itself to be one of the most powerful methods of dimension reduction and this method uses Kernel-PCA with a Gaussian kernel in order to extract the key features of SICE.
+In order to reduce the dimensionality of the obtained SICE matrix, Kernel-PCA with a Gaussian kernel is used  to extract the key features.
+\textcolor{red}{Since SICE is an SPD matrix, specific distance functions such as Log-Euclidean distance\cite{r49} or Root Stein divergence\cite{r50} can be used as the distance function in the Gaussian kernel. Analogous to linear PCA, and by defining 
+	$\Phi(\cdot) = Sym^{+}_{d} \mapsto \mathcal{F}$ as the kernel map, 
+	for a given SICE matrix $S$,$\Phi(S)$ can then be projected onto the top $m$ eigenvectors to obtain an $m$-dimensional principal
+	component vector. These vectors are used to train an SVM classifier. The performance of this method heavily relies on the choice of sparsity parameter $\lambda$ and the number of top eigenvectors $m$. }   
+
+\begin{itemize}
+	\item $\mathbf{High Order Networks(HON):}$
+\end{itemize}
+This method which belongs to non-stationary paradigm uses so called
+High Order Networks as features for classification purposes. It uses the sliding window technique  in order to split the time-series into smaller pieces and then find the relation between them\cite{r51}\textendash \cite{r52}. Let $x_{i}^{(l)}(k) \in \mathbb{R}^N$ denote the $k$-th segment of subseries extracted from $x_{i}^{(l)}$, which comprises $N$ image volumes. by taking each $x_{i}^{(l)}(k)$ as a node, A network can be constructed with edges defined using:
+\[
+C_{ij}^{(l)}(k) = \operatorname{corr}\left(x_{i}^{(l)}(k),x_{j}^{(l)}(k)
+\right)
+\]
+which represents the pairwise Pearson’s correlation coefficients
+between the $i$-th and the $j$-th ROIs of the $l$-th subject using the $k$-th segment of subseries. 
+%\[
+%G_l^{(l)}(k) = \left( 
+%\{ x_i^{(l)}(k) \} , \{ C_{ij}^{(l)}(k) \}
+%\right)
+%\]
+by taking  
+\[
+y_{ij}^{(l)} = \left[ 
+C_{ij}^{(l)}(1), C_{ij}^{(l)}(2), \cdots , C_{ij}^{(K)}(1) 
+\right] \in \mathbb{R}^K
+\]
+as new nodes, an other network can be calculated as follow: 
+\[
+H_{ij,pq}^{(l)} = \operatorname{corr} \left(
+y_{ij}^{(l)},y_{pq}^{(l)}
+\right)
+\]
+for each pair of correlation time series $y_{ij}$ and $y_{pq}$ thus, $H_{ij,pq}^{(l)}$ indicates how the correlation between the $i$-th and the $j$-th ROIs influence the correlation between the $p$-th and the $q$-th ROIs.
+The total number of the high-order correlation coefficients
+$\{ H_{ij,pq}^{(l)} \}$ is proportional to $R^4$ which will lead to a large-scale high-order FC
+network, containing at least thousands of vertices and millions
+of edges. In order to overcome this issue, the correlation time series within each subject is grouped into different clusters. Then, the correlation calculation
+between the original correlation time series can be
+converted into that between the respective mean correlation
+time series in clusters. After reducing the network size, the
+weighted-graph local clustering coefficients was used to select the key features for each network and then an SVM classifier is trained in order to classify the obtained features.  
+%	\end{itemize}
+
+It is noteworthy that non of these techniques consider the multi-linearity nature of the data, and since both methods use traditional classifiers like SVM or KNN, they follow a rather complex path to find vector features as the representative of each FC matrix.
+	
+	
+	
+	
+	\section{Proposed fMRI analysis Framework Based On Tensor framework}
+% needed in second column of first page if using \IEEEpubid
+%\IEEEpubidadjcol
+All main mentioned eMCI classification methods use FC of each sample as an input feature. So, the computational complexity of these methods are high due to the construction of FC matrices. In addition, the quality of the obtained FC heeavily affects the  classification performance. Moreover, none of these methods  attend  the multi-linear propriety of such data.
+In this section by tensor viewpoint we show that only by one tensor decomposition we could do the following analysis on fMRI data:
+
+\textbullet\ $\mathbf{Classification:}$
+\textcolor{red}{
+	Viewing each class as a 3D tensor ables us to separately project each mode into a smaller one, without the necessity of unfolding it into matrices or vectors, and thus preserving the structural integrity of data along with reducing its dimensions. Transferring each sample matrix $X_i\in \mathbb{R}^{T \times R}$ into the new feature space granted by tensor viewpoint, obsoletes the necessity of constructing the FC for each sample by producing a high quality and low-dimensional feature $\bar{X}_i \in \mathbb{R}^{\bar{T} \times \bar{R}}$ in which $\bar{T}$ and $\bar{R}$ are drastically smaller that $T$ and $R$. This viewpoint also ables us to design a novel discriminant function in which the test data is used in the training process without forcing any apriory knowledge about its label to the classifier, a task which is impossible via the conventional classifiers such as SVM, K-NN or logistic regression.  
+}
+
+
+
+%	time-region matrices  without folding and construction of FC matrix per-sample. Here data set of each class is denoted by a tensor and by using the HOSVD of such data
+%	all region-time matrices are projected to smaller ones(without folding the data to vectors). Also based on this HOSVD decpmoistion  we design a tensor based discriminant function for classification.As the first time we propose a novel method that allows test data have a contribution in constructions of discriminant function of each class without using extra information. This idea have a big effect in the quality of propped method.
+%	
+%	Since this method directly works on region-time matrices as input features, its computational complexity is more smaller than state of the art methods that use FC matrices as input feature. Also the experimental results confirm the quality of this method in recognition of normal and eMCI data.
+
+\textbullet\ $\mathbf{General~FC:}$
+\textcolor{red}{
+	Using the components of HOSVD extracted in the previous step, a general FC could be constructed for each class that reveals patterns common shared among all samples within each class. This technique allows us to discard the role of outliers or noisy samples.  
+}
+%By this HOSVD decomposition we	
+%	proposed a novel method that could 
+%	find a general representative FC for eMCI and Normal data. In this method having the FC of all samples is not necessary. 
+%	{\color{red} In the experiments we show that the obtained FC contains  relations that recently  
+%		founded experimentally(clinically).} 
+% By using High order singular value eecomposition
+% (HOSVD), all region-time matrices are projected to
+% smaller matrices (without flding the data to vectors
+%\end{itemize}
+%}
+%By using the properties of HOSVD, the proposed framework allows us to reduce the dimensionality of data, create a discriminant function and enhance it and also calculate an FC network. These four features are discussed in full detail in the following sections:
+%%Begin Dr.Rezghi Suggestions
+\subsection{ A Classification of Region-Time data of eMCI and normal data based on  Tensor framework}
+%In region based fMRI data  each data is a region-Time matrix $X\in \mathbb{R}^{T\times R}$, where $T, R$ denote the length of time and regions of the data.
+For reducing the computational complexity and reducing the  occurrence of over fitting, specially for data with large features (Like fMRI data), using  dimensionality reduction is inevitable. Although each sample $X\in \mathbb{R}^{T\times R}$ has two different time and region features, the classical methods like PCA, SVD ,... only could work on vectorized version $x=vec(X)$ of such data.
+% In these methods by having projection matrix $U$(Due to method), the projected data will be $y=U^{\sf T}x$.
+Although this approach is easy to deploy, it has several drawbacks like occurrence of Curse of dimensionality and mixing different features(time and region).
+% would be the Curse of dimensionality that appears when the proportion of the number of features to the number of samples is relatively high (which results in over-fitting). 
+%Also in this view different kind of features(like \emph{Time} and \emph{region} in our case) would be mixed together which may discard some important information within these features. The second approach is to deploy multilinear methods. 
+%This vectorizatin forthermore inceasing the computatina coplexity, mixed the metioed two type of vectors. 
+Recently multilinear dimension reduction methods like MPCA, GLRAM  have been proposed that
+could works with multidimensional data, without folding them into vectors.
+In these methods there is a freedom to select specific reduction for each kind of feature. In this section we will used well known tensor decomposition named HOSVD for dimension reduction and also classification of fMRI data.
+
+%Let ${X_1,\ldots,X_{s_1}}$ and  ${X_1,\ldots,X_{s_2}}$ be the train data of eMCI and Normal classes, respectively.
+Let tensors $\mathcal{X}^{(i)}\in \mathbb{R}^{T\times R \times S_i}$, consists normal and eMCI data, for i=1,2, respectively.  Here $S_1,S_2$ are the number of normal and eMCI data.
+% Also
+% mode-2 slices of each tensor show  the sample data.
+%the sample data. 
+%Let $\mathcal{X}^{(i)}\in \mathbb{R}^{T \times R \times S_i}$, where each slice $X(:,:,i)$ denotes the time-region feature of the $i^{th}$ sample.
+For tensor $\mathcal{X}^{(i)}$, the decomposition
+\begin{equation}
+\label{ho}
+\mathcal{X}^{(i)} = 
+\left(  
+U^{(i)},V^{(i)},W^{(i)}
+\right)\boldsymbol{\cdot} \mathcal{S}^{(i)},
+\end{equation}
+is known as higher order singular decomposition(HOSVD),
+where orthogonal matrices $U^{(i)}\in \mathbb{R}^{T\times T}, V^{(i)}\in \mathbb{R}^{R\times R} $ and $W^{(i)}\in \mathbb{R}^{S_i\times S_i}$ are known as modes-1,2,3 singular matrices of 
+and $\mathcal{S}^{(i)}$ is the corresponding core tensor \textcolor{red}{Ref?}. Here $U^{(i)}$ is a base of all mode-$ 1 $ fibers $\mathcal{X}(:,l,k)$. Here  $\mathcal{X}^{(i)}(:,l,k)$ indicates the behavior of $l$th region of the $k$th sample of the $i$th class in all times. Also  $V^{(i)}$ is a base of all mode-$ 2 $ fibers $\mathcal{X}(l,:,k)$ which indicates the behavior of all regions of  $l$th  sample of the $i$th class in  the $k$th time.
+Also, due to the properties of HOSVD inherited from svd, the first columns of mode-k (k=1,2,3) has more ability in construction of main parts of $k$th fibers and on the other hand, the last columns of  this singular matrix, are corresponding to noise parts of the fibers of the mode \textcolor{red}{ref??}. Therefore, with appropriate values of $k^i_1$ and $k^i_2$ projection of mode-1 and mode-2 fibers into space spanned by  the first $k_1$ and $k_2$ singular vectors of modes-1,2, which  are denoted by  $U^{(i)}_{k^i_1}$ and $V_{k^i_2}^{(i)}$, respectively,
+is a suitable  dimension reduction. This dimensionality reduction could be done as
+\begin{align}
+\label{m1}
+\mathbb{R}^{k_1 \times k_2 \times S_i} \ni  \bar{{\mathcal{X}}}^{(i)} = \left( 
+U^{(i) {\sf {T}}}_{k^i_1}, V_{k^i_2}^{\sf {T}}
+\right)_{1,2}\boldsymbol{\cdot} \mathcal{X}^{(i)}
+\end{align}
+%So, by having mode-2 and mode-2 singular matrices of tensor $\mathcal{X}$, its reduced versin $\overline{\mathcal{X}}$ without folding the data into vecores could be otained.
+Here it's clear that the reduced version of the $k^{th}$ sample, i.e.,$\overline{\mathcal{X}}(:,:,k)\in \mathbb{R}^{k_1\times k_2}$ could be reduced separately  in each mode without folding. This means that the structure of data is preserved in the reducing process.
+Base on the properties of the  HOSVD, it could b shown that by small number of $k_1^1, k_2^i$, the reduced data have good reconstruction error. 
+
+In the following  in spired by the structure of this reduction, we present a tensor based discrimination function.
+By HOSVD decomposition of
+$\mathcal{X}^{(i)}$ the projected data $\overline{\mathcal{X}}^{(i)}$ in equation \eqref{m1} becomes
+\begin{align}
+\bar{\mathcal{X}}^{(i)}= & \notag
+\left(
+\begin{bmatrix}
+I_{k_1^i} &  0
+\end{bmatrix},
+\begin{bmatrix}
+I_{k_2^i} &  0
+\end{bmatrix},
+W
+\right)\boldsymbol{\cdot} \mathcal{S}^{(i)} \notag
+\\&=\left( 
+W
+\right)_{3} \boldsymbol{\cdot} \mathcal{S}^{(i)}(1:k_1, 1:k_2, :) \notag &
+\end{align}
+So,  each sample of the $i^{th}$ class in the reduced space has the following form
+\begin{align*}
+\bar{{\mathcal{X}}}^{(i)}(:,:,k) &= \left(  
+W^{(i)}(k,:)
+\right)_{3} \boldsymbol{\cdot} \mathcal{S}^{(i)}(1:k_1^i, 1:k_2^i, :)\\
+=& \sum_{k' = 1}^{S_i} W^{(i)}(k,k') \boldsymbol{\cdot} \mathcal{S}^{(i)}(1:k_1^i, 1:k_2^i, k').
+\end{align*}
+This means that each sample in the $i^{th}$ class could be represented as linear combination of the slices  of the tensor $\overline{\mathcal{S}}^{(i)}=\mathcal{S}^{(i)}(1:k_1^i, 1:k_2^i, :)$.
+So if a test data like $X\in \mathbb{R}^{T\times R}$, be in the $i^{th}$ class
+it's natural to expect that its
+projected version into principle region and times spaces, spanned by $U_{k_1^i},V_{k_2^i}$, i.e,
+\[
+Z^{(i)}= \left( U_{k_1^i}^{(i)\sf T}, V_{k_2^i}^{(i)\sf T} 
+\right)_{1,2}\boldsymbol{\cdot} X
+\]
+could be approximated well as a linear combination of the slices of the tensor $\overline{\mathcal{S}}^{(i)}$ as follows
+\begin{equation}
+\label{m2}
+Z^{(i)} \approx \sum_{k=1}^{S_i} \lambda_k^i \overline{\mathcal{S}}^{(i)}(:,:,k).
+\end{equation}
+Based on this viewpoint, each test data $X$ could be assigned to a class that its prjected version have the best approximation in the form??. 
+Due to importance of core tensor elements with small indices in reconstruction of the signal part of data in comparison with the last parts,
+the small number $k_3^i< S_i$  of slices $\overline{\mathcal{S}}^{(i)}(:,:,k)$ could be used  in  \eqref{m2}. 
+
+In this viewpoint each test data
+$X$ assignment to the $l^{th}$class, if
+\[
+r_{l}=\min_{i=1,2} {r_{i}},
+\]
+where
+\begin{equation}
+\label{ls}
+r_{i}=\min_{{\lambda^{i}}} \|Z^{(i)} -\sum_{k=1}^{k_3^i} \lambda_k^i \overline{\mathcal{S}}^{(i)}(:,:,k)\|,\quad
+\lambda^i=\begin{pmatrix}
+\lambda_1^i\\
+\vdots\\
+\lambda_{s_i}
+\end{pmatrix}
+\end{equation}
+shows the  reconstruction error of the projected version of $X$ in the $i^{th}$ class.
+The minimization  \eqref{ls} is a simple least square problem that could be solved easily.
+The proposed method have an interesting property that  bring us to propose a novel method to improve its 
+quality.
+By the properties of HOSVD, the principle properties of the $i^{th}$ class could be reflected in the  slices of
+$\overline{\mathcal{S}}^{(i)}$. Also, for small indices these Slices have a  better   role in construction of main properties of this class. So the first slices of $\overline{\mathcal{S}}$
+could represent signal parts, while last ones do not this role and sometimes represents the wast parts.
+Now consider the test data $X$ added to data set $\mathcal{X}^{(i)}$ of the $i^{th}$ class. So new data set will be
+$\mathcal{\widetilde{X}}\in \mathbb{R}^{T\times R \times (S_{i}+1)}$. For example
+\begin{eqnarray*}
+	\widetilde{\mathcal{X}}^{(i)}(:,:,1:S_i)&=&{\mathcal{X}}^{(i)},\\
+	\widetilde{\mathcal{X}}^{(i)}(:,:,S_i+1)&=&X.
+\end{eqnarray*}
+
+If $X$ belongs to this class then in HOSVD of this tensor $X$ reinforce the slices of core tensor with small indices. But when it  dose not belong to this class  it  will changes the behavior of last slices of core tensor of new tensor. This meas that before classification of a test data $X$, We could added it to both classes. This addition,  will changed the first slices of core tensor when it belongs to this  class or
+will changed the last Slices  when dose not belong. But in our classification method only the first Slices of core tensor are exits. Also the elements of $S$ in the first and second modes are filtered and we work with $S(1:k_1^i,1:k_2^i,1:k_3^i)$.  This means that by addition of $X$ in both classes for class that it belongs to it, the first slices in \eqref{ls}, will be  adapted to have good reconstruction for this data. But for a class that dose not belong to, this addition have small changes in the slices in \eqref{ls}.
+It should be mentioned that
+since $X$ added to both data sets, so we did not use its label and the method in true. After computing the HOSDVD of this new data sets $\widetilde{\mathcal{X}}^{(i)}$, we apply the method in \eqref{ls} for classification.  Algorithm 1 summarized the proposed classification method.
+\begin{algorithm}[h!]
+	\label{ATNB}
+	\caption{\textbf{TNBeMCI}: Tensor based Classification method}
+	\begin{algorithmic}
+		\STATE 1) \textbf{Input}: Normal train data $\mathcal{X}^{(1)}$, eMCI train data $\mathcal{X}^{(2)}$
+		\STATE~~~    $k_i^j, i=1,2,3, \quad j=1,2$.\\
+		\STATE~~~ Test data $X$
+		\STATE 2) Construct $\widetilde{\mathcal{X}}^{(i)}$ for $i=1,2$ by adding $X$.
+		\STATE 3) Compute $U_{k_1^i}, V_{k_2^i}$ and $\mathcal{S}(1:k_1^i,1:k_2^i,k_3^i)$ of  $\widetilde{\mathcal{X}}^{(i)}$.
+		\STATE 4) Compute $Z^{(i)} = \left( U_{k_1^i}^{(i)\sf T}, V_{k_2^i}^{(i)\sf T} 
+		\right)_{1,2}\boldsymbol{\cdot} X$, $i=1,2.$
+		\STATE 5)~~Comput $r_1,r_2$ from \eqref{ls}
+		\STATE  6 )~~Assign $X$ to class $l$, if $l= \arg \min_{i} \{r_i\}$
+	\end{algorithmic}
+\end{algorithm}
+
+
+In this section by HOSVD decomposition on both normal and eMCI data, we proposed a novel tensor based classification. The benifits of the proposed tensor based classification method could be summarized as follow
+\begin{itemize}
+	\item This method  uses multi linear property of region-Time matrix data and  could works with time and region features separately based on their specific bases(corresponding singular matrices). This means that the classification works on data without folding them into vectors.
+	\item  In this classification,  the test data has a role in construction of bases for both classes, without using its label. This  increase the quality of the discrimination. This could not applied on important classification methods like SVM, logistic regression classifier and neuronal networks. 
+	\item This method works with time-region features, and dose not need to have FC matrices for each sample. So
+	its computational complexity is more less than other state of the art methods  based on FC features. Also in this method we do not wary about the quality of FC methods.	
+	It should be mentioned that our method also could be applied on FC matrices as input features. But in experiments the proposed method gives better results on original time-region features.  
+\end{itemize}
+In the experiments we compare the quality of the method with some of the sate of the art methods for recognition of eMCI like mentioned k-SICE and HON .
+Experimental results confirm the quality of the proposed method. In the next section we show that based the obtained HOSVD decomposition for both classes one could obtain appropriate General patters for normal and eMCI data.	
+\subsection{General Functional Connectivity for Normal and eMCI by tensor framework} \label{FC_Construction}
+
+
+As it was mentioned before, one of the main studies associated with rs-fMRI analysis is finding common functional disorders cause by a disease like AD. This can be done via constructing proper FC matrices. The majority of techniques calculate the FC matrix for each individual subject(like SICE). This may overlook tiny but common connectivities shared within a class. It is also noteworthy that the majority of non-stationary methods are not capable of constructing a relatable FC since the concept of a physical ROI is not well defined in them.    
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%	Functional connectivity simply means the relation between different ROIs. As it was mentioned the FC could be used for two different purposes. In one approach for each sample its per sample FC matrix is obtained by its time-region matrix  and this new matrix is used in classification instead of time-region matrix. The obtained FC matrices in mentioned k-SICE and HON bloges to this type of application of FC.  ???ref 
+%	
+%	In other approach the general pattern of normal and abnormal data is desired. So in this approach based on all data only one FC for normal and one FC for abnormal data are obtained.
+%	These general FC matrices could helps the experts persons to found the effects of desis in the??
+%	{\color{blue}
+%		Although several approaches have been proposed in order to find the functional connectivity, the majority of them focus on the individual samples rather that the whole class. This may overlook tiny but common connectivities shared within a class like the class of people in their early Alzheimer's disease.  
+%		\textcolor{red}{ref?}
+%	}
+%v
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this section we show that based on HOSVD decomposition one could  obtain  one representative functional connectivity for each normal or eMCI classes without obtaining the per-sample FC of all data separately. Here the classification is not our goal, instead  finding a general and representative
+relation of regions for eMCI and normal person is our demand. This general pattern could be used clinically by expert cognitive scientists to found  
+functional relation disorders caused by Alzheimer's disease.
+
+As we know in HOSVD  the singular matrices $U,V,W$, are the base of time, region features and also the samples, receptively. In the laset section by property of these matrices we designed our classification method.  know in this section we show that
+, the same idea could helps us to define a general FC matrix based on HOSVD decomposition for normal and
+eMCI data. It should be mentioned that here we did not use the FC of per-samples to construct this general FC matrix.
+
+In tensor  $\mathcal{X}^{(i)}$ of the $l^{th}$ class, the slice $\mathcal{X}^{(i)}(:,l,:)$ denotes
+the  behavior of $l^{th}$  region of all samples in all times in the $i^{th}$ class. So this could be consider as a feature of the $l^{th}$ region  of the $i^{th}$ class and each region is shown with an Times-sample feature matrix. Viewing each region as a slice would allow us to consider it's behavior in all time points and across all samples, which itself allows us to shed more light on common properties and ignore individual differences that is highly possible due to the presence of noise and outliers.
+So, by the properties of singular matrices in modes-1,3, for appropriate values
+$k_1^i,k_3^i$, each region $\mathcal{X}(:,l,:)$ could be reduced in both time and sample features, separately
+based on mode-1 and mode-3 truncated singular matrices $U_{k_1^i}^{(i)}$ and $W_{k_3}^{(i)}$
+as follows
+\begin{eqnarray}
+\mathcal{Y}^{(i)}(:,l,:) = \left( 
+{U_{k_1^i}^{(i)}}^{\trans},  {W_{k_3}^{(i)}}^{\trans} 
+\right)_{1,3} \boldsymbol{\cdot} \mathcal{X}^{(i)}(:,l,:).
+\end{eqnarray}
+Here $\mathcal{Y}^{(i)}(:,l,:)$  denotes a reduced version of $\mathcal{X}^{(i)}(:,l,:)$ into space
+spanned by $U_{k_1^i}^{(i)}$ and $W_{k_3}^{(i)}$ in modes-1,3. So,
+\begin{align}
+\mathbb{R}^{k_1^i \times R \times k_3^i} \ni  {{\mathcal{Y}^{(i)}}} = \left( 
+{U_{k_1^i}^{(i)}}^{\trans}, {W_{k^i_3}^{(i)}}^{\trans} 
+\right)_{1,3}\boldsymbol{\cdot} \mathcal{X}^{(i)} \label{DR_Version_FC1}
+\end{align} 
+denote all reduced regions of the $i^{th}$ class. By this structure  and substituting the HOSVD decomposition of $\mathcal{X}^{(i)}$ in \eqref{DR_Version_FC1},  we obtain
+\begin{align}
+{\mathcal{Y}}^{(i)}= & \notag
+\left(
+\begin{bmatrix}
+I_{k_1^i} &  0
+\end{bmatrix},
+V,
+\begin{bmatrix}
+I_{k_3^i} &  0
+\end{bmatrix}
+\right)\boldsymbol{\cdot} \mathcal{S}^{(i)} \notag
+\\&=\left( 
+V
+\right)_{2} \boldsymbol{\cdot} \mathcal{S}^{(i)}(1:k_1^i,:, 1:k_3^i) \notag &
+\end{align}
+
+and so
+
+\begin{align}
+\label{ok}
+{\mathcal{Y}}^{(i)}(:,k,:) &= \sum_{k'}^{R} V^{(i)}(k,k')\bar{\mathcal{C}}^{(i)}(:,k',:) \notag
+\\&= \left( V^{(i)}(k,:)\right)_2 \boldsymbol{\cdot} {\mathcal{C}}^{(i)}
+\end{align}
+in which 
+\[
+\mathbb{R}^{k_1^i\times R \times k_3^i}\ni {\mathcal{C}}^{(i)} = \mathcal{S}(1:k_1^i,:,1:k_3^i).
+\]
+% Although we do not use the FCs in the classification process, FC networks would allow further investigations on the brain activities. Let $\mathcal{X} \in \mathbb{R}^{T \times R \times S}$, finding the FC for this class means finding the relation between mode-2 slices of $\mathcal{X}$. Viewing each region as a slice would allow us to consider it's behavior in all time points and across all samples, which itself allows us to shed more light on common properties and ignore individual differences that is highly possible due to the presence of noise and outliers. 
+
+%In order to calculate the FC, we first reduced the dimensions of our data similar to what we did in the previous part: 
+%\begin{align}
+%	\mathbb{R}^{k_1^i \times R \times k_3^i} \ni  \bar{{\mathcal{X}}} = \left( 
+%{U_{k_1^i}^{(i)}}^{\trans}, {U_{k^i_3}^{(i)}}^{\trans} 
+%	\right)_{1,3}\boldsymbol{\cdot} \mathcal{X} \label{DR_Version_FC}
+%	\end{align}
+%	it can be seen that each region slice can be written as:
+%	\begin{align}
+%	\label{ok}
+%	\bar{\mathcal{X}}^{(i)}(:,k,:) &= \sum_{k'}^{N_i} U_2^{(i)}(k,k')\bar{\mathcal{C}}^{(i)}(:,k',:) \notag
+%	\\&= \left( U_{2}^{(i)}(k,:)\right)_2 \boldsymbol{\cdot} \bar{\mathcal{C}}^{(i)}
+%	\end{align}
+%	in which 
+%	\[
+%	\bar{\mathcal{C}}^{(i)} = \mathcal{C}(1:k_1^i,:,1:k_3^i).
+%	\]
+The equation \eqref{ok}, show that the reduced version of each region in the $i^{th}$ class could be
+written as the linear combinations of  mode-2 slices of $\mathcal{C}^{(i)}$. So the coefficients of slices in this linear combination could be considered as a new feature for the $l^{the}$ region of the $i^{th}$ class. Also as we mentioned the first slices are better than the last ones to reflect the principle properties of the data. So for appropriate $k_3^i$ we could select only the fits coefficient in \eqref{ok} as  new features for the $l^{th}$ region. Mathematically this means each region  in the $i^{th}$ class could be represented by new feature $V(l,1;k_3^i)\in \mathbb{R}^{k_3^i}$.   
+
+The main benefit of this approach is that each
+region could be represented only be a vector with size $k_3^i$, instead large feature matrix  time-sample. Now different methods could be used to find the correlation of reigns based on this new type of feature and clean matrix $V(:,1:k_{3}^i)$ which its rows corresponding to different regions and columns are new features. Due to quality of  Sparse Inverse Covariance ,  this method is applied the obtained  feature-region matrix  $V(:,1:k_3^i)^{\sf T}$  in order to find the functional connectivity of the $i^{th}$ class.
+%	\begin{figure}[!t]
+%		\centering
+%		\includegraphics[width=3.5in]{images/SVDiff}
+%		\caption{The blue line with the star indicator, shows the difference between the mode-$3$ singular values of the original data and the data appended with a \emph{same} label subject. The orange line indicated with circles, shows the difference between the mode-$3$ singular values of the original data and the data appended with a \emph{different} label subject.}
+%		\label{g3.1}
+%	\end{figure}
+
+
+\section{EXPERIMENTAL STUDY}
+\subsection{Data Preprocessing and Experimental Settings}
+
+Rs-fMRI data of $196$ subjects were downloaded from the ADNI website\footnote{http://adni.loni.usc.edu}. Nine subjects were discarded
+due to the corruption of data, and the remaining $187$ subjects were preprocessed for analysis. After removing subjects that had problems in the preprocessing steps, such as large head motion,
+$156$ subjects were kept, including $26$ AD, $44$ early MCI, $38$ late MCI, $38$ NC, and ten significant memory concern labeled by ADNI. We used the $38$ NC and the $44$ early MCI because our focus in this paper is to identify MCI at very early stage, which is the most challenging and significant task in AD
+prediction. The IDs of the $82$ ($38$ NC and $44$ early MCI) subjects are provided in the supplementary material. 
+
+The data are acquired on a $3$-T (Philips) scanner with TR/TE set as $3000/30$
+ms and flip angle of $80◦$. Each series has $140$ volumes, and each volume consists of 48 slices of image matrices with dimensions
+$64 \times 64$
+with voxel size of
+$ 3.31 \times  3.31 \times 3.31$
+$mm^3$ . The preprocessing is carried out using SPM12 and DPARSFA [40]. The
+first ten volumes of each series are discarded for signal equilibrium. Slice timing, head motion correction, and MNI space normalization are performed. Participants with too much head motion are excluded. The normalized brain images are warped into automatic anatomical labeling (AAL) [41] atlas to obtain $116$ ROIs as nodes. By following common practice [15]–[17], the ROI mean time series are extracted by averaging the time series from all voxels within each ROI and then bandpass filtered to obtain multiple sub-bands as in [17].
+
+
+
+\subsection{Classification}
+
+Almost every subject in ADNI dataset has several scans. Usually a random scan data is selected and enters the processing step. This random selection may cause several problems \textcolor{red}{ref}. Since the number of train data is very low, a small perturbation in it could drastically change the set of input parameters in order to achieve the highest prediction accuracy and other classification evaluation methods. Also achieving high quality results with a classifier does not guarantee its effectiveness on other datasets even with fine tuning the parameters since the training set may contain outliers and unidentified corrupted data. 
+In order to show that the proposed framework is less sensitive against the choice of different perturbations and is less vulnerable towards the aforementioned issues, we have selected $18$ different perturbations and two test state of the art classification methods on them: \textbf{HON} and \textbf{k-SICE}.   
+To make full use of the limited subjects, a leave-one-out procedure is used for training and test. That is, each sample is reserved for test in turn, while the remaining samples are used for training.
+We have use five
+evaluation measures: accuracy (ACC), sensitivity (SEN), Youden’s index(YI), F-score, and balanced accuracy (BAC).
+\textcolor{red}{Tan Book} 
+
+%The detailed definitions
+%of these seven statistical measures are provided in Table \eqref{Table_1}, where TP, TN, FP, and FN denote the true positive, true negative, false positive, and false negative, respectively, and 
+%$precision =  \frac{TP}{TP + FP}  $ 
+%and 
+%$recall = \frac{TP}{TP + FN}$.
+In this article, we treat the eMCI samples as positive class and the NC samples as negative class.
+%\begin{table}
+%	\begin{center}
+%			\caption{Definitions of five statistical measurement
+%			indices} \label{Table_1}
+%		\begin{tabular}{l c}
+%			\hline
+%			\hline
+%			Measureement & Definition\\
+%			\hline
+%			\\
+%			Acc & $\dfrac{TP+TN}{TP+FP+TN+FN}$\\[7pt]
+%			SEN & $\dfrac{TP}{TP+FN}$\\[7pt]
+%			%SPE & $\dfrac{TN}{TN+FP}$\\[7pt]
+%			YI & $SEN + SPE - 1$\\[7pt]
+%			F-Score & $2\times \dfrac{precesion \times recall}{precesion + recall}$\\[7pt]
+%			BAC & $\dfrac{1}{2}(SEN + SPE)$\\[7pt]
+%			\hline
+%			\hline
+%		\end{tabular}
+%	\end{center}
+%\end{table}
+
+\subsubsection{Classification performance}
+The classification accuracy measure(ACC), After fine-tuning the input parameter set for each method, shows that for $16$ out of $18$ different perturbations, our approach works better than k-SICE, the same also holds for $15$ datasets comparing to HON. i.e. in $88.8 \%$ of datasets, proposed method works better than k-SICE and in $83.3 \%$ of datasets, it works better that FON.  
+The highest classification accuracy($86.59\%$) is achieved with the proposed method in the $15$th perturbation. The highest accuracy for the HON ($84.15\%$) is achieved in the $14$th, and the highest accuracy for the SICE method ($85.37\%$) is achieved in the $6$th perturbation. As it was mentioned before, being stable when the input dataset changes is a very important aspect for a classifier, in order to measure the stability, standard deviation of accuracy along with other measures are
+calculated. The std. of accuracy for proposed method is $0.64$ times less than HON and $1.73$ times less than SICE method. Similar results also holds for other classification measures.
+\begin{figure*}
+	\centering
+	\includegraphics[width=7in]{images/Final-eps.pdf}
+	\caption{
+		Comparison of proposed method(Prop) with K-SICE and HON in five different classification evaluation measures along with the standard deviation of each one. As it can be seen, the both the minimum and maximum of the proposed methods in these measurements are higher that the other two. Also the lower std. of our method indicates its stability.   
+	}
+	\label{g3.2}
+\end{figure*}
+
+
+Figure \eqref{g3.2} shows the performance of these three methods in all five measurements. Some statistical information about these plots are also included in the embedded table. As it can bee seen in this figure, similar to the accuracy, the proposed method in overall works much better than FON and k-SICE. For a better Demonstration, table \eqref{AVG} provides the average of several classification measurements scores for all permutations. 
+\begin{table}
+	\begin{center}
+		\caption{The Average of Different Classification Measurements in all perturbations in \% }
+		%\resizebox{\textwidth}{!}{  
+		\begin{tabular}{@{}c*{6}{c}}
+			\hline\hline
+			Method&ACC& F-Score&SEN & SPE &YI & BAC 
+			\\
+			\hline
+			k-SICE  &75.57& 77.36 & 78.50 & 72.19 & 50.69 & 75.34 
+			\\
+			FON   &75.66& 77.44 & 78.40 & 72.48 & 50.89 & 75.44  
+			\\
+			Proposed &\textbf{80.43}& \textbf{82.20} & \textbf{84.60} & \textbf{75.59} & \textbf{60.20} & \textbf{80.09}
+			
+			\\
+			
+			\hline\hline
+			\label{AVG}
+		\end{tabular}
+		%}
+	\end{center}
+\end{table}
+As it can be seen in this table, the average accuracy of Proposed method which is $80.43 \%$ is $4.77\%$ higher than the next method HON, and $4.86 \%$ better than k-SICE. It is noteworthy that The other two methods i.e HON and SICE shows similar results in average.  
+
+\begin{figure*}
+	\centering
+	\includegraphics[width=6in]{images/FG}
+	\caption{
+		The difference graph. This graph is obtained via subtracting the functional connectivity of eMCI subjects from normal subjects. Each circle represents a ROI in AAL atlas and the color and size of each circle is proportional to the graph clustering coefficient of the difference graph. red = more activity in EMCI, green: less. 
+	}
+	\label{g3.3}
+\end{figure*}
+
+\subsubsection{Runtime Comparison}
+One other key features of proposed method is that it works significantly faster that the other two methods. Table \eqref{Time} shows the average elapsed time (Training plus Testing) of each method for all selected permutations. These methods were executed in matlab R2017b and carried with an intel Core-i7 processor and $16$GB of RAM. As it can be seen in this table, proposed method is more that $600$ times faster than HON and $20$ times faster that SICE.   
+\begin{table}
+	\begin{center}
+		\caption{Elapsed time of the test and train phase in seconds}
+		%\resizebox{\textwidth}{!}{  
+		\begin{tabular}{@{}c*{4}{c}}
+			\hline\hline
+			Method& HON & k-SICE& proposed method 
+			\\
+			\hline
+			Elapsed Time  &6950& 230 & 11 
+			\\
+			\hline\hline
+			\label{Time}
+		\end{tabular}
+		%}
+	\end{center}
+\end{table}
+Having a huge execution time specially affects the parameter selection for HON, since it uses cross-validation procedure in order to find the optimal parameters which itself require several  runs of the algorithm. 
+
+%\subsubsection{Parameter Estimation and Sensitivity}
+%As it was discussed before, the choice of parameters drastically affect the performance of the aforementioned classifier. 
+
+
+
+\subsection{Functional connectivity Network}
+The functional connectivity networks of the Normal and eMCI classes was obtained via proposed method as it is described in \eqref{FC_Construction}.
+In order to better highlight the differences between Normal and eMCI subjects, a difference graph $D$ is constructed by subtracting the Normal FC from the eMCI FC. This graph could be seen in Figure\eqref{g3.3}. 
+The nodes of $D$ shows the ROIs according to the AAL atlas. The size of each node is proportional to its graph clustering coefficient, i.e. the bigger node, demonstrates higher activity in eMCI subjects in the corresponding ROI. 
+Similar to nodes, the size of each edge is also proportional to the correlation between two ROI's. In addition, the edges are also color coded in a way that the green edges shows the positive edges in $D$ and the orange edges shows the negative edges in $D$. In this manner, the green edges demonstrates decreasing in activity between the corresponding nodes in eMCI subjects and vice versa, the orange edges shows increasing activity between corresponding ROIs in the eMCI subjects.   
+
+As it can be seen in the difference graph, the big nodes i.e. ROIs with higher activities does not necessarily establish strong connections with the other nodes. As an obvious example, higher activities in Lingual gyrus(ROI index: 47,48)\cite{r24,r25}, Calcarine sulcus(ROI index: 43, 44)\cite{r26,r27}, Supplementary motor area(ROI index: 19,20)\cite{r27,r28} and Temporal\_mid\_L(ROI index: 85)\cite{r29} are easily detectable. The majority of ROIs located in frontal lobe also shows rather high activities comparing to normal subjects\cite{r30,r31}.
+
+Similar to the nodes, strong edge between two ROIs does not necessarily requires the nodes to be highly active in eMCI. Although a strong edge does indicate high activities and functional connectivity between the two corresponding ROIs. The difference Graph shows significant increase in connectivity between 
+Rectus(ROI index: 28, 27 in Frontal lobe) and 
+Parietal\_Sup\_R(ROI index: 60 in Parietal lobe) \cite{r40, r41},
+Frontal\_Inf\_Orb\_R(ROI index: 16 in Frontal lobe) and
+Cingulum\_Ant(ROI index: 31,32 in Limbic lobe)\cite{r42},
+Insula\_L, Temporal\_Pole\_Sup\_L(ROI index: 29,83 in Limbic lobe) and
+Pallidum\_R, Caudate\_R(ROI index: 29,83 in Sub Cortical Grey Nuclei)\cite{r43}. It can also be seen that within activities in frontal lobe also increased in patients with eMCI\cite{r44}. There is a decrease in connectivity between Amygdala\_L(ROI index: 41 in Sub Cortical Grey Nuclei) with Frontal\_Mid\_Orb\_R(ROI index: 10 in Sub Frontal lobe) and ParaHippocampal\_L(ROI index: 39 in Sub Limbic lobe)\cite{r45}. The connectivity between Heschl\_L(ROI index: 79 in Temporal lobe) and two ROIs Temporal\_Mid\_R(ROI index: 86 also in Temporal lobe) and Occipital\_Inf\_R(ROI index: 54 in Occipital lobe) also decreased in eMCI\cite{r46}.  
+
+\subsubsection*{\textbf{Regarding the Cerebellum and Vermis}}
+In fMRI data analysis and especially in Alzheimer's disease studies, ROIs within the Cerebellum and Vermis are usually excluded since their role was regarded as insignificant\cite{r47, r48}. Recent studies have shown that the traditional assumption that Cerebral area is essential only for the coordination of voluntary motor activity and motor learning is not valid and indicates the significant role of cerebellum in nervous system function, cognition and emotion\cite{r32}. 
+
+As it can be seen in the difference graph that we obtained, ROIs within Cerebellum and Vermis are highly active and both their intra and inter connections are noticeable. There is an increasing functional connectivity between the Limbic lobe especially 
+Hippocampus\_R, Temporal\_Pole\_Mid(ROI index: 38,87,88)
+and Cerebral areas in eMCI patients. Also, the connectivity between Occipital lobe, especially Occipital\_mid\_R(ROI index: 52), the Frontal lobe, especially in Frontal\_mid\_orb(ROI index: 9,10) and Cerebral areas seems to decrease in patients with eMCI.
+
+
+
+
+%\begin{table*}
+%	\begin{center}
+%		\caption{Active Nodes }
+%		\resizebox{\textwidth}{!}{  
+%		\begin{tabular}{@{}l*{4}{l}}
+%			\hline\hline
+%			NO.&ROI Index&ROI name&Location& Citations 
+%			\\
+%			\hline
+%			1& 8 & Frontal\_Mid\_R & Middle frontal gyrus
+%			$\rightarrow$ Prefrontal cortex $\rightarrow$ \textbf{Frontal lobe}
+%			 & Main 
+%			\\
+%			2& 14 & Frontal\_Inf\_Tri\_R & Inferior frontal gyrus, pars triangularis
+%			$\rightarrow$ Inferior frontal gyrus $\rightarrow$ Prefrontal cortex
+%			 $\rightarrow$ \textbf{Frontal lobe} & Main 
+%			\\
+%			3& 17 & Rolandic\_Oper\_L & Rolandic operculum
+%			$\rightarrow$ Operculum $\rightarrow$ \textbf{Cerebral cortex} & Main 
+%			\\
+%			4& 19 & Supp\_Motor\_Area\_L & Supplementary motor area
+%			$\rightarrow$ Motor area $\rightarrow$ \textbf{Functional area} & Main 
+%			\\
+%			5& 20 & Supp\_Motor\_Area\_R & Supplementary motor area
+%			$\rightarrow$ Motor area $\rightarrow$ \textbf{Functional area} & Main 
+%			\\
+%			6& 25 & Frontal\_Med\_Orb\_L &  Medial orbitofrontal cortex $\rightarrow$ Orbitofrontal cortex
+%			$\rightarrow$ Orbitofrontal area $\rightarrow$ \textbf{Frontal lobe} & ? 
+%			\\
+%			7 & 34 & Cingulum\_Mid\_R & Right midcingulate area
+%			$\rightarrow$ Midcingulate area $\rightarrow$ Cingulate gyrus
+%			$\rightarrow$ Cerebral cortex $\rightarrow$ \textbf{Frontal lobe} & ? 
+%			\\
+%			8 & 43 & Calcarine\_L & Calcarine sulcus
+%			$\rightarrow$ Midcingulate area $\rightarrow$ \textbf{Sulcus} & ? 
+%			\\
+%			9 & 44 & Calcarine\_R & Calcarine sulcus
+%			$\rightarrow$ Midcingulate area $\rightarrow$ \textbf{Sulcus} & ? 
+%			\\
+%			10 & 47 & Lingual\_L & Lingual gyrus
+%			$\rightarrow$ Occipital lobe $\rightarrow$Cerebral cortex $\rightarrow$ \textbf{Frontal lobe} & ? 
+%			\\
+%			11 & 48 & Lingual\_R & Lingual gyrus
+%			$\rightarrow$ Occipital lobe $\rightarrow$Cerebral cortex $\rightarrow$ \textbf{Frontal lobe} & ? 
+%			\\
+%			12 & 70 & Paracentral\_Lobule\_R & Paracentral lobule $\rightarrow$ \textbf{Frontal lobe} & ?
+%			\\
+%			13 & 69 & Paracentral\_Lobule\_L & Middle temporal gyrus $\rightarrow$ \textbf{Temporal lobe} & ?
+%			\\
+%			14 & 99 & Cerebelum\_6\_L & Lobule VI of cerebellar hemisphere $\rightarrow$Cerebellum
+%			$\rightarrow$ Metencephalon $\rightarrow$ \textbf{Hindbrain} & ?
+%			\\
+%			15 & 111 & Vermis\_4\_5 & Vermis $\rightarrow$ Cerebellum $\rightarrow$ Metencephalon $\rightarrow$ \textbf{Hindbrain} & ?
+%			\\
+%			\hline\hline
+%			\label{sss}
+%		\end{tabular}
+%		}
+%	\end{center}
+%\end{table*}
+
+
+
+
+% An example of a floating figure using the graphicx package.
+% Note that \label must occur AFTER (or within) \caption.
+% For figures, \caption should occur after the \includegraphics.
+% Note that IEEEtran v1.7 and later has special internal code that
+% is designed to preserve the operation of \label within \caption
+% even when the captionsoff option is in effect. However, because
+% of issues like this, it may be the safest practice to put all your
+% \label just after \caption rather than within \caption{}.
+%
+% Reminder: the "draftcls" or "draftclsnofoot", not "draft", class
+% option should be used if it is desired that the figures are to be
+% displayed while in draft mode.
+%
+%\begin{figure}[!t]
+%\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+%\caption{Simulation results for the network.}
+%\label{fig_sim}
+%\end{figure}
+
+% Note that the IEEE typically puts floats only at the top, even when this
+% results in a large percentage of a column being occupied by floats.
+
+
+% An example of a double column floating figure using two subfigures.
+% (The subfig.sty package must be loaded for this to work.)
+% The subfigure \label commands are set within each subfloat command,
+% and the \label for the overall figure must come after \caption.
+% \hfil is used as a separator to get equal spacing.
+% Watch out that the combined width of all the subfigures on a 
+% line do not exceed the text width or a line break will occur.
+%
+%\begin{figure*}[!t]
+%\centering
+%\subfloat[Case I]{\includegraphics[width=2.5in]{box}%
+%\label{fig_first_case}}
+%\hfil
+%\subfloat[Case II]{\includegraphics[width=2.5in]{box}%
+%\label{fig_second_case}}
+%\caption{Simulation results for the network.}
+%\label{fig_sim}
+%\end{figure*}
+%
+% Note that often IEEE papers with subfigures do not employ subfigure
+% captions (using the optional argument to \subfloat[]), but instead will
+% reference/describe all of them (a), (b), etc., within the main caption.
+% Be aware that for subfig.sty to generate the (a), (b), etc., subfigure
+% labels, the optional argument to \subfloat must be present. If a
+% subcaption is not desired, just leave its contents blank,
+% e.g., \subfloat[].
+
+
+% An example of a floating table. Note that, for IEEE style tables, the
+% \caption command should come BEFORE the table and, given that table
+% captions serve much like titles, are usually capitalized except for words
+% such as a, an, and, as, at, but, by, for, in, nor, of, on, or, the, to
+% and up, which are usually not capitalized unless they are the first or
+% last word of the caption. Table text will default to \footnotesize as
+% the IEEE normally uses this smaller font for tables.
+% The \label must come after \caption as always.
+%
+%\begin{table}[!t]
+%% increase table row spacing, adjust to taste
+%\renewcommand{\arraystretch}{1.3}
+% if using array.sty, it might be a good idea to tweak the value of
+% \extrarowheight as needed to properly center the text within the cells
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%\caption{An Example of a Table}
+%\label{table_example}
+%\centering
+%% Some packages, such as MDW tools, offer better commands for making tables
+%% than the plain LaTeX2e tabular which is used here.
+%\begin{tabular}{|c||c|}
+%\hline
+%One & Two\\
+%\hline
+%Three & Four\\
+%\hline
+%\end{tabular}
+%\end{table}
+
+
+% Note that the IEEE does not put floats in the very first column
+% - or typically anywhere on the first page for that matter. Also,
+% in-text middle ("here") positioning is typically not used, but it
+% is allowed and encouraged for Computer Society conferences (but
+% not Computer Society journals). Most IEEE journals/conferences use
+% top floats exclusively. 
+% Note that, LaTeX2e, unlike IEEE journals/conferences, places
+% footnotes above bottom floats. This can be corrected via the
+% \fnbelowfloat command of the stfloats package.
+
+
+
+
+\section{Conclusion}
+The majority of classification techniques uses the vectorized version of data as the input of the discriminant function. As the number of the dimensions grows, i.e. when data is naturally a high order tensor, this vectorization become problematic and it would highly affect the  performance. Taking advantage of the techniques designed for the tensors, we have developed a framework for fMRI data analysis in which the following objectives: 
+\begin{enumerate}
+	\item 
+	Classification 
+	\item 
+	General Functional Connectivity network
+\end{enumerate}
+are achieved via a singe \textbf{H}igh \textbf{O}rder \textbf{SVD} of the input tensors. 
+
+Extensive studies on the rs-fMRI provided by ADNI shows the superiority of the proposed framework in both classification and functional connectivity. The obtained FC network not only acknowledge the previous discovered connections but also reveals new connectivity patterns previously unknown.
+The framework proposed in this paper can be easily extended to other studies involved with high order data.  
+
+%\begin{table*}
+%	\begin{center}
+%		\caption{content...}
+%		\resizebox{\textwidth}{!}{  
+%	\begin{tabular}{@{}c*{20}{c}}
+%		\hline\hline
+%		\multicolumn{20}{c}{Datasets} 
+%		\\
+%		\hline
+%&\multicolumn{1}{|c}{TBNA} & \textbf{79.27} & \textbf{80.49} & \textbf{76.83} & 78.05 & 78.05 & 81.71 & \textbf{80.49} & \textbf{78.05} & \textbf{81.71} & \textbf{78.05} & \textbf{78.05} & \textbf{83.1} & \textbf{79.27} & 8171 & \textbf{86.59} & 82.93 & \textbf{82.93} & \textbf{80.49} 
+%\\
+%ACC&\multicolumn{1}{|c}{FON} & 78.05 & 73.17 & 74.39 & \textbf{79.27} & 73.17 & 73.17 & 75.61 & 70.73 & 74.39 & 74.39 & 76.83 & 73.17 & 78.05 & \textbf{84.15} & 70.73 & \textbf{83.9} & 76.83 & 71.95 
+%\\
+%&\multicolumn{1}{|c}{SICE} & 73.17 & 74.39 & 74.39 & 71.95 & \textbf{79.27} & \textbf{85.37} & 71.95 & 68.29 & 78.05 & 73.17 & 74.39 & 70.73 & 74.39 & 80.49 & 82.38 & 76.83 & 73.17 & 78.05 
+%%\\\hline
+%%&\multicolumn{1}{|c}{TBNA} & \textbf{0.9091} & \textbf{0.8409} & 0.7727 & \textbf{0.8864} & 0.7955 & \textbf{0.8636} & \textbf{0.9318} & 0.75 & \textbf{0.9091} & \textbf{0.8864} & \textbf{0.8864} & \textbf{0.8421} & 0.6818 & \textbf{0.9091} & \textbf{0.8864} &\textbf{ 0.7955} &\textbf{ 0.8636} & \textbf{0.8182} 
+%%\\
+%%SEN&\multicolumn{1}{|c}{FON} & 0.8636 & 0.75 & 0.75 & 0.7273 & \textbf{0.8182} & 0.8182 & 0.8182 & 0.75 & 0.7045 & 0.7955 & 0.8636 & 0.75 & \textbf{0.8636} & 0.8864 & 0.6136 & 0.8636 & 0.7955 & 0.6818 
+%%\\
+%%&\multicolumn{1}{|c}{SICE} & 0.7955 & 0.7727 & \textbf{0.8409} & 0.7273 & 0.75 & 0.8864 & 0.75 & 0.5227 & 0.7727 & 0.7727 & 0.8409 & 0.7955 & 0.7273 & 0.8864 & 0.7895 & 0.8864 & 0.7727 & 0.8409 
+%\\\hline
+%%&\multicolumn{1}{|c}{TBNA} & 0.6579 & \textbf{0.7632} & \textbf{0.7632} & 0.6579 & \textbf{0.7632} & 0.7632 & 0.6579 & 0.8158 & 0.7105 & 0.6579 & 0.6579 & 0.8182 & 0.9211 & 0.7105 & 0.8421 & 0.8684 & 0.7895 & 0.7895 
+%%\\
+%%SPE&\multicolumn{1}{|c}{FON} & 0.6842 & 0.7105 & 0.7368 & 0.8684 & 0.6316 & 0.6316 & 0.6842 & 0.6579 & 0.7895 & 0.6842 & 0.6579 & 0.7105 & 0.6842 & 0.7895 & 0.8158 & 0.8106 & 0.7368 & 0.7632 
+%%\\
+%%&\multicolumn{1}{|c}{SICE} & 0.6579 & 0.7105 & 0.6316 & 0.7105 & 0.8421 & 0.8158 & 0.6842 & 0.8684 & 0.7895 & 0.6842 & 0.6316 & 0.6053 & 0.7632 & 0.7105 & 0.8636 & 0.6316 & 0.6842 & 0.7105 
+%%\\\hline
+%%&\multicolumn{1}{|c}{TBNA} & 0.567 & 0.6041 & 0.5359 & 0.5443 & 0.5586 & 0.6268 & 0.5897 & 0.5658 & 0.6196 & 0.5443 & 0.5443 & 0.6603 & 0.6029 & 0.6196 & 0.7285 & 0.6639 & 0.6531 & 0.6077 
+%%\\
+%%YI&\multicolumn{1}{|c}{FON} & 0.5478 & 0.4605 & 0.4868 & 0.5957 & 0.4498 & 0.4498 & 0.5024 & 0.4079 & 0.494 & 0.4797 & 0.5215 & 0.4605 & 0.5478 & 0.6758 & 0.4294 & 0.6742 & 0.5323 & 0.445 
+%%\\
+%%&\multicolumn{1}{|c}{SICE} & 0.4533 & 0.4833 & 0.4725 & 0.4378 & 0.5921 & 0.7022 & 0.4342 & 0.3911 & 0.5622 & 0.4569 & 0.4725 & 0.4007 & 0.4904 & 0.5969 & 0.6531 & 0.5179 & 0.4569 & 0.5514 
+%%\\\hline
+%&\multicolumn{1}{|c}{TBNA} &\textbf{ 82.47} & \textbf{82.22} & \textbf{78.16} & \textbf{81.25} & \textbf{79.55} & 83.52 & \textbf{83.67} &\textbf{ 78.57} & \textbf{84.21} & \textbf{81.25 } & \textbf{81.25} & \textbf{84.25} & 77.92 & 84.21 & \textbf{87.64 }& 83.33 & \textbf{84.44} & \textbf{81.82 }
+%\\
+%F-SC&\multicolumn{1}{|c}{FON} & 80.85 & 75 & 75.86 & 79.01 & 76.6 & 76.6 & 78.26 & 73.33 & 74.7 & 76.92 & 80 & 75 & \textbf{80.85} & \textbf{85.71} & 69.23 & \textbf{85.2} & 78.65 & 72.29 
+%\\
+%&\multicolumn{1}{|c}{SICE} & 76.09 & 76.4 & 77.89 & 73.56 & 79.52 & \textbf{86.67} & 74.16 & 63.89 & 79.07 & 75.56 & 77.89 & 74.47 & 75.29 & 82.98 & 82.79 & 80.41 & 75.56 & 80.43 
+%\\\hline
+%%&\multicolumn{1}{|c}{TBNA} & 0.7835 & 0.802 & 0.7679 & 0.7721 & 0.7793 & 0.8134 & 0.7949 & 0.7829 & 0.8098 & 0.7721 & 0.7721 & 0.8301 & 0.8014 & 0.8098 & 0.8642 & 0.8319 & 0.8266 & 0.8038 
+%%\\
+%%BAC&\multicolumn{1}{|c}{FON} & 0.7739 & 0.7303 & 0.7434 & 0.7978 & 0.7249 & 0.7249 & 0.7512 & 0.7039 & 0.747 & 0.7398 & 0.7608 & 0.7303 & 0.7739 & 0.8379 & 0.7147 & 0.8371 & 0.7661 & 0.7225 
+%%\\
+%%&\multicolumn{1}{|c}{SICE} & 0.7267 & 0.7416 & 0.7362 & 0.7189 & 0.7961 & 0.8511 & 0.7171 & 0.6956 & 0.7811 & 0.7285 & 0.7362 & 0.7004 & 0.7452 & 0.7984 & 0.8266 & 0.759 & 0.7285 & 0.7757 
+%%		& HON & &\multicolumn{1}{|c}{kernel} & \\
+%%		
+%%		& TBNA & &\multicolumn{1}{|c}{kernel} & \\
+%		 \\
+%		\hline\hline
+%	\end{tabular}
+%}
+%	\end{center}
+%\end{table*}
+
+
+
+
+
+
+
+% if have a single appendix:
+%\appendix[Proof of the Zonklar Equations]
+% or
+%\appendix  % for no appendix heading
+% do not use \section anymore after \appendix, only \section*
+% is possibly needed
+
+% use appendices with more than one appendix
+% then use \section to start each appendix
+% you must declare a \section before using any
+% \subsection or using \label (\appendices by itself
+% starts a section numbered zero.)
+%
+
+
+%\appendices
+%\section{Proof of the First Zonklar Equation}
+%Appendix one text goes here.
+
+% you can choose not to have a title for an appendix
+% if you want by leaving the argument blank
+%\section{}
+%Appendix two text goes here.
+
+
+%	% use section* for acknowledgment
+%	\section*{Acknowledgment}
+%	
+%	
+%	The authors would like to thank...
+
+
+% Can use something like this to put references on a page
+% by themselves when using endfloat and the captionsoff option.
+%\ifCLASSOPTIONcaptionsoff
+%\newpage
+%\fi
+
+
+
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+% references section
+
+% can use a bibliography generated by BibTeX as a .bbl file
+% BibTeX documentation can be easily obtained at:
+% http://mirror.ctan.org/biblio/bibtex/contrib/doc/
+% The IEEEtran BibTeX style support page is at:
+% http://www.michaelshell.org/tex/ieeetran/bibtex/
+%\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+%\bibliography{IEEEabrv,../bib/paper}
+%
+% <OR> manually copy in the resultant .bbl file
+% set second argument of \begin to the number of references
+% (used to reserve space for the reference number labels box)			
+
 
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
@@ -220,6 +1113,12 @@ In recent years, brain imaging techniques like Positron Emission Tomography(PET)
 %%
 
 %% References with bibTeX database:
+
+
+
+
+
+
 
 \bibliographystyle{elsarticle-num}
 \bibliography{<your-bib-database>}
