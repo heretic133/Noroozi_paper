@@ -185,7 +185,7 @@ In recent years, brain imaging techniques like Positron Emission Tomography (PET
 	 and functional Magnetic Resonance Imaging (fMRI)\cite{r23} 
 	 have been used in analysis of AD. Due to the high spatial resolution and relatively lower costs, fMRI is vastly used among researchers in order to monitor brain activities especially in AD and all its stages in which detecting abnormalities within small brain regions is essential \cite{r04}. 
 	An fMRI sample is naturally a 4D tensor consisting of 3D voxels moving in time, and each voxel contains an intensity value that is proportional to the strength of the Blood Oxygenation Level Dependent(BOLD) signal, which is a measure of the changes in blood flow, to estimate the activity of different brain regions\cite{r07}.
-	Resting-state fMRI(rs-fMRI) is an fMRI technique in which the patient is asked to rest during the whole scan, focuses on the low-frequency $\left( < 0.1 Hz \right)$  oscillations of BOLD signal, which presents the underlying neuronal activation patterns of brain regions[8]–[10]. rs-fMRI is usually used in order to analyze brain diseases like AD or autism\cite{r33,r34}.
+	Resting-state fMRI(rs-fMRI) is an fMRI technique in which the patient is asked to rest during the whole scan, focuses on the low-frequency $\left( < 0.1 Hz \right)$  oscillations of BOLD signal, which presents the underlying neuronal activation patterns of brain regions[8]–[10]. rs-fMRI is usually used in order to analyze brain diseases like AD or Autism\cite{r33,r34}.
 	%
 	%Since the number of voxels within a single full scan is high 
 	%($5000$ up to roughly $200,000$[ref(Definingnodes)]) and they form strong spatial relations, 
@@ -205,32 +205,35 @@ In recent years, brain imaging techniques like Positron Emission Tomography (PET
 			\label{g1.1}
 		\end{figure*}
 	
-	  There are two major studies associated with rs-fMRI data: finding common brain disorders caused by diseases like Alzheimer's or autism, and more recently detecting patients with brain disorders using classification techniques \cite{r35,r36}. Due to the high dimensionality of data and the nature of diseases like eMCI which does not show any reliable clinical symptoms,
-	    researchers moved towards advanced machine learning techniques in order to achieve more reliable analysis \cite{r37}.
-	    
-	    	There are two major studies associated with rs-fMRI data: finding common brain disorders caused by diseases like Alzheimer's or autism, and more recently detecting patients with brain disorders using classification techniques \cite{r35,r36}. Due to the high dimensionality of data and the nature of diseases like eMCI which does not show any reliable clinical symptoms,
+%	  There are two major studies associated with rs-fMRI data: finding common brain disorders caused by diseases like Alzheimer's or autism, and more recently detecting patients with brain disorders using classification techniques \cite{r35,r36}.
+%	   Due to the high dimensionality of data and the nature of diseases like eMCI which does not show any reliable clinical symptoms,
+%	    researchers moved towards advanced machine learning techniques in order to achieve more reliable analysis \cite{r37}.
+%	    
+	    	There are two major studies associated with rs-fMRI data: finding common brain disorders caused by diseases like Alzheimer's, Autism, schizophrenia and etc. and more recently detecting patients with brain disorders using classification techniques \cite{r35,r36}. Due to the high dimensionality of data and the nature of diseases like eMCI which does not show any reliable clinical symptoms,
 	    	researchers moved towards advanced machine learning techniques in order to achieve more reliable analysis \cite{r37}.
 	    	
 	A powerful tool that is commonly used in order to achieve aforementioned goals is Functional Connectivity(FC) network.  FC is a $region \times region$ matrix $\bar{X}$ in which $\bar{x}_{ij}$ represents the functional connectivity between the $i$th and $j$th ROI. Functional connectivity is an observable
-		phenomenon quantifiable with measures of statistical dependencies, such as correlations, coherence, or transfer entropy \cite{r38}.  Recent studies have shown that some brain disorders like AD could alter the way that some brain regions interact with each other. For example, compared with the healthy, AD patients have been found decreased functional connectivity between the hippocampus and other brain regions, and MCI patients have been observed increased functional connectivity between the frontal lobe and other brain regions??.
-		\textcolor{red}
-		{So, Finding an FC that highlights the patterns caused by a disease has been a common goal in the rs-fMRI study for a long time. Several approaches exist to find common patterns among different brain scans. Data-driven methods such as kernel-PCA or clustering techniques have been proposed for this task\textcolor{red}{ref?}. But ultimately most of them rely on calculating a network for each volume. This may overlook the role of noises or outliers within the data. }
+		phenomenon quantifiable with measures of statistical dependencies, such as correlations, coherence, or transfer entropy \cite{r38}.  Recent studies have shown that some brain disorders like AD could alter the way that some brain regions interact with each other. For example, compared with the healthy, AD patients have been found decreased functional connectivity between the hippocampus and other brain regions, and MCI patients have been observed increased functional connectivity between the frontal lobe and other brain regions\cite{r04}.
+		So, Finding an FC that highlights the patterns caused by a disease, i.e. a \textbf{General} functional connectivity, has been a common goal in the rs-fMRI study for a long time. Several approaches exist to find common patterns among different brain scans. Data-driven methods such as kernel-PCA or clustering techniques have been proposed for this task \textcolor{red}{REF}. But ultimately most of them rely on calculating a network for each volume which may overlook the role of noises or outliers within the data\cite{r53,r54}. 
 	
 		In recent years FCs are also used as features in classification. 
-				So, instead of using $X_i$ as the $i^{th}$ sample its corresponding  FC i.e. $\bar{X}_i$ is used as a feature. Although FCs show promising results, they bring their own challenges.  The computational cost of FC usually is high and also its quality has a main effect in the quality of learning process. Also, Since the conventional classifiers like SVM work on data in vector format, these matrix features should be vectorized in order to feed them to classifiers.
-				This vectorization leads to high-dimensional vectors which produce poor performance due to the phenomena known as the Curse of Dimensionality.Alongside the curse of dimensionality, vectorization also destroys potential information that are embedded in the structure of data. 
-						This problem has been studied especially in image data in which vectorization destroys the spatial relations within an image.\textcolor{red}{Rezghi and S.Ahmadi paper}
+		So, instead of using $X_i$ as the $i^{th}$ sample, its corresponding  FC i.e. $\bar{X}_i$ is used as a feature. Although FCs show promising results, they bring their own challenges.  The computational cost of FC is usually high and also its quality massively affects the performance of the learning process. Also, Since the conventional classifiers like \textbf{S}upport \textbf{V}ector \textbf{M}achine(SVM) and or k-NN works on data in vector format, these matrix features should be vectorized in order be fed to these classifiers.
+		This vectorization leads to high-dimensional vectors which produce poor performance due to the phenomena known as the Curse of Dimensionality. Alongside the curse of dimensionality, vectorization also destroys potential information that are embedded in the structure of data. 
+		This problem has been studied especially in image data in which vectorization destroys the spatial relations within an image.\textcolor{red}{Rezghi and S.Ahmadi paper}
 						
 						
-	In this paper, based on high order tensor decomposition, we have created a framework in which the mentioned goals i.e. finding an FC for a whole class and detecting a disorder via classification could be achieved via a single High Order Singular Value Decomposition (HOSVD) of each class.
-	 Here based on latent variables obtained by HOSVD a general representative pattern of FC for eMCI and normal are obtained. Experiments show that the functional connectivities by the proposed method are confirmed by empirical methods along with novel connectivities. Also, The proposed classifier also outperforms state of the art eMCI classification methods. 
+	In this paper, based on high order tensor decomposition, we have created a framework in which the aforementioned goals i.e. finding a general FC and detecting a disorder via classification could be achieved via a single \textbf{H}igh \textbf{O}rder \textbf{S}ingular \textbf{V}alue \textbf{D}ecomposition (HOSVD) of each class.
+	 Here based on latent variables obtained by HOSVD a general representative pattern of FC for eMCI and Normal controls are obtained. 
+	 The majority of connectivity patterns detected by this method have been observed and studied in several seperated researches which shows the reliability and power of the proposed method. Along with these connections, we have also detected novel connectivities specially regarding the Cerebellum which is usually discarded in analysis of AD.     
+	 The proposed classifier also outperforms state of the art eMCI classification methods. 
+	 
 	 Viewing each class as a tensor allows us to work with \textit{time} and \textit{region} features separately but simultaneously. This multilinear view
-	  ables us to design a proper dimension reduction relative to the nature of each feature along with a discriminant function based on linear regression \textcolor{red}{on latent space of samples} that uses the test data to enhance the quality of the training set without forcing any a prior knowledge to the classifier, a task which is not possible through well known classifiers like SVM, logistic regression or k-NN. It is also notable that the proposed discriminant function directly works with the $X_i$s as features. Having the FC calculation step omitted not only heavily affects the computational performance of the method, but it also saves us from the troubles of FCs mentioned before.   
+	  ables us to design a proper dimension reduction relative to the nature of each feature along with a discriminant function based on linear regression \textcolor{red}{on latent space of samples} that uses the test data to enhance the quality of the training set without forcing any a prior knowledge to the classifier, a task which is not possible through well known classifiers like SVM, logistic regression or k-NN. It is also notable that the proposed discriminant function directly works with the $X_i$s as features. Having the FC calculation step omitted in classification not only heavily affects the computational performance of the method, but it also saves us from the troubles of FCs which will be discussed in the next section.   
 	  
 	  To verify our approach, we conduct an extensive experimental study on rs-fMRI data from the
 	  	benchmark dataset ADNI
-	  	\footnote{http://adni.loni.usc.edu/} 
-	  	As will be seen, the results well demonstrate the effectiveness and advantages of our method. Specifically, the proposed framework, not only grants us superior classification accuracy to that from other methods, it is also much faster and more stable against different data selection schemes. We have also confirmed our achieved whole-class FC matrix using empirical data on the eMCI and Normal functional connectivity patterns.
+	  	\footnote{http://adni.loni.usc.edu/}.
+	  	As will be seen, the results well demonstrate the effectiveness and advantages of our method. Specifically, the proposed framework, not only grants us superior classification accuracy to that from other methods, it is also much faster and more stable against different data selection schemes. We have also confirmed our achieved General FC matrix using empirical data on the eMCI and Normal functional connectivity patterns.
 	  	
 							 
 	\section{eMCI classification techniques}
@@ -675,9 +678,9 @@ In this article, we treat the eMCI samples as positive class and the NC samples 
 %\end{table}
 
 \subsubsection{Classification performance}
-The classification accuracy measure(ACC), After fine-tuning the input parameter set for each method, shows that for $16$ out of $18$ different perturbations, our approach works better than k-SICE, the same also holds for $15$ datasets comparing to HON. i.e. in $88.8 \%$ of datasets, proposed method works better than k-SICE and in $83.3 \%$ of datasets, it works better that FON.  
+The classification accuracy measure(ACC), After fine-tuning the input parameter set for each method, shows that for $16$ out of $18$ different perturbations, our approach performs better than k-SICE, the same also holds for $15$ datasets comparing to HON. i.e. in $88.8 \%$ of datasets, proposed method works better than k-SICE and in $83.3 \%$ of datasets, it works better than FON.  
 The highest classification accuracy($86.59\%$) is achieved with the proposed method in the $15$th perturbation. The highest accuracy for the HON ($84.15\%$) is achieved in the $14$th, and the highest accuracy for the SICE method ($85.37\%$) is achieved in the $6$th perturbation. As it was mentioned before, being stable when the input dataset changes is a very important aspect for a classifier, in order to measure the stability, standard deviation of accuracy along with other measures are
-calculated. The std. of accuracy for proposed method is $0.64$ times less than HON and $1.73$ times less than SICE method. Similar results also holds for other classification measures.
+calculated. The std. of accuracy for proposed method is $0.64$ times less than HON and $1.73$ times less than k-SICE method. Similar results also holds for other classification measures.
 \begin{figure*}
 	\centering
 	\includegraphics[width=7in]{images/Final-eps.pdf}
@@ -755,7 +758,7 @@ In order to better highlight the differences between Normal and eMCI subjects, a
 The nodes of $D$ shows the ROIs according to the AAL atlas. The size of each node is proportional to its graph clustering coefficient, i.e. the bigger node, demonstrates higher activity in eMCI subjects in the corresponding ROI. 
 Similar to nodes, the size of each edge is also proportional to the correlation between two ROI's. In addition, the edges are also color coded in a way that the green edges shows the positive edges in $D$ and the orange edges shows the negative edges in $D$. In this manner, the green edges demonstrates decreasing in activity between the corresponding nodes in eMCI subjects and vice versa, the orange edges shows increasing activity between corresponding ROIs in the eMCI subjects.   
 
-As it can be seen in the difference graph, the big nodes i.e. ROIs with higher activities does not necessarily establish strong connections with the other nodes. As an obvious example, higher activities in Lingual gyrus(ROI index: 47,48)\cite{r24,r25}, Calcarine sulcus(ROI index: 43, 44)\cite{r26,r27}, Supplementary motor area(ROI index: 19,20)\cite{r27,r28} and Temporal\_mid\_L(ROI index: 85)\cite{r29} are easily detectable. The majority of ROIs located in frontal lobe also shows rather high activities comparing to normal subjects\cite{r30,r31}.
+As it can be seen in the difference graph, the big nodes i.e. ROIs with higher activities does not necessarily establish strong connections with the other nodes. As an obvious example, higher activities in Lingual gyrus(ROI index: 47,48)\cite{r24,r25}, Calcarine sulcus(ROI index: 43, 44)\cite{r26,r27}, Supplementary motor area(ROI index: 19,20)\cite{r27,r28} and Temporal\_mid\_L(ROI index: 85)\cite{r29} are easily detectable. The majority of ROIs located in frontal lobe also shows rather high activities comparing to normal subjects\cite{r30,r04}.
 
 Similar to the nodes, strong edge between two ROIs does not necessarily requires the nodes to be highly active in eMCI. Although a strong edge does indicate high activities and functional connectivity between the two corresponding ROIs. The difference Graph shows significant increase in connectivity between 
 Rectus(ROI index: 28, 27 in Frontal lobe) and 
@@ -1120,8 +1123,8 @@ The framework proposed in this paper can be easily extended to other studies inv
 
 
 
-\bibliographystyle{elsarticle-num}
-\bibliography{<your-bib-database>}
+%\bibliographystyle{elsarticle-num}
+%\bibliography{<your-bib-database>}
 
 %% Authors are advised to submit their bibtex database files. They are
 %% requested to list a bibtex style file in the manuscript if they do
@@ -1139,7 +1142,7 @@ The framework proposed in this paper can be easily extended to other studies inv
 
 % \end{thebibliography}
 
-\section{Bibliography}
+%\section{Bibliography}
 \begin{thebibliography}{1}
 		
 			\bibitem{r01}
@@ -1151,8 +1154,8 @@ The framework proposed in this paper can be easily extended to other studies inv
 			\bibitem{r03}
 			Musha, Toshimitsu, et al. "EEG markers for characterizing anomalous activities of cerebral neurons in NAT (neuronal activity topography) method." IEEE Transactions on Biomedical Engineering 60.8 (2013): 2332-2338.
 			
-	%		\bibitem{r04}
-	%		Gould, R. L., et al. "Brain mechanisms of successful compensation during learning in Alzheimer disease." Neurology 67.6 (2006): 1011-1017.
+			\bibitem{r04}
+			Gould, R. L., et al. "Brain mechanisms of successful compensation during learning in Alzheimer disease." Neurology 67.6 (2006): 1011-1017.
 			
 			\bibitem{r04}Dennis, Emily L., and Paul M. Thompson. "Functional brain connectivity using fMRI in aging and Alzheimer’s disease." Neuropsychology review 24.1 (2014): 49-62.
 			
@@ -1231,7 +1234,6 @@ The framework proposed in this paper can be easily extended to other studies inv
 			
 			\bibitem{r30}Salvatore, Christian, et al. "Magnetic resonance imaging biomarkers for the early diagnosis of Alzheimer's disease: a machine learning approach." Frontiers in neuroscience 9 (2015): 307.
 			
-			\bibitem{r31}Gould, R. L., et al. "Brain mechanisms of successful compensation during learning in Alzheimer disease." Neurology 67.6 (2006): 1011-1017.
 			
 			\bibitem{r32}Jacobs, Heidi IL, et al. "The cerebellum in Alzheimer’s disease: evaluating its role in cognitive decline." Brain 141.1 (2017): 37-47.
 			
@@ -1285,6 +1287,11 @@ The framework proposed in this paper can be easily extended to other studies inv
 			\bibitem{r51}Chang, Catie, and Gary H. Glover. "Time–frequency dynamics of resting-state brain connectivity measured with fMRI." Neuroimage 50.1 (2010): 81-98.
 			
 			\bibitem{r52}Handwerker, Daniel A., et al. "Periodic changes in fMRI connectivity." Neuroimage 63.3 (2012): 1712-1719.
+			
+			\bibitem{r53}Supekar, Kaustubh, et al. "Network analysis of intrinsic functional brain connectivity in Alzheimer's disease." PLoS computational biology 4.6 (2008): e1000100.
+			
+			\bibitem{r54}Contreras, Joey A., et al. "Resting state network modularity along the prodromal late onset Alzheimer's disease continuum." NeuroImage: Clinical 22 (2019): 101687.
+		
 		
 	
 	
