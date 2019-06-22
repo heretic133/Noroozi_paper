@@ -214,7 +214,7 @@ In recent years, brain imaging techniques like Positron Emission Tomography (PET
 	    	
 	A powerful tool that is commonly used in order to achieve aforementioned goals is Functional Connectivity(FC) network.  FC is a $region \times region$ matrix $\bar{X}$ in which $\bar{x}_{ij}$ represents the functional connectivity between the $i$th and $j$th ROI. Functional connectivity is an observable
 		phenomenon quantifiable with measures of statistical dependencies, such as correlations, coherence, or transfer entropy \cite{r38}.  Recent studies have shown that some brain disorders like AD could alter the way that some brain regions interact with each other. For example, compared with the healthy, AD patients have been found decreased functional connectivity between the hippocampus and other brain regions, and MCI patients have been observed increased functional connectivity between the frontal lobe and other brain regions\cite{r04}.
-		So, Finding an FC that highlights the patterns caused by a disease, i.e. a \textbf{General} functional connectivity, has been a common goal in the rs-fMRI study for a long time. Several approaches exist to find common patterns among different brain scans. Data-driven methods such as kernel-PCA or clustering techniques have been proposed for this task \textcolor{red}{REF}. But ultimately most of them rely on calculating a network for each volume which may overlook the role of noises or outliers within the data\cite{r53,r54}. 
+		So, Finding an FC that highlights the patterns caused by a disease, i.e. a \textbf{General} functional connectivity, has been a common goal in the rs-fMRI study for a long time. Several approaches exist to find common patterns among different brain scans. Data-driven methods such as PCA have been proposed for this task \cite{r55}. But ultimately most of them rely on calculating a network for each volume which may overlook the role of noises or outliers within the data\cite{r53,r54}. 
 	
 		In recent years FCs are also used as features in classification. 
 		So, instead of using $X_i$ as the $i^{th}$ sample, its corresponding  FC i.e. $\bar{X}_i$ is used as a feature. Although FCs show promising results, they bring their own challenges.  The computational cost of FC is usually high and also its quality massively affects the performance of the learning process. Also, Since the conventional classifiers like \textbf{S}upport \textbf{V}ector \textbf{M}achine(SVM) and or k-NN works on data in vector format, these matrix features should be vectorized in order be fed to these classifiers.
@@ -236,7 +236,7 @@ In recent years, brain imaging techniques like Positron Emission Tomography (PET
 	  	As will be seen, the results well demonstrate the effectiveness and advantages of our method. Specifically, the proposed framework, not only grants us superior classification accuracy to that from other methods, it is also much faster and more stable against different data selection schemes. We have also confirmed our achieved General FC matrix using empirical data on the eMCI and Normal functional connectivity patterns.
 	  	
 							 
-	\section{eMCI classification and FC construction techniques}
+	\section{eMCI classification and FC construction techniques}\label{related_works}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -248,7 +248,7 @@ In recent years, brain imaging techniques like Positron Emission Tomography (PET
 As it was mentioned before, obtaining and classifying FC matrices have become the dominant approach towards eMCI analysis. 
 Variety of methods such as Pairwise Pearson’s correlation coefficient \cite{r10, r11}, sparse representation \cite{r10, r12, r13}  and \textbf{S}parse \textbf{I}nverse \textbf{C}ovariance \textbf{E}stimation (SICE)\cite{r15} exists to obtain an FC,
 While the first two are easy to understand and can capture pairwise functional relationship based on a pair of ROIs, the latter can account for more complex interactions among multiple ROIs, but the estimation of partial correlation involves an inversion of a covariance matrix, which may be ill-posed due to the singularity of the covariance matrix. 
-These methods result in vastly different networks\cite{r35}. On the other hand, computing the correlations, based on the entire time series of fMRI data simply measures the FC between ROIs with a scalar value, which is fixed across time. This actually implicitly hypothesizes the \textbf{Stationary} interaction patterns among ROIs. As a result, this method may overlook the complex and dynamic interaction patterns among ROIs, which are essentially time-varying. In order to overcome this issue, \textbf{Non-stationary} methods have been proposed which results in more complex networks\cite{r16}\textendash \cite{r19}. \textcolor{red}{MORE about FC}
+These methods result in vastly different networks\cite{r35}. On the other hand, computing the correlations, based on the entire time series of fMRI data simply measures the FC between ROIs with a scalar value, which is fixed across time. This actually implicitly hypothesizes the \textbf{Stationary} interaction patterns among ROIs which will result in a \textit{static functional connectivity} (sFC). As a result, this method may overlook the complex and dynamic interaction patterns among ROIs, which are essentially time-varying. In order to overcome this issue, \textbf{Non-stationary} methods have been proposed which results in more complex networks also known as dynamic functional connectivity (dFC)\cite{r16,r19,r56}. The most common and straightforward way to investigate dFC is using windowed FC, which consists of calculating a given FC measure, for example, the Pearson correlation coefficient, over consecutive windowed segments of the data\cite{r58,r59}. Although such an analysis seems straightforward, there are also pitfalls associated with it which may cause in a non-accurate FC\cite{r57}.
 
 %	There are two main paradigms towards obtaining the FCs: Stationary and non-stationary methods. Stationary methods use a single scaler value like Partial correlation or \textcolor{red}{sparse coefficients} in order to determine the functional connectivity between two ROIs. Non-stationary methods consider a more complex relation between ROIs that can not be best captured with a single scaler value. 
 
@@ -588,9 +588,7 @@ I_{k_3^i} &  0
 V
 \right)_{2} \boldsymbol{\cdot} \mathcal{S}^{(i)}(1:k_1^i,:, 1:k_3^i) \notag &
 \end{align}
-
-and so
-
+thus
 \begin{align}
 \label{ok}
 {\mathcal{Y}}^{(i)}(:,k,:) &= \sum_{k'}^{R} V^{(i)}(k,k')\bar{\mathcal{C}}^{(i)}(:,k',:) \notag
@@ -618,11 +616,11 @@ in which
 %	\[
 %	\bar{\mathcal{C}}^{(i)} = \mathcal{C}(1:k_1^i,:,1:k_3^i).
 %	\]
-The equation \eqref{ok}, show that the reduced version of each region in the $i^{th}$ class could be
-written as the linear combinations of  mode-2 slices of $\mathcal{C}^{(i)}$. So the coefficients of slices in this linear combination could be considered as a new feature for the $l^{the}$ region of the $i^{th}$ class. Also as we mentioned the first slices are better than the last ones to reflect the principle properties of the data. So for appropriate $k_3^i$ we could select only the fits coefficient in \eqref{ok} as  new features for the $l^{th}$ region. Mathematically this means each region  in the $i^{th}$ class could be represented by new feature $V(l,1;k_3^i)\in \mathbb{R}^{k_3^i}$.   
+The equation \eqref{ok}, shows that the reduced version of each region in the $i^{th}$ class could be
+written as the linear combinations of  mode-2 slices of $\mathcal{C}^{(i)}$. So the coefficients of slices in this linear combination could be considered as a new feature for the $l^{th}$ region of the $i^{th}$ class. Also as we mentioned the first slices are better than the last ones to reflect the principle properties of the data. So for appropriate $k_3^i$ we could select only the first coefficients in \eqref{ok} as  new features for the $l^{th}$ region. Mathematically this means each region  in the $i^{th}$ class could be represented by new feature $V(l,1;k_3^i)\in \mathbb{R}^{k_3^i}$.   
 
-The main benefit of this approach is that each
-region could be represented only be a vector with size $k_3^i$, instead large feature matrix  time-sample. Now different methods could be used to find the correlation of reigns based on this new type of feature and clean matrix $V(:,1:k_{3}^i)$ which its rows corresponding to different regions and columns are new features. Due to quality of  Sparse Inverse Covariance ,  this method is applied the obtained  feature-region matrix  $V(:,1:k_3^i)^{\sf T}$  in order to find the functional connectivity of the $i^{th}$ class.
+\textcolor{olive}{The main benefit of this approach is that each
+	region could be represented only be a vector with size $k_3^i$, instead large feature matrix  time-sample. Now different methods could be deployed in order to find the correlation of reigns based on this new type of feature and clean matrix $V(:,1:k_{3}^i)$ which its rows corresponding to different regions and columns are new features.} Due to the qualities of Sparse Inverse Covariance discussed before, this method is applied to obtained  \textcolor{red}{feature-region} matrix  $V(:,1:k_3^i)^{\sf T}$  in order to find the functional connectivity of the $i^{th}$ class.
 %	\begin{figure}[!t]
 %		\centering
 %		\includegraphics[width=3.5in]{images/SVDiff}
@@ -630,6 +628,8 @@ region could be represented only be a vector with size $k_3^i$, instead large fe
 %		\label{g3.1}
 %	\end{figure}
 
+
+As it was discussed before in \eqref{related_works}, there are two types of FC: Dynamic FC and Static FC. Although the obtained FC is an sFC by definition, we argue that the core tensor obtained from HOSVD, which contains the features included in the FC calculation process, has a dynamic structure. The majority of non-stationary methods uses the sliding window technique in order to analyze the BOLD signal in several sessions. The main idea is that the presence of temporal fluctuations in FC within different sessions should be taken into account in order to obtain a better FC.
 
 \section{EXPERIMENTAL STUDY}
 \subsection{Data Preprocessing and Experimental Settings}
@@ -1301,9 +1301,17 @@ The framework proposed in this paper can be easily extended to other studies inv
 			
 			\bibitem{r54}Contreras, Joey A., et al. "Resting state network modularity along the prodromal late onset Alzheimer's disease continuum." NeuroImage: Clinical 22 (2019): 101687.
 		
-		
+			\bibitem{r55}Leonardi, Nora, et al. "Principal components of functional connectivity: a new approach to study dynamic brain connectivity during rest." NeuroImage 83 (2013): 937-950.
 	
-	
+			\bibitem{r56}Leonardi, Nora, and Dimitri Van De Ville. "On spurious and real fluctuations of dynamic functional connectivity during rest." Neuroimage 104 (2015): 430-436.
+			
+			\bibitem{r57}
+			Hindriks, Rikkert, et al. "Can sliding-window correlations reveal dynamic functional connectivity in resting-state fMRI?." Neuroimage 127 (2016): 242-256.
+			
+			\bibitem{r58}Barttfeld, Pablo, et al. "Signature of consciousness in the dynamics of resting-state brain activity." Proceedings of the National Academy of Sciences 112.3 (2015): 887-892.
+			
+			\bibitem{r59}Zalesky, Andrew, et al. "Time-resolved resting-state brain networks." Proceedings of the National Academy of Sciences 111.28 (2014): 10341-10346.
+				
 \end{thebibliography}
 
 \end{document}
