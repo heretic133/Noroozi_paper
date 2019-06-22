@@ -541,20 +541,25 @@ As it was mentioned before, one of the main studies associated with rs-fMRI anal
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this section we show that based on HOSVD decomposition one could  obtain  one representative functional connectivity for each normal or eMCI classes without obtaining the per-sample FC of all data separately. Here the classification is not our goal, instead  finding a general and representative
-relation of regions for eMCI and normal person is our demand. This general pattern could be used clinically by expert cognitive scientists to found  
-functional relation disorders caused by Alzheimer's disease.
+\textcolor{red}{In this section we show that based on HOSVD decomposition one general functional connectivity matrix could be obtained for each class without obtaining the per-sample FC of all data separately. Here the classification is not our goal, instead  finding a general and representative
+	relation of regions for eMCI and Normal subjects is our demand. This general pattern could be used clinically by  cognitive scientists in order to obtain deeper knowledge about Alzheimer's disease and brain in general.}
+%
+%As we know in HOSVD,  the singular matrices $U,V,W$, are the bases of time, region and sample receptively.
+% In the previous section by property of these matrices we designed our classification method.  know in this section we show that
+%, the same idea could helps us to define a general FC matrix based on HOSVD decomposition for normal and
+%eMCI data. It should be mentioned that here we did not use the FC of per-samples to construct this general FC matrix.
+\textcolor{red}{As we saw in the previous section, the obtained $U,V,W$ matrices are the basis for time, region and sample respectively. We used these matrices in order to reduce the dimensionality of data and create a discriminant function. In this section we will show that these basis matrices could be reused in order to obtain a general functional connectivity matrix for each class.}   
 
-As we know in HOSVD  the singular matrices $U,V,W$, are the base of time, region features and also the samples, receptively. In the laset section by property of these matrices we designed our classification method.  know in this section we show that
-, the same idea could helps us to define a general FC matrix based on HOSVD decomposition for normal and
-eMCI data. It should be mentioned that here we did not use the FC of per-samples to construct this general FC matrix.
-
-In tensor  $\mathcal{X}^{(i)}$ of the $l^{th}$ class, the slice $\mathcal{X}^{(i)}(:,l,:)$ denotes
-the  behavior of $l^{th}$  region of all samples in all times in the $i^{th}$ class. So this could be consider as a feature of the $l^{th}$ region  of the $i^{th}$ class and each region is shown with an Times-sample feature matrix. Viewing each region as a slice would allow us to consider it's behavior in all time points and across all samples, which itself allows us to shed more light on common properties and ignore individual differences that is highly possible due to the presence of noise and outliers.
-So, by the properties of singular matrices in modes-1,3, for appropriate values
-$k_1^i,k_3^i$, each region $\mathcal{X}(:,l,:)$ could be reduced in both time and sample features, separately
+\textcolor{red}{
+	In the $i^{th}$ class which is represented by $\mathcal{X}^{(i)}$, the slice $\mathcal{X}^{(i)}(:,l,:)$ denotes
+	the  behavior of $l^{th}$  region of all samples in all times.    
+	%In tensor  $\mathcal{X}^{(i)}$ of the $l^{th}$ class, the slice $\mathcal{X}^{(i)}(:,l,:)$ denotes
+	%the  behavior of $l^{th}$  region of all samples in all times in the $i^{th}$ class. 
+	This slice could be considered as a feature for the $l^{th}$ region of the $i^{th}$ class so each region is represented as a  Times-sample feature matrix. Viewing each region as a slice would allow us to consider it's behavior in all time points and across all samples, which itself allows us to shed more light on common properties and ignore individual differences that is highly possible due to the presence of noise and outliers.}
+Thus, by the properties of singular matrices in modes-1,3, and for appropriate values
+$k_1^i,k_3^i$, each region $\mathcal{X}(:,l,:)$ could be reduced in both time and sample features separately
 based on mode-1 and mode-3 truncated singular matrices $U_{k_1^i}^{(i)}$ and $W_{k_3}^{(i)}$
-as follows
+as follows:
 \begin{eqnarray}
 \mathcal{Y}^{(i)}(:,l,:) = \left( 
 {U_{k_1^i}^{(i)}}^{\trans},  {W_{k_3}^{(i)}}^{\trans} 
@@ -569,7 +574,7 @@ spanned by $U_{k_1^i}^{(i)}$ and $W_{k_3}^{(i)}$ in modes-1,3. So,
 \end{align} 
 denote all reduced regions of the $i^{th}$ class. By this structure  and substituting the HOSVD decomposition of $\mathcal{X}^{(i)}$ in \eqref{DR_Version_FC1},  we obtain
 \begin{align}
-{\mathcal{Y}}^{(i)}= & \notag
+{\mathcal{Y}}^{(i)}&=  \notag
 \left(
 \begin{bmatrix}
 I_{k_1^i} &  0
