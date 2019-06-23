@@ -423,24 +423,24 @@ and $\mathcal{S}^{(i)}$ is the corresponding core tensor \cite{r64}.  Here $U^{(
 which indicates the behavior of $l$th region of the $k$th sample of the $i$th class in all times. Also  $V^{(i)}$ is a base of all mode-$ 2 $ fibers $\mathcal{X}(l,:,k)$ which indicates the behavior of all regions of  $l$th  sample of the $i$th class in  the $k$th time.
 Due to the properties of HOSVD inherited from svd, the first columns of the $k$th singular matrix ($k = 1,2,3$) has more ability in construction of main parts of $k$th fibers. On the other hand, the last columns of  these singular matrices, have more fluctuations and are usually  associated  with the noisy parts of their corresponding fibers\cite{r64}. 
 Therefore a suitable dimension reduction would be to project the mode-1 and mode-2 fibers into the space spanned by the first $k^i_1$ and $k^i_2$ singular vectors of modes-1,2, which will be denoted by $U^{(i)}_{k^i_1}$ and $V_{k^i_2}^{(i)}$, respectively. This dimension reduction could be done as:
-\textcolor{blue}{Therefore, with appropriate values of $k^i_1$ and $k^i_2$ projection of mode-1 and mode-2 fibers into space spanned by  the first $k_1$ and $k_2$ singular vectors of modes-1,2, which  are denoted by  $U^{(i)}_{k^i_1}$ and $V_{k^i_2}^{(i)}$, respectively,
-	is a suitable  dimension reduction. This dimensionality reduction could be done as}
+%\textcolor{blue}{Therefore, with appropriate values of $k^i_1$ and $k^i_2$ projection of mode-1 and mode-2 fibers into space spanned by  the first $k_1$ and $k_2$ singular vectors of modes-1,2, which  are denoted by  $U^{(i)}_{k^i_1}$ and $V_{k^i_2}^{(i)}$, respectively,
+%	is a suitable  dimension reduction. This dimensionality reduction could be done as}
 \begin{align}
 \label{m1}
 \mathbb{R}^{k_1 \times k_2 \times S_i} \ni  \bar{{\mathcal{X}}}^{(i)} = \left( 
 U^{(i) {\sf {T}}}_{k^i_1}, V_{k^i_2}^{\sf {T}}
 \right)_{1,2}\boldsymbol{\cdot} \mathcal{X}^{(i)}
 \end{align}
-It is clear that this reduction could be done separately on each mode without the need to fold them into lower dimensions. This means that the structural integrity of data is preserved during the dimension reduction process which is a key aspect in our work. It has been shown that even choosing relatively small values for$k_1^1$ and $k_2^i$ would result in a very good reconstruction error.\textcolor{red}{REF NEEDED} 
-\textcolor{blue}{\textcolor{olive}{Here it's clear that the reduced version of the $k^{th}$ sample, i.e.,$\overline{\mathcal{X}}(:,:,k)\in \mathbb{R}^{k_1\times k_2}$ could be reduced separately  in each mode without folding. This means that the structure of data is preserved in the reducing process.
-		Base on the properties of the  HOSVD, it could b shown that by small number of $k_1^1, k_2^i$, the reduced data have good reconstruction error. }
-}
+It is clear that this reduction could be done separately on each mode without the need to fold any of them. This means that the structural integrity of data is preserved during the dimension reduction process which is a key aspect in our work. It has been shown that even choosing relatively small values for$k_1^1$ and $k_2^i$ would result in a very good reconstruction error.\textcolor{red}{REF NEEDED} 
+%\textcolor{blue}{\textcolor{olive}{Here it's clear that the reduced version of the $k^{th}$ sample, i.e.,$\overline{\mathcal{X}}(:,:,k)\in \mathbb{R}^{k_1\times k_2}$ could be reduced separately  in each mode without folding. This means that the structure of data is preserved in the reducing process.
+%		Base on the properties of the  HOSVD, it could b shown that by small number of $k_1^1, k_2^i$, the reduced data have good reconstruction error. }
+%}
 
 In the following  spired by the structure of this reduction, we present a tensor based discriminant function.
 By HOSVD decomposition of
 $\mathcal{X}^{(i)}$ the projected data $\overline{\mathcal{X}}^{(i)}$ in equation \eqref{m1} becomes
 \begin{align}
-\bar{\mathcal{X}}^{(i)}= & \notag
+\bar{\mathcal{X}}^{(i)}&=  \notag
 \left(
 \begin{bmatrix}
 I_{k_1^i} &  0
@@ -459,7 +459,7 @@ So,  each sample of the $i^{th}$ class in the reduced space has the following fo
 \bar{{\mathcal{X}}}^{(i)}(:,:,k) &= \left(  
 W^{(i)}(k,:)
 \right)_{3} \boldsymbol{\cdot} \mathcal{S}^{(i)}(1:k_1^i, 1:k_2^i, :)\\
-=& \sum_{k' = 1}^{S_i} W^{(i)}(k,k') \boldsymbol{\cdot} \mathcal{S}^{(i)}(1:k_1^i, 1:k_2^i, k').
+&= \sum_{k' = 1}^{S_i} W^{(i)}(k,k') \boldsymbol{\cdot} \mathcal{S}^{(i)}(1:k_1^i, 1:k_2^i, k').
 \end{align*}
 This means that each sample in the $i^{th}$ class could be represented as linear combination of the slices  of the tensor $\overline{\mathcal{S}}^{(i)}=\mathcal{S}^{(i)}(1:k_1^i, 1:k_2^i, :)$.
 So if a test data like $X\in \mathbb{R}^{T\times R}$ belongs to the $i^{th}$ class
@@ -477,7 +477,6 @@ Z^{(i)} \approx \sum_{k=1}^{S_i} \lambda_k^i \overline{\mathcal{S}}^{(i)}(:,:,k)
 Based on this viewpoint, each test data $X$ could be assigned to a class that its prjected version have the best approximation in the form\textcolor{red}{??}. 
 Due to importance of core tensor elements with small indices in reconstruction of the signal part of data in comparison with its last parts,
 the small number $k_3^i< S_i$  of slices $\overline{\mathcal{S}}^{(i)}(:,:,k)$ could be used  in  \eqref{m2}. 
-
 In this viewpoint each test data
 $X$ would be assigned to the $l^{th}$class, if
 \[
@@ -495,22 +494,28 @@ r_{i}=\min_{{\lambda^{i}}} \|Z^{(i)} -\sum_{k=1}^{k_3^i} \lambda_k^i \overline{\
 \end{equation}
 shows the  reconstruction error of the projected version of $X$ in the $i^{th}$ class.
 The minimization  \eqref{ls} is a simple least square problem that could be solved easily.
-The proposed method have an interesting property that  bring us to propose a novel method to improve its 
-quality.
-By the properties of HOSVD, the principle properties of the $i^{th}$ class could be reflected in the  slices of
-$\overline{\mathcal{S}}^{(i)}$. Also, for small indices these Slices have a  better   role in construction of main properties of this class. So the first slices of $\overline{\mathcal{S}}$
-\textcolor{blue}{could represent signal parts, while last ones do not this role and sometimes represents the wast parts.}
-Now consider the test data $X$ added to data set $\mathcal{X}^{(i)}$ of the $i^{th}$ class. So new data set will be
-$\mathcal{\widetilde{X}}\in \mathbb{R}^{T\times R \times (S_{i}+1)}$. For example
+
+The proposed method has an interesting property which allows us to enhance the classification performance by using the test data in the training process without forcing any apriory knowledge to the classifier. 
+We have shown that the principal properties of the $i^{th}$ class is reflected in $\overline{\mathcal{S}}^{(i)}$, we also know that the first slices of this tensor, i.e. slices with lower indices, have the most role in reconstructing the main parts of this class i.e. the signal parts. Same reasoning also leads to the conclusion that slices with higher indices are responsible for the possible noise in this class.   
+%By the properties of HOSVD, the principle properties of the $i^{th}$ class could be reflected in the  slices of
+%$\overline{\mathcal{S}}^{(i)}$. Also, for small indices these Slices have a  better   role in construction of main properties of this class. 
+%So the first slices of $\overline{\mathcal{S}}$
+%\textcolor{blue}{could represent signal parts, while last ones do not this role and sometimes represents the wast parts.}
+Now consider that the test data $X$ is added to data set $\mathcal{X}^{(i)}$ of the $i^{th}$ class. So the new data set will be
+$\mathcal{\widetilde{X}}\in \mathbb{R}^{T\times R \times (S_{i}+1)}$,
 \begin{eqnarray*}
 	\widetilde{\mathcal{X}}^{(i)}(:,:,1:S_i)&=&{\mathcal{X}}^{(i)},\\
 	\widetilde{\mathcal{X}}^{(i)}(:,:,S_i+1)&=&X.
 \end{eqnarray*}
+If $X$ belongs to the $i^{th}$ class, then in the decomposition of $\widetilde{\mathcal{X}}^{(i)}$, $X$ would reinforce the first slices of the core tensor. On the other hand, if $X$ does not belong to the $i^{th}$ class, HOSVD would naturally consider it as a noise, since $X$ is not similar to other samples and thus does not play a key role in reconstructing them. So its effect would be on the last slices of the core tensor, i.e. slices with higher indices.
+%\textcolor{olive}{If $X$ belongs to this class then in HOSVD of this tensor $X$ reinforce the slices of core tensor with small indices. But when it  dose not belong to this class  it  will changes the behavior of last slices of core tensor of new tensor. 
 
-\textcolor{olive}{If $X$ belongs to this class then in HOSVD of this tensor $X$ reinforce the slices of core tensor with small indices. But when it  dose not belong to this class  it  will changes the behavior of last slices of core tensor of new tensor. This meas that before classification of a test data $X$, We could added it to both classes.} This addition,  will changed the first slices of core tensor when it belongs to \textcolor{red}{this}  class or
-will changed the last Slices  when dose not belong. But in our classification method only the first Slices of core tensor are exits. Also the elements of $S$ in the first and second modes are filtered and we work with $S(1:k_1^i,1:k_2^i,1:k_3^i)$.  This means that by addition of $X$ in both classes for class that it belongs to it, the first slices in \eqref{ls}, will be  adapted to have good reconstruction for this data. But for a class that dose not belong to, this addition have small changes in the slices in \eqref{ls}.
-It should be mentioned that
-since $X$ added to both data sets, so we did not use its label and the method in true. After computing the HOSDVD of this new data sets $\widetilde{\mathcal{X}}^{(i)}$, we apply the method in \eqref{ls} for classification.  Algorithm 1 summarized the proposed classification method.
+Remember that the last slices of the core tensor are discarded in the dimension reduction process. As a result, if $X$ does not belong to the $i^{th}$ class, it would not be involved in the classification process, on the other hand, if $X$ belongs to this class it would affect the first slices of the core tensor and thus would lead into smaller reconstruction error. So if we add $X$ to all classes before the decomposition process, the reconstruction error for the right class would be less than other classes. Note that since $X$ is added to all classes, without sneaking any information about its label to the training process this technique is legit.      
+%This meas that before classification of a test data $X$, We could added it to both classes. This addition,  will changed the first slices of core tensor when it belongs to \textcolor{red}{this}  class or
+%will changed the last Slices  when dose not belong. But in our classification method only the first Slices of core tensor are exits. Also the elements of $S$ in the first and second modes are filtered and we work with $S(1:k_1^i,1:k_2^i,1:k_3^i)$.  This means that by addition of $X$ in both classes for class that it belongs to it, the first slices in \eqref{ls}, will be  adapted to have good reconstruction for this data. But for a class that dose not belong to, this addition have small changes in the slices in \eqref{ls}.
+%It should be mentioned that
+%since $X$ added to both data sets, so we did not use its label and the method in true.
+ After computing the HOSDVD of this new data sets $\widetilde{\mathcal{X}}^{(i)}$, we apply the method in \eqref{ls} for classification.  Algorithm 1 summarizes the proposed classification method.
 \begin{algorithm}[h!]
 	\label{ATNB}
 	\caption{\textbf{TNBeMCI}: Tensor based Classification method}
@@ -528,16 +533,25 @@ since $X$ added to both data sets, so we did not use its label and the method in
 \end{algorithm}
 
 
-In this section by HOSVD decomposition on both normal and eMCI data, we proposed a novel tensor based classification. The benifits of the proposed tensor based classification method could be summarized as follow
+In this section by HOSVD on both Normal and eMCI classees, we proposed a novel tensor based classification and dimension reduction technique. The benefits of the proposed framework could be summarized as follow:
 \begin{itemize}
-	\item This method  uses multi linear property of region-Time matrix data and  could works with time and region features separately based on their specific bases(corresponding singular matrices). This means that the classification works on data without folding them into vectors.
-	\item  In this classification,  the test data has a role in construction of bases for both classes, without using its label. This  increase the quality of the discrimination. This could not applied on important classification methods like SVM, logistic regression classifier and neuronal networks. 
-	\item This method works with time-region features, and dose not need to have FC matrices for each sample. So
-	its computational complexity is more less than other state of the art methods  based on FC features. Also in this method we do not wary about the quality of FC methods.	
-	It should be mentioned that our method also could be applied on FC matrices as input features. But in experiments the proposed method gives better results on original time-region features.  
+	\item With respect to the multilinear nature of data, the proposed method works with \textit{time}, \textit{region} and \textit{sample} features separately and simultaneously using the extracted singular matrix for each mode without any folding sessions inorder to preserve the structural integrity of each class.  
+	
+%	This method  uses multi linear property of region-Time matrix data and  could works with time and region features separately based on their specific bases(corresponding singular matrices). This means that the classification works on data without folding them into vectors.
+	\item  The proposed classification technique allows us to use the test data in the training process in order to enhance the classification performance. A task which is not possible via convensional classifiers such as SVM, logistic regression  and or neuronal networks. 
+	
+%	In this classification,  the test data has a role in construction of bases for both classes, without using its label. This  increase the quality of the discrimination. This could not applied on important classification methods like SVM, logistic regression classifier and neuronal networks. 
+	\item 
+	The fact that the proposed method does not require calculation of FC for each sample, helps us to classify the data much faster than other state of the art methods.
+%	This method works with time-region features, and dose not need to have FC matrices for each sample. So
+%	its computational complexity is more less than other state of the art methods  based on FC features. Also in this method we do not wary about the quality of FC methods.	
+%	It should be mentioned that our method also could be applied on FC matrices as input features. But in experiments the proposed method gives better results on original time-region features.  
 \end{itemize}
-In the experiments we compare the quality of the method with some of the sate of the art methods for recognition of eMCI like mentioned k-SICE and HON .
-Experimental results confirm the quality of the proposed method. In the next section we show that based the obtained HOSVD decomposition for both classes one could obtain appropriate General patters for normal and eMCI data.	
+%In the experiments we compare the quality of the method with some of the sate of the art methods for recognition of eMCI like mentioned k-SICE and HON .
+%Experimental results confirm the quality of the proposed method.
+ In the next section we show that based
+ on the singular matrices obtained via HOSVD, a General functional connectivity for each of the eMCI and Normal classes could be obtained. 
+ 
 \subsection{General Functional Connectivity Calculations based on HOSVD} \label{FC_Construction}
 
 
