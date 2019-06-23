@@ -221,7 +221,7 @@ In recent years, brain imaging techniques like Positron Emission Tomography (PET
 		In recent years FCs are also used as features in classification. 
 		So, instead of using $X_i$ as the $i^{th}$ sample, its corresponding  FC i.e. $\bar{X}_i$ is used as a feature. Although FCs show promising results, they bring their own challenges.  The computational cost of FC is usually high and also its quality massively affects the performance of the learning process. Also, Since the conventional classifiers like \textbf{S}upport \textbf{V}ector \textbf{M}achine(SVM) and or k-NN works on data in vector format, these matrix features should be vectorized in order be fed to these classifiers.
 		This vectorization leads to high-dimensional vectors which produce poor performance due to the phenomena known as the Curse of Dimensionality. Alongside the curse of dimensionality, vectorization also destroys potential information that are embedded in the structure of data. 
-		This problem has been studied especially in image data in which vectorization destroys the spatial relations within an image.\textcolor{red}{Rezghi and S.Ahmadi paper}
+		This problem has been studied especially in image data in which vectorization destroys the spatial relations within an image\cite{r60}.
 						
 						
 	In this paper, based on high order tensor decomposition, we have created a framework in which the aforementioned goals i.e. finding a general FC and detecting a disorder via classification could be achieved via a single \textbf{H}igh \textbf{O}rder \textbf{S}ingular \textbf{V}alue \textbf{D}ecomposition (HOSVD) of each class.
@@ -230,7 +230,7 @@ In recent years, brain imaging techniques like Positron Emission Tomography (PET
 	 The proposed classifier also outperforms state of the art eMCI classification methods. 
 	 
 	 Viewing each class as a tensor allows us to work with \textit{time} and \textit{region} features separately but simultaneously. This multilinear view
-	  ables us to design a proper dimension reduction relative to the nature of each feature along with a discriminant function based on linear regression \textcolor{red}{on latent space of samples} that uses the test data to enhance the quality of the training set without forcing any a prior knowledge to the classifier, a task which is not possible through well known classifiers like SVM, logistic regression or k-NN. It is also notable that the proposed discriminant function directly works with the $X_i$s as features. Having the FC calculation step omitted in classification not only heavily affects the computational performance of the method, but it also saves us from the troubles of FCs which will be discussed in the next section.   
+	  ables us to design a proper dimension reduction relative to the nature of each feature along with a discriminant function based on linear regression on latent space of samples that uses the test data to enhance the quality of the training set without forcing any a prior knowledge to the classifier, a task which is not possible through well known classifiers like SVM, logistic regression or k-NN. It is also notable that the proposed discriminant function directly works with the $X_i$s as features. Having the FC calculation step omitted in classification not only heavily affects the computational performance of the method, but it also saves us from the troubles of FCs which will be discussed in the next section.   
 	  
 	  To verify our approach, we conduct an extensive experimental study on rs-fMRI data from the
 	  	benchmark dataset ADNI
@@ -281,21 +281,35 @@ In the following we briefely discuss two state of the art eMCI classification te
 \begin{itemize}
 	\item $\mathbf{Kernel Compact SICE(K-SIEC):}$ 
 \end{itemize}
-\textcolor{blue}{This method which belongs to the stationary paradigm was proposed in \cite{r14}. In this method, the SICE matrix is chosen as the FC for each sample, then using the SPD property of this matrix, kernel-PCA is deployed in order to reduce its dimensions.}
-
-The SICE matrix is extracted from the data sample $S$ using the following optimization: 
+SICE matrix have proven itself to be one of the best static functional connectivity models \cite{r15,r60,r61,r62, r63}, which is extracted via the following optimization:
 \begin{align}
 S^* = \operatorname{arg} \max\limits_{S\succ 0} \hspace{3mm} \log \left( \det(S) \right) - \operatorname{tr}(CS) - \lambda \norm{S}_1
 \end{align}
 where $C$ is the sample-based covariance matrix; $\det(·)$, $\operatorname{tr}(·)$,
-and $\norm{.}_1$ denote the determinant, trace, and the sum of the absolute values of the entries of a matrix respectively. 
+and $\norm{.}_1$ denote the determinant, trace, and the sum of the absolute values of the entries of a matrix respectively. Vectorized SICE could directly be used to train a classifier\cite{r19}, however curse of dimensionality arises since the dimensionality of the vector (at the order of $R \times R$ for a network
+with $R$ nodes) is usually much
+larger than the number of training subjects, which is often only tens for each class. In addition this approach have the risk of losing useful information contained in the SICE matrices. As an inverse covariance matrix, an SICE matrix is symmetric positive definite (SPD). This inherent property restricts SICE matrices to a lower dimensional Riemannian manifold rather than the full $R \times R$ dimensional Euclidean space. In the method proposed in \cite{r14}, a kernel-PCA with advanced similarity measures of SPD matrices such as Log-Euclidean distance\cite{r49} or Root Stein divergence\cite{r50} is deployed in order to extract the top $m$ principal components in the feature space. \textcolor{red}{These vectors are then used to train an SVM classifier.} The power of this method resides in massive dimension reduction of SICE, using its SPD property. The performance of this method heavily relies on the choice of sparsity parameter $\lambda$ for SICE calculations and the number of top eigenvectors $m$. 
+
+
+
+ 
+
+
+%\textcolor{blue}{This method which belongs to the stationary paradigm was proposed in \cite{r14}. In this method, the SICE matrix is chosen as the FC for each sample, then using the SPD property of this matrix, kernel-PCA is deployed in order to reduce its dimensions.}
+%
+%The SICE matrix is extracted from the data sample $S$ using the following optimization: 
+%\begin{align}
+%S^* = \operatorname{arg} \max\limits_{S\succ 0} \hspace{3mm} \log \left( \det(S) \right) - \operatorname{tr}(CS) - \lambda \norm{S}_1
+%\end{align}
+%where $C$ is the sample-based covariance matrix; $\det(·)$, $\operatorname{tr}(·)$,
+%and $\norm{.}_1$ denote the determinant, trace, and the sum of the absolute values of the entries of a matrix respectively. 
 %\textcolor{red}{Since the  SICE matrix is in $\mathbb{R}^{R\times R}$}, with $R$ representing the number of ROIs, the obtained matrix is still relatively large. 
 %	Principal Component Analysis(PCA) has proved itself to be one of the most powerful methods of dimension reduction and this method uses Kernel-PCA with a Gaussian kernel in order to extract the key features of SICE.
-In order to reduce the dimensionality of the obtained SICE matrix, Kernel-PCA with a Gaussian kernel is used  to extract the key features.
-\textcolor{red}{Since SICE is an SPD matrix, specific distance functions such as Log-Euclidean distance\cite{r49} or Root Stein divergence\cite{r50} can be used as the distance function in the Gaussian kernel. Analogous to linear PCA, and by defining 
-	$\Phi(\cdot) = Sym^{+}_{d} \mapsto \mathcal{F}$ as the kernel map, 
-	for a given SICE matrix $S$,$\Phi(S)$ can then be projected onto the top $m$ eigenvectors to obtain an $m$-dimensional principal
-	component vector. These vectors are used to train an SVM classifier. The performance of this method heavily relies on the choice of sparsity parameter $\lambda$ and the number of top eigenvectors $m$. }   
+%In order to reduce the dimensionality of the obtained SICE matrix, Kernel-PCA with a Gaussian kernel is used  to extract the key features.
+%\textcolor{red}{Since SICE is an SPD matrix, specific distance functions such as Log-Euclidean distance\cite{r49} or Root Stein divergence\cite{r50} can be used as the distance function in the Gaussian kernel. Analogous to linear PCA, and by defining 
+%	$\Phi(\cdot) = Sym^{+}_{d} \mapsto \mathcal{F}$ as the kernel map, 
+%	for a given SICE matrix $S$,$\Phi(S)$ can then be projected onto the top $m$ eigenvectors to obtain an $m$-dimensional principal
+%	component vector. These vectors are used to train an SVM classifier. The performance of this method heavily relies on the choice of sparsity parameter $\lambda$ and the number of top eigenvectors $m$. }   
 
 \begin{itemize}
 	\item $\mathbf{High Order Networks(HON):}$
@@ -345,14 +359,14 @@ It is noteworthy that non of these techniques consider the multi-linearity natur
 % needed in second column of first page if using \IEEEpubid
 %\IEEEpubidadjcol
 
-\textcolor{red}{All dominant eMCI classification techniques uses the FCs as the input feature of the classifier. As a result, the burden of calculating the FC along with its computational complexity is also added to the classification process.} 
+All dominant eMCI classification techniques uses the FCs as the input feature of the classifier. As a result, the burden of calculating the FC along with its computational complexity is also added to the classification process. 
 In addition, the quality of the obtained FC heavily affects the  classification performance. Moreover, none of these methods  attend  the multi-linear propriety of such data.
 In this section by tensor viewpoint we show that only by one tensor decomposition we could do the following analysis on fMRI data:
 
 \textbullet\ $\mathbf{Classification:}$
-\textcolor{red}{
+
 	Viewing each class as a 3D tensor ables us to separately project each mode into a smaller one, without the necessity of unfolding it into matrices or vectors, and thus preserving the structural integrity of data along with reducing its dimensions. Transferring each sample matrix $X_i\in \mathbb{R}^{T \times R}$ into the new feature space granted by tensor viewpoint, obsoletes the necessity of constructing the FC for each sample by producing a high quality and low-dimensional feature $\bar{X}_i \in \mathbb{R}^{\bar{T} \times \bar{R}}$ in which $\bar{T}$ and $\bar{R}$ are much smaller than $T$ and $R$. This viewpoint also ables us to design a novel discriminant function in which the test data is used in the training process without forcing any apriory knowledge about its label to the classifier, a task which is impossible via the conventional classifiers such as SVM, K-NN or logistic regression.  
-}
+
 
 
 
@@ -362,9 +376,8 @@ In this section by tensor viewpoint we show that only by one tensor decompositio
 %	Since this method directly works on region-time matrices as input features, its computational complexity is more smaller than state of the art methods that use FC matrices as input feature. Also the experimental results confirm the quality of this method in recognition of normal and eMCI data.
 
 \textbullet\ $\mathbf{General~FC~Construction:}$
-\textcolor{red}{
 	Using the components of HOSVD extracted in the previous step, a general FC could be constructed for each class that reveals common patterns  shared among all samples within each class. This technique allows us to discard the role of outliers or noisy samples.  
-}
+
 %By this HOSVD decomposition we	
 %	proposed a novel method that could 
 %	find a general representative FC for eMCI and Normal data. In this method having the FC of all samples is not necessary. 
@@ -405,22 +418,25 @@ U^{(i)},V^{(i)},W^{(i)}
 \end{equation}
 is known as \textbf{H}igher \textbf{O}rder \textbf{S}ingular \textbf{V}alue \textbf{D}ecomposition(HOSVD),
 where orthogonal matrices $U^{(i)}\in \mathbb{R}^{T\times T}, V^{(i)}\in \mathbb{R}^{R\times R} $ and $W^{(i)}\in \mathbb{R}^{S_i\times S_i}$ are known as modes-1,2,3 singular matrices of 
-and $\mathcal{S}^{(i)}$ is the corresponding core tensor \textcolor{red}{Ref?}. \textcolor{red}{ Here $U^{(i)}$ is a base of all mode-$ 1 $ fibers $\mathcal{X}^{(i)}(:,l,k)$
+and $\mathcal{S}^{(i)}$ is the corresponding core tensor \cite{r64}.  Here $U^{(i)}$ is a base of all mode-$ 1 $ fibers $\mathcal{X}^{(i)}(:,l,k)$
 %. Here  $\mathcal{X}^{(i)}(:,l,k)$
-which indicates the behavior of $l$th region of the $k$th sample of the $i$th class in all times.} Also  $V^{(i)}$ is a base of all mode-$ 2 $ fibers $\mathcal{X}(l,:,k)$ which indicates the behavior of all regions of  $l$th  sample of the $i$th class in  the $k$th time.
-\textcolor{olive}{Due to the properties of HOSVD inherited from svd, the first columns of mode-k (k=1,2,3) has more ability in construction of main parts of $k$th fibers, on the other hand, the last columns of  this singular matrix, are corresponding to noise parts of the fibers of the mode \textcolor{red}{ref??}. Therefore, with appropriate values of $k^i_1$ and $k^i_2$ projection of mode-1 and mode-2 fibers into space spanned by  the first $k_1$ and $k_2$ singular vectors of modes-1,2, which  are denoted by  $U^{(i)}_{k^i_1}$ and $V_{k^i_2}^{(i)}$, respectively,
-is a suitable  dimension reduction. This dimensionality reduction could be done as}
+which indicates the behavior of $l$th region of the $k$th sample of the $i$th class in all times. Also  $V^{(i)}$ is a base of all mode-$ 2 $ fibers $\mathcal{X}(l,:,k)$ which indicates the behavior of all regions of  $l$th  sample of the $i$th class in  the $k$th time.
+Due to the properties of HOSVD inherited from svd, the first columns of the $k$th singular matrix ($k = 1,2,3$) has more ability in construction of main parts of $k$th fibers. On the other hand, the last columns of  these singular matrices, have more fluctuations and are usually  associated  with the noisy parts of their corresponding fibers\cite{r64}. 
+Therefore a suitable dimension reduction would be to project the mode-1 and mode-2 fibers into the space spanned by the first $k^i_1$ and $k^i_2$ singular vectors of modes-1,2, which will be denoted by $U^{(i)}_{k^i_1}$ and $V_{k^i_2}^{(i)}$, respectively. This dimension reduction could be done as:
+\textcolor{blue}{Therefore, with appropriate values of $k^i_1$ and $k^i_2$ projection of mode-1 and mode-2 fibers into space spanned by  the first $k_1$ and $k_2$ singular vectors of modes-1,2, which  are denoted by  $U^{(i)}_{k^i_1}$ and $V_{k^i_2}^{(i)}$, respectively,
+	is a suitable  dimension reduction. This dimensionality reduction could be done as}
 \begin{align}
 \label{m1}
 \mathbb{R}^{k_1 \times k_2 \times S_i} \ni  \bar{{\mathcal{X}}}^{(i)} = \left( 
 U^{(i) {\sf {T}}}_{k^i_1}, V_{k^i_2}^{\sf {T}}
 \right)_{1,2}\boldsymbol{\cdot} \mathcal{X}^{(i)}
 \end{align}
-%So, by having mode-2 and mode-2 singular matrices of tensor $\mathcal{X}$, its reduced versin $\overline{\mathcal{X}}$ without folding the data into vecores could be otained.
-\textcolor{olive}{Here it's clear that the reduced version of the $k^{th}$ sample, i.e.,$\overline{\mathcal{X}}(:,:,k)\in \mathbb{R}^{k_1\times k_2}$ could be reduced separately  in each mode without folding. This means that the structure of data is preserved in the reducing process.
-	Base on the properties of the  HOSVD, it could b shown that by small number of $k_1^1, k_2^i$, the reduced data have good reconstruction error. }
+It is clear that this reduction could be done separately on each mode without the need to fold them into lower dimensions. This means that the structural integrity of data is preserved during the dimension reduction process which is a key aspect in our work. It has been shown that even choosing relatively small values for$k_1^1$ and $k_2^i$ would result in a very good reconstruction error.\textcolor{red}{REF NEEDED} 
+\textcolor{blue}{\textcolor{olive}{Here it's clear that the reduced version of the $k^{th}$ sample, i.e.,$\overline{\mathcal{X}}(:,:,k)\in \mathbb{R}^{k_1\times k_2}$ could be reduced separately  in each mode without folding. This means that the structure of data is preserved in the reducing process.
+		Base on the properties of the  HOSVD, it could b shown that by small number of $k_1^1, k_2^i$, the reduced data have good reconstruction error. }
+}
 
-In the following  in spired by the structure of this reduction, we present a tensor based discrimination function.
+In the following  spired by the structure of this reduction, we present a tensor based discriminant function.
 By HOSVD decomposition of
 $\mathcal{X}^{(i)}$ the projected data $\overline{\mathcal{X}}^{(i)}$ in equation \eqref{m1} becomes
 \begin{align}
@@ -446,7 +462,7 @@ W^{(i)}(k,:)
 =& \sum_{k' = 1}^{S_i} W^{(i)}(k,k') \boldsymbol{\cdot} \mathcal{S}^{(i)}(1:k_1^i, 1:k_2^i, k').
 \end{align*}
 This means that each sample in the $i^{th}$ class could be represented as linear combination of the slices  of the tensor $\overline{\mathcal{S}}^{(i)}=\mathcal{S}^{(i)}(1:k_1^i, 1:k_2^i, :)$.
-So if a test data like $X\in \mathbb{R}^{T\times R}$, be in the $i^{th}$ class
+So if a test data like $X\in \mathbb{R}^{T\times R}$ belongs to the $i^{th}$ class
 it's natural to expect that its
 projected version into principle region and times spaces, spanned by $U_{k_1^i},V_{k_2^i}$, i.e,
 \[
@@ -458,12 +474,12 @@ could be approximated well as a linear combination of the slices of the tensor $
 \label{m2}
 Z^{(i)} \approx \sum_{k=1}^{S_i} \lambda_k^i \overline{\mathcal{S}}^{(i)}(:,:,k).
 \end{equation}
-Based on this viewpoint, each test data $X$ could be assigned to a class that its prjected version have the best approximation in the form??. 
-Due to importance of core tensor elements with small indices in reconstruction of the signal part of data in comparison with the last parts,
+Based on this viewpoint, each test data $X$ could be assigned to a class that its prjected version have the best approximation in the form\textcolor{red}{??}. 
+Due to importance of core tensor elements with small indices in reconstruction of the signal part of data in comparison with its last parts,
 the small number $k_3^i< S_i$  of slices $\overline{\mathcal{S}}^{(i)}(:,:,k)$ could be used  in  \eqref{m2}. 
 
 In this viewpoint each test data
-$X$ assignment to the $l^{th}$class, if
+$X$ would be assigned to the $l^{th}$class, if
 \[
 r_{l}=\min_{i=1,2} {r_{i}},
 \]
@@ -483,7 +499,7 @@ The proposed method have an interesting property that  bring us to propose a nov
 quality.
 By the properties of HOSVD, the principle properties of the $i^{th}$ class could be reflected in the  slices of
 $\overline{\mathcal{S}}^{(i)}$. Also, for small indices these Slices have a  better   role in construction of main properties of this class. So the first slices of $\overline{\mathcal{S}}$
-could represent signal parts, while last ones do not this role and sometimes represents the wast parts.
+\textcolor{blue}{could represent signal parts, while last ones do not this role and sometimes represents the wast parts.}
 Now consider the test data $X$ added to data set $\mathcal{X}^{(i)}$ of the $i^{th}$ class. So new data set will be
 $\mathcal{\widetilde{X}}\in \mathbb{R}^{T\times R \times (S_{i}+1)}$. For example
 \begin{eqnarray*}
@@ -543,21 +559,20 @@ As it was mentioned before, one of the main studies associated with rs-fMRI anal
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\textcolor{red}{In this section we show that based on HOSVD decomposition one general functional connectivity matrix could be obtained for each class without obtaining the per-sample FC of all data separately. Here the classification is not our goal, instead  finding a general and representative
-	relation of regions for eMCI and Normal subjects is our demand. This general pattern could be used clinically by  cognitive scientists in order to obtain deeper knowledge about Alzheimer's disease and brain in general.}
+In this section we show that based on HOSVD decomposition one general functional connectivity matrix could be obtained for each class without obtaining the per-sample FC of all data separately. Here the classification is not our goal, instead  finding a general and representative
+	relation of regions for eMCI and Normal subjects is our demand. This general pattern could be used clinically by  cognitive scientists in order to obtain deeper knowledge about Alzheimer's disease and brain in general.
 %
 %As we know in HOSVD,  the singular matrices $U,V,W$, are the bases of time, region and sample receptively.
 % In the previous section by property of these matrices we designed our classification method.  know in this section we show that
 %, the same idea could helps us to define a general FC matrix based on HOSVD decomposition for normal and
 %eMCI data. It should be mentioned that here we did not use the FC of per-samples to construct this general FC matrix.
-\textcolor{red}{As we saw in the previous section, the obtained $U,V,W$ matrices are the basis for time, region and sample respectively. We used these matrices in order to reduce the dimensionality of data and create a discriminant function. In this section we will show that these basis matrices could be reused in order to obtain a general functional connectivity matrix for each class.}   
+As we saw in the previous section, the obtained $U,V,W$ matrices are the basis for time, region and sample respectively. We used these matrices in order to reduce the dimensionality of data and create a discriminant function. In this section we will show that these basis matrices could be reused in order to obtain a general functional connectivity matrix for each class.  
 
-\textcolor{red}{
 	In the $i^{th}$ class which is represented by $\mathcal{X}^{(i)}$, the slice $\mathcal{X}^{(i)}(:,l,:)$ denotes
 	the  behavior of $l^{th}$  region of all samples in all times.    
 	%In tensor  $\mathcal{X}^{(i)}$ of the $l^{th}$ class, the slice $\mathcal{X}^{(i)}(:,l,:)$ denotes
 	%the  behavior of $l^{th}$  region of all samples in all times in the $i^{th}$ class. 
-	This slice could be considered as a feature for the $l^{th}$ region of the $i^{th}$ class so each region is represented as a  Times-sample feature matrix. Viewing each region as a slice would allow us to consider it's behavior in all time points and across all samples, which itself allows us to shed more light on common properties and ignore individual differences that is highly possible due to the presence of noise and outliers.}
+	This slice could be considered as a feature for the $l^{th}$ region of the $i^{th}$ class so each region is represented as a  Times-sample feature matrix. Viewing each region as a slice would allow us to consider it's behavior in all time points and across all samples, which itself allows us to shed more light on common properties and ignore individual differences that is highly possible due to the presence of noise and outliers.
 Thus, by the properties of singular matrices in modes-1,3, and for appropriate values
 $k_1^i,k_3^i$, each region $\mathcal{X}(:,l,:)$ could be reduced in both time and sample features separately
 based on mode-1 and mode-3 truncated singular matrices $U_{k_1^i}^{(i)}$ and $W_{k_3}^{(i)}$
@@ -653,12 +668,11 @@ first ten volumes of each series are discarded for signal equilibrium. Slice tim
 
 \subsection{Classification}
 
-Almost every subject in ADNI dataset has several scans. Usually a random scan data is selected and enters the processing step. This random selection may cause several problems \textcolor{red}{ref}. Since the number of train data is very low, a small perturbation in it could drastically change the set of input parameters in order to achieve the highest prediction accuracy and other classification evaluation methods. Also achieving high quality results with a classifier does not guarantee its effectiveness on other datasets even with fine tuning the parameters since the training set may contain outliers and unidentified corrupted data. 
+Almost every subject in ADNI dataset has several scans. Usually a random scan data is selected and enters the processing step. This random selection may cause several problems. Since the number of train data is very low, a small perturbation in it could drastically change the set of input parameters in order to achieve the highest prediction accuracy and other classification evaluation methods. Also achieving high quality results with a classifier does not guarantee its effectiveness on other datasets even with fine tuning the parameters since the training set may contain outliers and unidentified corrupted data. 
 In order to show that the proposed framework is less sensitive against the choice of different perturbations and is less vulnerable towards the aforementioned issues, we have selected $18$ different perturbations and two test state of the art classification methods on them: \textbf{HON} and \textbf{k-SICE}.   
 To make full use of the limited subjects, a leave-one-out procedure is used for training and test. That is, each sample is reserved for test in turn, while the remaining samples are used for training.
 We have use five
-evaluation measures: accuracy (ACC), sensitivity (SEN), Youden’s index(YI), F-score, and balanced accuracy (BAC).
-\textcolor{red}{Tan Book} 
+evaluation measures: accuracy (ACC), sensitivity (SEN), Youden’s index(YI), F-score, and balanced accuracy (BAC)\cite{r65}.
 
 %The detailed definitions
 %of these seven statistical measures are provided in Table \eqref{Table_1}, where TP, TN, FP, and FN denote the true positive, true negative, false positive, and false negative, respectively, and 
@@ -694,7 +708,7 @@ The highest classification accuracy($86.59\%$) is achieved with the proposed met
 calculated. The std. of accuracy for proposed method is $0.64$ times less than HON and $1.73$ times less than k-SICE method. Similar results also holds for other classification measures.
 \begin{figure*}
 	\centering
-	\includegraphics[width=7in]{images/Final-eps.pdf}
+	\includegraphics[width=6in]{images/Final-eps.pdf}
 	\caption{
 		Comparison of proposed method(Prop) with K-SICE and HON in five different classification evaluation measures along with the standard deviation of each one. As it can be seen, the both the minimum and maximum of the proposed methods in these measurements are higher that the other two. Also the lower std. of our method indicates its stability.   
 	}
@@ -1313,7 +1327,21 @@ The framework proposed in this paper can be easily extended to other studies inv
 			\bibitem{r58}Barttfeld, Pablo, et al. "Signature of consciousness in the dynamics of resting-state brain activity." Proceedings of the National Academy of Sciences 112.3 (2015): 887-892.
 			
 			\bibitem{r59}Zalesky, Andrew, et al. "Time-resolved resting-state brain networks." Proceedings of the National Academy of Sciences 111.28 (2014): 10341-10346.
+			
+			\bibitem{r60}Ahmadi, Soheil, and Mansoor Rezghi. "A novel extension of Generalized Low-Rank Approximation of Matrices based on multiple-pairs of transformations." CoRR (2018).
 				
+			\bibitem{r61}Ng, Bernard, et al. "A novel sparse group Gaussian graphical model for functional connectivity estimation." International Conference on Information Processing in Medical Imaging. Springer, Berlin, Heidelberg, 2013.
+			
+			\bibitem{r62}Colclough, Giles L., et al. "Multi-subject hierarchical inverse covariance modelling improves estimation of functional brain networks." NeuroImage 178 (2018): 370-384.
+			
+		\bibitem{r63}	Foti, Nicholas J., and Emily B. Fox. "Statistical model-based approaches for functional connectivity analysis of neuroimaging data." Current opinion in neurobiology 55 (2019): 48-54.	
+		
+		\bibitem{r64}Rezghi, Mansoor. "A novel fast tensor-based preconditioner for image restoration." IEEE Transactions on Image Processing 26.9 (2017): 4499-4508.
+				
+				
+			\bibitem{r65}Tan, Pang-Ning. Introduction to data mining. Pearson Education India, 2018.
+			
+			
 \end{thebibliography}
 
 \end{document}
