@@ -648,10 +648,12 @@ in which
 %	\bar{\mathcal{C}}^{(i)} = \mathcal{C}(1:k_1^i,:,1:k_3^i).
 %	\]
 The equation \eqref{ok}, shows that the reduced version of each region in the $i^{th}$ class could be
-written as the linear combinations of  mode-2 slices of $\mathcal{C}^{(i)}$. So the coefficients of slices in this linear combination could be considered as a new feature for the $l^{th}$ region of the $i^{th}$ class. Also as we mentioned the first slices are better than the last ones to reflect the principle properties of the data. So for appropriate $k_3^i$ we could select only the first coefficients in \eqref{ok} as  new features for the $l^{th}$ region. Mathematically this means each region  in the $i^{th}$ class could be represented by new feature $V(l,1;k_3^i)\in \mathbb{R}^{k_3^i}$.   
+written as the linear combinations of  mode-2 slices of $\mathcal{C}^{(i)}$. So the coefficients of slices in this linear combination could be considered as a new feature for the $l^{th}$ region of the $i^{th}$ class. Also as we mentioned before, the first slices are better than the last ones to reflect the principle properties of the data. So for appropriate $k_3^i$ we could select only the first coefficients in \eqref{ok} as  new features for the $l^{th}$ region. Mathematically this means each region  in the $i^{th}$ class could be represented by a new feature vector $V(l,1;k_3^i)\in \mathbb{R}^{k_3^i}$.   
 
-\textcolor{olive}{The main benefit of this approach is that each
-	region could be represented only be a vector with size $k_3^i$, instead large feature matrix  time-sample. Now different methods could be deployed in order to find the correlation of reigns based on this new type of feature and clean matrix $V(:,1:k_{3}^i)$ which its rows corresponding to different regions and columns are new features.} Due to the qualities of Sparse Inverse Covariance discussed before, this method is applied to obtained  \textcolor{red}{feature-region} matrix  $V(:,1:k_3^i)^{\sf T}$  in order to find the functional connectivity of the $i^{th}$ class.
+The main benefit of this approach is that each
+	region could be represented only be a vector with size $k_3^i$, instead of a large time-sample matrix. Having each region be represented via a single and \textcolor{red}{low dimensional vector} variety of methods could be deployed in order to construct a general FC for each class. 
+%	correlation of reigns based on this new type of feature and clean matrix $V(:,1:k_{3}^i)$ which its rows corresponding to different regions and columns are new features.} 
+Due to the qualities of SICE, \textcolor{red}{this model} is deployed in order to obtain \textcolor{red}{region-region} matrix  $V(:,1:k_3^i)^{\sf T}$ as the representative of general FC for the $i^{th}$ class.
 %	\begin{figure}[!t]
 %		\centering
 %		\includegraphics[width=3.5in]{images/SVDiff}
@@ -660,7 +662,7 @@ written as the linear combinations of  mode-2 slices of $\mathcal{C}^{(i)}$. So 
 %	\end{figure}
 
 
-As it was discussed before in \eqref{related_works}, there are two types of FC: Dynamic FC and Static FC. Although the obtained FC is an sFC by definition, we argue that the core tensor obtained from HOSVD, which contains the features included in the FC calculation process, has a dynamic structure. The majority of non-stationary methods uses the sliding window technique in order to analyze the BOLD signal in several sessions. The main idea is that the presence of temporal fluctuations in FC within different sessions should be taken into account in order to obtain a better FC.
+%As it was discussed before in \eqref{related_works}, there are two types of FC: Dynamic FC and Static FC. Although the obtained FC is an sFC by definition, we argue that the core tensor obtained from HOSVD, which contains the features included in the FC calculation process, has a dynamic structure. The majority of non-stationary methods uses the sliding window technique in order to analyze the BOLD signal in several sessions. The main idea is that the presence of temporal fluctuations in FC within different sessions should be taken into account in order to obtain a better FC.
 
 \section{EXPERIMENTAL STUDY}
 \subsection{Data Preprocessing and Experimental Settings}
