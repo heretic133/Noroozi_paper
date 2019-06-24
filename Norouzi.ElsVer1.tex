@@ -154,13 +154,18 @@
 \begin{abstract}
 %% Text of abstract
 
-MORE FC !
-Recently machine learning methods had gain lots of publicity among researchers in order to analyze the brain images such as functional Magnetic Resonance Imaging(fMRI) to obtain a better understanding of the brain and its related disease such as Alzheimer's disease. Different methods have been deployed in order to discriminate Alzheimer's disease from normal ones which is a hard task, especially in early stages (eMCI) case. The majority of deployed techniques rely on constructing the functional connectivity (FC) for each person and use the vectorized FC as the input for the classifiers which has two main drawbacks: 1) The need for constructing the FC********The loss of possible valuable structural information in the vectorization step.
-    Considering these problems and based on multidimensional nature the data, we have came up with a novel framework which omits the FC construction part and preserve the structural integrity of data for the classification.
-        The proposed framework uses the High Order Singular Value Decomposition (HOSVD) in order to prune the classes and select the proper basis for each of them.
-This framework also allows us to obtain a general FC pattern for normal and eMCI classes but not a single sample which helps us to shed more lights on the brain abnormalities in the Alzheimers disease at its early stages. 
-        Extensive experiments using the ADNI dataset demonstrate that
-        our proposed framework effectively boosts the fMRI classification performance and reveals novel connectivity patterns in Alzheimer's disease at its early stages.
+Recently machine learning methods had gain lots of publicity among researchers in order to analyze the brain images such as Resting State Functional Magnetic Resonance Imaging(rs-fMRI) to obtain a better understanding of the brain and its related disease such as Alzheimer's disease. 
+Finding the common patterns caused by a brain disorder through analyzing the functional connectivity(FC) network along with discriminating brain diseases from normal controls have traditionally been two main goals in studying rs-fMRI data. The majority of techniques for finding an FC, calculate the FC matrix for each subject and then use simple techniques in order to combine them to obtain a general functional connectivity. The state of the art classification techniques for finding subjects with brain disorders, also rely on calculating an FC for each subject, vectorize them and then feed them to the classifier. Considering these problems and based on multidimensional nature data, we have came up with a novel tensor framework in which the FC calculation for each class is done without the need to construct the FC for each sample, also this framework allows us to reduce the dimensionality, and create a novel discriminant function that avoid vectorization in any step and uses the test data in the training process without forcing any apriory knowledge about its label to the classifier.  
+
+Extensive experiments using the ADNI dataset demonstrate that
+our proposed framework effectively boosts the fMRI classification performance and reveals novel connectivity patterns in Alzheimer's disease at its early stages.
+%
+%Different methods have been deployed in order to discriminate Alzheimer's disease from normal ones which is a hard task, especially in early stages (eMCI) case. The majority of deployed techniques rely on constructing the functional connectivity (FC) for each person and use the vectorized FC as the input for the classifiers which has two main drawbacks: 1) The need for constructing the FC********The loss of possible valuable structural information in the vectorization step.
+%Considering these problems and based on multidimensional nature the data, we have came up with a novel framework which omits the FC construction part and preserve the structural integrity of data for the classification.
+%    The proposed framework uses the High Order Singular Value Decomposition (HOSVD) in order to prune the classes and select the proper basis for each of them.
+%This framework also allows us to obtain a general FC pattern for normal and eMCI classes but not a single sample which helps us to shed more lights on the brain abnormalities in the Alzheimers disease at its early stages. 
+%        Extensive experiments using the ADNI dataset demonstrate that
+%        our proposed framework effectively boosts the fMRI classification performance and reveals novel connectivity patterns in Alzheimer's disease at its early stages.
 \end{abstract}
 
 \begin{keyword}
