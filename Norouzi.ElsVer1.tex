@@ -293,7 +293,7 @@ S^* = \operatorname{arg} \max\limits_{S\succ 0} \hspace{3mm} \log \left( \det(S)
 where $C$ is the sample-based covariance matrix; $\det(·)$, $\operatorname{tr}(·)$,
 and $\norm{.}_1$ denote the determinant, trace, and the sum of the absolute values of the entries of a matrix respectively. Vectorized SICE could directly be used to train a classifier\cite{r19}, however curse of dimensionality arises since the dimensionality of the vector (at the order of $R \times R$ for a network
 with $R$ nodes) is usually much
-larger than the number of training subjects, which is often only tens for each class. In addition this approach have the risk of losing useful information contained in the SICE matrices. As an inverse covariance matrix, an SICE matrix is symmetric positive definite (SPD). This inherent property restricts SICE matrices to a lower dimensional Riemannian manifold rather than the full $R \times R$ dimensional Euclidean space. In the method proposed in \cite{r14}, a kernel-PCA with advanced similarity measures of SPD matrices such as Log-Euclidean distance\cite{r49} or Root Stein divergence\cite{r50} is deployed in order to extract the top $m$ principal components in the feature space. \textcolor{red}{These vectors are then used to train an SVM classifier.} The power of this method resides in massive dimension reduction of SICE, using its SPD property. The performance of this method heavily relies on the choice of sparsity parameter $\lambda$ for SICE calculations and the number of top eigenvectors $m$. 
+larger than the number of training subjects, which is often only tens for each class. In addition this approach have the risk of losing useful information contained in the SICE matrices. As an inverse covariance matrix, an SICE matrix is symmetric positive definite (SPD). This inherent property restricts SICE matrices to a lower dimensional Riemannian manifold rather than the full $R \times R$ dimensional Euclidean space. In the method proposed in \cite{r14}, a kernel-PCA with advanced similarity measures of SPD matrices such as Log-Euclidean distance\cite{r49} or Root Stein divergence\cite{r50} is deployed in order to extract the top $m$ principal components in the feature space. These vectors are then used to train an SVM classifier. The power of this method resides in massive dimension reduction of SICE, using its SPD property. The performance of this method heavily relies on the choice of sparsity parameter $\lambda$ for SICE calculations and the number of top eigenvectors $m$. 
 
 
 
@@ -436,7 +436,7 @@ Therefore a suitable dimension reduction would be to project the mode-1 and mode
 U^{(i) {\sf {T}}}_{k^i_1}, V_{k^i_2}^{\sf {T}}
 \right)_{1,2}\boldsymbol{\cdot} \mathcal{X}^{(i)}
 \end{align}
-It is clear that this reduction could be done separately on each mode without the need to fold any of them. This means that the structural integrity of data is preserved during the dimension reduction process which is a key aspect in our work. It has been shown that even choosing relatively small values for$k_1^1$ and $k_2^i$ would result in a very good reconstruction error.\textcolor{red}{REF NEEDED} 
+It is clear that this reduction could be done separately on each mode without the need to fold any of them. This means that the structural integrity of data is preserved during the dimension reduction process which is a key aspect in our work. It has been shown that even choosing relatively small values for $k_1^1$ and $k_2^i$ would result in a very good reconstruction error\cite{r60}.
 %\textcolor{blue}{\textcolor{olive}{Here it's clear that the reduced version of the $k^{th}$ sample, i.e.,$\overline{\mathcal{X}}(:,:,k)\in \mathbb{R}^{k_1\times k_2}$ could be reduced separately  in each mode without folding. This means that the structure of data is preserved in the reducing process.
 %		Base on the properties of the  HOSVD, it could b shown that by small number of $k_1^1, k_2^i$, the reduced data have good reconstruction error. }
 %}
@@ -656,9 +656,9 @@ The equation \eqref{ok}, shows that the reduced version of each region in the $i
 written as the linear combinations of  mode-2 slices of $\mathcal{C}^{(i)}$. So the coefficients of slices in this linear combination could be considered as a new feature for the $l^{th}$ region of the $i^{th}$ class. Also as we mentioned before, the first slices are better than the last ones to reflect the principle properties of the data. So for appropriate $k_3^i$ we could select only the first coefficients in \eqref{ok} as  new features for the $l^{th}$ region. Mathematically this means each region  in the $i^{th}$ class could be represented by a new feature vector $V(l,1;k_3^i)\in \mathbb{R}^{k_3^i}$.   
 
 The main benefit of this approach is that each
-	region could be represented only be a vector with size $k_3^i$, instead of a large time-sample matrix. Having each region be represented via a single and \textcolor{red}{low dimensional vector} variety of methods could be deployed in order to construct a general FC for each class. 
+	region could be represented only be a vector with size $k_3^i$, instead of a large time-sample matrix. Having each region be represented via a single \textcolor{red}{low dimensional vector} variety of methods such as SICE and other mentioned similarity measures could be deployed in order to construct a general FC for each class. 
 %	correlation of reigns based on this new type of feature and clean matrix $V(:,1:k_{3}^i)$ which its rows corresponding to different regions and columns are new features.} 
-Due to the qualities of SICE, \textcolor{red}{this model} is deployed in order to obtain \textcolor{red}{region-region} matrix  $V(:,1:k_3^i)^{\sf T}$ as the representative of general FC for the $i^{th}$ class.
+%Due to the qualities of SICE, \textcolor{red}{this model} is deployed in order to obtain a generan FC network via input matrix  $V(:,1:k_3^i)^{\sf T}$ for the $i^{th}$ class. as the representative of general FC 
 %	\begin{figure}[!t]
 %		\centering
 %		\includegraphics[width=3.5in]{images/SVDiff}
@@ -799,7 +799,7 @@ Having a huge execution time specially affects the parameter selection for HON, 
 
 
 \subsection{Functional connectivity Network}
-The functional connectivity networks of the Normal and eMCI classes was obtained via proposed method as it is described in \eqref{FC_Construction}.
+\textcolor{red}{The functional connectivity networks of the Normal and eMCI classes was obtained via proposed method as it is described in \eqref{FC_Construction}}. Due to the aforementioned qualities of partial correlation, SICE model is deployed in order to obtain the final FC.  
 In order to better highlight the differences between Normal and eMCI subjects, a difference graph $D$ is constructed by subtracting the Normal FC from the eMCI FC. This graph could be seen in Figure\eqref{g3.3}. 
 The nodes of $D$ shows the ROIs according to the AAL atlas. The size of each node is proportional to its graph clustering coefficient, i.e. the bigger node, demonstrates higher activity in eMCI subjects in the corresponding ROI. 
 Similar to nodes, the size of each edge is also proportional to the correlation between two ROI's. In addition, the edges are also color coded in a way that the green edges shows the positive edges in $D$ and the orange edges shows the negative edges in $D$. In this manner, the green edges demonstrates decreasing in activity between the corresponding nodes in eMCI subjects and vice versa, the orange edges shows increasing activity between corresponding ROIs in the eMCI subjects.   
@@ -1010,7 +1010,8 @@ and Cerebral areas in eMCI patients. Also, the connectivity between Occipital lo
 
 
 \section{Conclusion}
-The majority of classification techniques uses the vectorized version of data as the input of the discriminant function. As the number of the dimensions grows, i.e. when data is naturally a high order tensor, this vectorization become problematic and it would highly affect the  performance. Taking advantage of the techniques designed for the tensors, we have developed a framework for fMRI data analysis in which the following objectives: 
+\textcolor{red}{The majority of classification techniques uses the vectorized version of data as the input of the discriminant function. As the number of the dimensions grows, i.e. when data is naturally a high order tensor, this vectorization become problematic and it would highly affect the }
+ performance. Taking advantage of the techniques designed for the tensors, we have developed a framework for fMRI data analysis in which the following objectives: 
 \begin{enumerate}
 	\item 
 	Classification 
