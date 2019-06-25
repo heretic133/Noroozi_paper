@@ -140,7 +140,7 @@
  \address{Address\fnref{label3}}
  \fntext[label3]{}
 
-\title{fdhfgh}
+\title{Tensor framework for Alzheimer's disease early detection and functional connectivity analysis}
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{<author name>}
@@ -656,7 +656,7 @@ The equation \eqref{ok}, shows that the reduced version of each region in the $i
 written as the linear combinations of  mode-2 slices of $\mathcal{C}^{(i)}$. So the coefficients of slices in this linear combination could be considered as a new feature for the $l^{th}$ region of the $i^{th}$ class. Also as we mentioned before, the first slices are better than the last ones to reflect the principle properties of the data. So for appropriate $k_3^i$ we could select only the first coefficients in \eqref{ok} as  new features for the $l^{th}$ region. Mathematically this means each region  in the $i^{th}$ class could be represented by a new feature vector $V(l,1;k_3^i)\in \mathbb{R}^{k_3^i}$.   
 
 The main benefit of this approach is that each
-	region could be represented only be a vector with size $k_3^i$, instead of a large time-sample matrix. Having each region be represented via a single \textcolor{red}{low dimensional vector} variety of methods such as SICE and other mentioned similarity measures could be deployed in order to construct a general FC for each class. 
+	region could be represented only be a vector with size $k_3^i$, instead of a large time-sample matrix. Having each region be represented via a single low dimensional vector variety of methods such as SICE and other mentioned similarity measures could be deployed in order to construct a general FC for each class. 
 %	correlation of reigns based on this new type of feature and clean matrix $V(:,1:k_{3}^i)$ which its rows corresponding to different regions and columns are new features.} 
 %Due to the qualities of SICE, \textcolor{red}{this model} is deployed in order to obtain a generan FC network via input matrix  $V(:,1:k_3^i)^{\sf T}$ for the $i^{th}$ class. as the representative of general FC 
 %	\begin{figure}[!t]
@@ -799,7 +799,7 @@ Having a huge execution time specially affects the parameter selection for HON, 
 
 
 \subsection{Functional connectivity Network}
-\textcolor{red}{The functional connectivity networks of the Normal and eMCI classes was obtained via proposed method as it is described in \eqref{FC_Construction}}. Due to the aforementioned qualities of partial correlation, SICE model is deployed in order to obtain the final FC.  
+The vector features for both Normal and eMCI classes was obtained via proposed method as it is described in \eqref{FC_Construction}. Due to the aforementioned qualities of partial correlation, SICE is deployed in order to obtain the final FC.  
 In order to better highlight the differences between Normal and eMCI subjects, a difference graph $D$ is constructed by subtracting the Normal FC from the eMCI FC. This graph could be seen in Figure\eqref{g3.3}. 
 The nodes of $D$ shows the ROIs according to the AAL atlas. The size of each node is proportional to its graph clustering coefficient, i.e. the bigger node, demonstrates higher activity in eMCI subjects in the corresponding ROI. 
 Similar to nodes, the size of each edge is also proportional to the correlation between two ROI's. In addition, the edges are also color coded in a way that the green edges shows the positive edges in $D$ and the orange edges shows the negative edges in $D$. In this manner, the green edges demonstrates decreasing in activity between the corresponding nodes in eMCI subjects and vice versa, the orange edges shows increasing activity between corresponding ROIs in the eMCI subjects.   
@@ -1010,15 +1010,14 @@ and Cerebral areas in eMCI patients. Also, the connectivity between Occipital lo
 
 
 \section{Conclusion}
-\textcolor{red}{The majority of classification techniques uses the vectorized version of data as the input of the discriminant function. As the number of the dimensions grows, i.e. when data is naturally a high order tensor, this vectorization become problematic and it would highly affect the }
- performance. Taking advantage of the techniques designed for the tensors, we have developed a framework for fMRI data analysis in which the following objectives: 
+The majority of functional connectivity analysis methods rely on calculating the FC matrix for each individual, then using simple methods to combine them in order to obtain a general FC network for a class. The state of the art classification techniques also uses FC as the representative for each sample. In this paper, based on multilinear nature of data, we have proposed a novel framework in which the general FC is extracted directly from the class data and does not rely on individual FC calculations. This framework also ables us to design a discriminant function that works directly with $Time \times  Region$ samples rather that their FC. The new discriminant function also uses the test data inorder to enhance the training set. The benefits of the proposed method could be summarize as follow: 
 \begin{enumerate}
-	\item 
-	Classification 
-	\item 
-	General Functional Connectivity network
-\end{enumerate}
-are achieved via a singe \textbf{H}igh \textbf{O}rder \textbf{SVD} of the input tensors. 
+	\item Taking advantage of multilinear nature of data.
+	\item Avoid vectorization at any stage
+	\item FC calculation regarding the whole class
+	\item Directly classifying the original $Time \times  Region$ matrix
+	\item Uses test samples to enhance the training set
+\end{enumerate}  
 
 Extensive studies on the rs-fMRI provided by ADNI shows the superiority of the proposed framework in both classification and functional connectivity. The obtained FC network not only acknowledge the previous discovered connections but also reveals new connectivity patterns previously unknown.
 The framework proposed in this paper can be easily extended to other studies involved with high order data.  
