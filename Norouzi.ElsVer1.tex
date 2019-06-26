@@ -691,7 +691,7 @@ first ten volumes of each series are discarded for signal equilibrium. Slice tim
 
 Almost every subject in ADNI dataset has several scans. Usually a random scan data is selected and enters the processing step\cite{12}. This random selection may cause several problems. Since the number of train data is very low, a small alteration in the samples could drastically change the set of input parameters in order to achieve the highest prediction accuracy and other classification evaluation methods. Also achieving high quality results with a classifier does not guarantee its effectiveness on other datasets even with fine tuning the parameters since the training set may contain outliers and unidentified corrupted data.
 
-In order to show that the proposed framework is less sensitive against the choice of different samples of data (i.e. Same patient with different scan) is less vulnerable towards the aforementioned issues, we have selected $18$ different random samples of data and test two state of the art classification methods on them: \textbf{HON} and \textbf{k-SICE}.   
+In order to show that the proposed framework is less sensitive against the choice of different permutations of data (i.e. Same patient with different scan) is less vulnerable towards the aforementioned issues, we have selected $18$ different permutations of data and test two state of the art classification methods on them: \textbf{HON} and \textbf{k-SICE}.   
 To make full use of the limited subjects, a leave-one-out procedure is used for training and test. That is, each sample is reserved for test in turn, while the remaining samples are used for training.
 We have use five
 evaluation measures: accuracy (ACC), sensitivity (SEN), Youden’s index(YI), F-score, and balanced accuracy (BAC)\cite{r65}.
@@ -733,7 +733,7 @@ calculated. The std. of accuracy for proposed method is $0.64$ times less than H
 	\includegraphics[width=6in]{images/Final-eps.pdf}
 	\caption{
 		Comparison of proposed method(Prop) with K-SICE and HON 
-		applied on 18 different samples of data 
+		applied on 18 different dataset permutations 
 		in five different classification evaluation measures.
 		Figures \textit{a} through \textit{e} shows \textit{accuracy}, \textit{F-Score}, \textit{balanced accuracy}, \textit{sensitivity} and \textit{Youden Index} respectively
 		along with the max, min and standard deviation of each one presented at the embedded table (f). 
@@ -742,10 +742,10 @@ calculated. The std. of accuracy for proposed method is $0.64$ times less than H
 \end{figure*}
 
 
-Figure \eqref{g3.2} shows the performance of these three methods in all five measurements. Some statistical information about these plots are also included in the embedded table. As it can bee seen in this figure, similar to the accuracy, the proposed method in overall works much better than FON and k-SICE. For a better Demonstration, table \eqref{AVG} provides the average of several classification measurements scores for all samples of data. 
+Figure \eqref{g3.2} shows the performance of these three methods in all five measurements. Some statistical information about these plots are also included in the embedded table. As it can bee seen in this figure, similar to the accuracy, the proposed method in overall works much better than FON and k-SICE. For a better Demonstration, table \eqref{AVG} provides the average of several classification measurements scores for all dataset permutations. 
 \begin{table}
 	\begin{center}
-		\caption{The Average of Different Classification Measurements in all samples of data in \% }
+		\caption{The Average of Different Classification Measurements in all dataset permutations in \% }
 		%\resizebox{\textwidth}{!}{  
 		\begin{tabular}{@{}c*{6}{c}}
 			\hline\hline
@@ -778,7 +778,7 @@ As it can be seen in this table, the average accuracy of Proposed method which i
 \end{figure*}
 
 \subsubsection{Runtime Comparison}
-One other key features of proposed method is that it works significantly faster that the other two methods. Table \eqref{Time} shows the average elapsed time (Training plus Testing) of each method for all samples of data. These methods were executed in matlab R2017b and carried with an intel Core-i7 processor and $16$GB of RAM. As it can be seen in this table, proposed method is more that $600$ times faster than HON and $20$ times faster that SICE.   
+One other key features of proposed method is that it works significantly faster that the other two methods. Table \eqref{Time} shows the average elapsed time (Training plus Testing) of each method for all data permutations. These methods were executed in matlab R2017b and carried with an intel Core-i7 processor and $16$GB of RAM. As it can be seen in this table, proposed method is more that $600$ times faster than HON and $20$ times faster that SICE.   
 \begin{table}
 	\begin{center}
 		\caption{Elapsed time of the test and train phase in seconds}
