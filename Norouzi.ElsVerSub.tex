@@ -112,7 +112,7 @@
 % \biboptions{}
 
 
-\journal{Nuclear Physics B}
+\journal{}
 \graphicspath{{images/}}
 
 \begin{document}
@@ -130,24 +130,25 @@
 %% use the ead command for the email address,
 %% and the form \ead[url] for the home page:
 %%
- \title{k km kmkmkm\tnoteref{label1}}
- \tnotetext[label1]{}
- \author{Name\corref{cor1}\fnref{label2}}
- \ead{email address}
- \ead[url]{home page}
- \fntext[label2]{}
- \cortext[cor1]{}
- \address{Address\fnref{label3}}
- \fntext[label3]{}
+ %\title{k km kmkmkm\tnoteref{label1}}
+ %\tnotetext[label1]{}
+ \author{Ali Noruzi}
+ \author{Mansoor rezghi\corref{cor1}\fnref{label2}}
+ \ead{Rezghi@modares.ac.ir}
+ %\ead[url]{home page}
+% \fntext[label2]{}
+% \cortext[cor1]{}
+ \address{Department of Computer Science, Tarbiat Modares University, Tehran-Iran\fnref{label3}}
+ %\fntext[label3]{}
 
-\title{Tensor framework for Alzheimer's disease early detection and functional connectivity analysis}
+\title{A Tensor Framework for Alzheimer's Disease early Detection and Functional Connectivity Analysis in Resting State}
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{<author name>}
 %% \address[label1]{<address>}
 %% \address[label2]{<address>}
 
-\author{}
+
 
 \address{}
 
@@ -170,7 +171,7 @@ our proposed framework effectively boosts the fMRI classification performance an
 
 \begin{keyword}
 %% keywords here, in the form: keyword \sep keyword
-
+Tensor Decomposition, fMRI, Functional Connectivity
 %% MSC codes here, in the form: \MSC code \sep code
 %% or \MSC[2008] code \sep code (2000 is the default)
 
@@ -479,7 +480,7 @@ could be approximated well as a linear combination of the slices of the tensor $
 \label{m2}
 Z^{(i)} \approx \sum_{k=1}^{S_i} \lambda_k^i \overline{\mathcal{S}}^{(i)}(:,:,k).
 \end{equation}
-Based on this viewpoint, each test data $X$ could be assigned to a class that its prjected version have the best approximation in the form\textcolor{red}{??}. 
+Based on this viewpoint, each test data $X$ could be assigned to a class that its prjected version have the best approximation in the form \eqref{m2}. 
 Due to importance of core tensor elements with small indices in reconstruction of the signal part of data in comparison with its last parts,
 the small number $k_3^i< S_i$  of slices $\overline{\mathcal{S}}^{(i)}(:,:,k)$ could be used  in  \eqref{m2}. 
 In this viewpoint each test data
@@ -732,7 +733,15 @@ calculated. The std. of accuracy for proposed method is $0.64$ times less than H
 	\centering
 	\includegraphics[width=6in]{images/Final-eps.pdf}
 	\caption{
-		Comparison of proposed method(Prop) with K-SICE and HON in five different classification evaluation measures along with the standard deviation of each one. %As it can be seen, the both the minimum and maximum of the proposed methods in these measurements are higher that the other two. Also the lower std. of our method indicates its stability.   
+% Updated upstream
+		Comparison of proposed method(Prop) with K-SICE and HON 
+		applied on 18 different dataset permutations 
+		in five different classification evaluation measures.
+		Figures \textit{a} through \textit{e} shows \textit{accuracy}, \textit{F-Score}, \textit{balanced accuracy}, \textit{sensitivity} and \textit{Youden Index} respectively
+		along with the max, min and standard deviation of each one presented at the embedded table (f). 
+%=======
+%		Comparison of proposed method(Prop) with K-SICE and HON in five different classification evaluation measures along with the standard deviation of each one. %As it can be seen, the both the minimum and maximum of the proposed methods in these measurements are higher that the other two. Also the lower std. of our method indicates its stability.   
+%>>>>>>> Stashed changes
 	}
 	\label{g3.2}
 \end{figure*}
@@ -1011,15 +1020,15 @@ and Cerebral areas in eMCI patients. Also, the connectivity between Occipital lo
 
 
 \section{Conclusion}
-The majority of functional connectivity analysis methods rely on calculating the FC matrix for each individual, then using simple methods to combine them in order to obtain a general FC network for a class. The state of the art classification techniques also uses FC as the representative for each sample. In this paper, based on multilinear nature of data, we have proposed a novel framework in which the general FC is extracted directly from the class data and does not rely on individual FC calculations. This framework also ables us to design a discriminant function that works directly with $Time \times  Region$ samples rather that their FC. The new discriminant function also uses the test data inorder to enhance the training set. The benefits of the proposed method could be summarize as follow: 
-\begin{enumerate}
-	\item Taking advantage of multilinear nature of data.
-	\item Avoid vectorization at any stage
-	\item FC calculation regarding the whole class
-	\item Directly classifying the original $Time \times  Region$ matrix
-	\item Uses test samples to enhance the training set
-\end{enumerate}  
-
+The majority of functional connectivity analysis methods rely on calculating the FC matrix for each individual, then using simple methods to combine them in order to obtain a general FC network for a class. Also, the state of the art classification techniques  use FC as the representative for each sample. In this paper, based on multilinear nature of data, we have proposed a novel framework in which the general FC is extracted directly from the Time-Region features  and does not rely on individual FC calculations. Also the obtained FC by the proposed method contains some relations that recently  approved 
+experimentally.
+This framework also ables us to design a discriminant function that works directly with $Time \times  Region$ samples rather that their FC. The new discriminant function also uses the test data in order to enhance the training set. The benefits of the proposed method could be summarize as follow: 
+%\begin{enumerate}
+%Taking advantage of multilinear nature of data, Avoid vectorization at any stage, 
+%	\item FC calculation regarding the whole class
+%	\item Directly classifying the original $Time \times  Region$ matrix
+%	\item Uses test samples to enhance the training set
+%\end{enumerate}  
 Extensive studies on the rs-fMRI provided by ADNI shows the superiority of the proposed framework in both classification and functional connectivity. The obtained FC network not only acknowledge the previous discovered connections but also reveals new connectivity patterns previously unknown.
 The framework proposed in this paper can be easily extended to other studies involved with high order data.  
 
