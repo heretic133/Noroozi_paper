@@ -448,8 +448,9 @@
      \let\@oddhead\@empty
      \let\@evenhead\@empty
      \def\@oddfoot{\footnotesize\itshape
-       Preprint submitted to \ifx\@journal\@empty Elsevier
-       \else\@journal\fi\hfill\today}%
+     %  Preprint submitted to \ifx\@journal\@empty Elsevier
+%       \else\@journal\fi\hfill\today
+}%
      \let\@evenfoot\@oddfoot}
 \def\@seccntDot{.}
 \def\@seccntformat#1{\csname the#1\endcsname\@seccntDot\hskip 0.5em}
