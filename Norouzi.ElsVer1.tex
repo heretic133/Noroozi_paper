@@ -209,7 +209,7 @@
 	and functional Magnetic Resonance Imaging (fMRI)\cite{r23} 
 	have been used in the analysis of AD. Due to the high spatial resolution and relatively lower costs, fMRI is vastly used among researchers in order to monitor brain activities especially in AD and all its stages in which detecting abnormalities within small brain regions is essential \cite{r04}. 
 	An fMRI sample is naturally a 4D tensor consisting of 3D voxels moving in time, and each voxel contains an intensity value that is proportional to the strength of the Blood Oxygenation Level Dependent(BOLD) signal, which is a measure of the changes in blood flow, to estimate the activity of different brain regions\cite{r07}.
-	Resting-state fMRI(rs-fMRI) is an fMRI technique in which the patient is asked to rest during the whole scan, focuses on the low-frequency $\left( < 0.1 Hz \right)$  oscillations of BOLD signal, which presents the underlying neuronal activation patterns of brain regions[8]–[10]. rs-fMRI is usually used in order to analyze brain diseases like AD or Autism\cite{r33,r34}.
+	Resting-state fMRI(rs-fMRI) is an fMRI technique in which the patient is asked to rest during the whole scan, focuses on the low-frequency $\left( < 0.1 Hz \right)$  oscillations of BOLD signal, which presents the underlying neuronal activation patterns of brain regions. rs-fMRI is usually used in order to analyze brain diseases like AD or Autism\cite{r33,r34}.
 	%
 	%Since the number of voxels within a single full scan is high 
 	%($5000$ up to roughly $200,000$[ref(Definingnodes)]) and they form strong spatial relations, 
@@ -324,7 +324,7 @@
 	%	component vector. These vectors are used to train an SVM classifier. The performance of this method heavily relies on the choice of sparsity parameter $\lambda$ and the number of top eigenvectors $m$. }   
 	
 	$\mathbf{High~Order~Networks(HON):}$
-	\textcolor{red}{**}This method which is proposed in ?? belongs to non-stationary paradigm uses so called
+	This method which is proposed in \cite{r63.5}, belongs to non-stationary paradigm and uses the so called
 	High Order Networks as features for classification purposes. It uses the sliding window technique  in order to split the time-series into smaller pieces and then find the relation between them\cite{r51,r52}. Let $x_{i}^{(l)}(k) \in \mathbb{R}^N$ denotes the $k$-th segment
 	of the $i$-th region in the $l$-th sample. For each sample a network with  nodes $x_{i}^{(l)}(k)$ could be constructed which its edge weights are obtained as
 	\[
@@ -344,7 +344,7 @@
 	C_{ij}^{(l)}(1), C_{ij}^{(l)}(2), \cdots , C_{ij}^{(K)}(1) 
 	\right] \in \mathbb{R}^K
 	\]
-	represents the similarity of the $i$th and $j$-th, regions of the $l$-th sample in all segments. In ??, for each  $l$ by considering $y_{ij}^{(l)}$ as nodes of a networks with weights 
+	represents the similarity of the $i$th and $j$-th, regions of the $l$-th sample in all segments. for each  $l$ by considering $y_{ij}^{(l)}$ as nodes of a networks with weights 
 	\[
 	H_{ij,pq}^{(l)} = \operatorname{corr} \left(
 	y_{ij}^{(l)},y_{pq}^{(l)}
@@ -400,7 +400,7 @@
 	% would be the Curse of dimensionality that appears when the proportion of the number of features to the number of samples is relatively high (which results in over-fitting). 
 	%Also in this view different kind of features(like \emph{Time} and \emph{region} in our case) would be mixed together which may discard some important information within these features. The second approach is to deploy multilinear methods. 
 	%This vectorizatin forthermore inceasing the computatina coplexity, mixed the metioed two type of vectors. 
-	Recently multilinear dimension reduction methods like MPCA, GLRAM  have been proposed that
+	Recently multilinear dimension reduction methods like MPCA, GLRAM \textcolor{red}{REF}  have been proposed that
 	could work with multidimensional data, without folding them into vectors.
 	In these methods, there is a freedom to select specific reduction for each kind of feature. In this section, we will use a well-known tensor decomposition named HOSVD for both dimension reduction and classification of fMRI data.
 	
@@ -675,12 +675,12 @@
 	$64 \times 64$
 	with voxel size of
 	$ 3.31 \times  3.31 \times 3.31$
-	$mm^3$ . The preprocessing is carried out using SPM12 and DPARSFA [40]. The
-	first ten volumes of each series are discarded for signal equilibrium. Slice timing, head motion correction, and MNI space normalization are performed. Participants with too much head motion are excluded. The normalized brain images are warped into automatic anatomical labeling (AAL) [41] atlas to obtain $116$ ROIs as nodes. By following common practice [15]–[17], the ROI mean time series are extracted by averaging the time series from all voxels within each ROI and then bandpass filtered to obtain multiple sub-bands as in [17]. 
+	$mm^3$ . The preprocessing is carried out using SPM12 and DPARSFA \cite{r64.5}. The
+	first ten volumes of each series are discarded for signal equilibrium. Slice timing, head motion correction, and MNI space normalization are performed. Participants with too much head motion are excluded. The normalized brain images are warped into automatic anatomical labeling (AAL) \cite{r64.7} atlas to obtain $116$ ROIs as nodes. By following common practice \cite{n1, n2, n3}, the ROI mean time series are extracted by averaging the time series from all voxels within each ROI and then bandpass filtered to obtain multiple sub-bands as in \cite{n3}. 
 	
 	\subsection{Classification}
 	
-	Almost every subject in ADNI dataset has several scans. Usually, random scan data is selected and enters the processing step\cite{12}. This random selection may cause several problems. Since the number of train data is very low, a small alteration in the samples could drastically change the set of input parameters in order to achieve the highest prediction accuracy and other classification evaluation methods. Also achieving high-quality results with a classifier does not guarantee its effectiveness on other datasets even with fine-tuning the parameters since the training set may contain outliers and unidentified corrupted data.
+	Almost every subject in ADNI dataset has several scans. Usually, random scan data is selected and enters the processing step\cite{r14}. This random selection may cause several problems. Since the number of train data is very low, a small alteration in the samples could drastically change the set of input parameters in order to achieve the highest prediction accuracy and other classification evaluation methods. Also achieving high-quality results with a classifier does not guarantee its effectiveness on other datasets even with fine-tuning the parameters since the training set may contain outliers and unidentified corrupted data.
 	
 	In order to show that the proposed framework is less sensitive against the choice of different permutations of data (i.e. Same patient with the different scan) is less vulnerable towards the aforementioned issues, we have selected $18$ different permutations of data and test two state of the art classification methods on them: \textbf{HON} and \textbf{k-SICE}.   
 	To make full use of the limited subjects, a leave-one-out procedure is used for training and test. That is, each sample is reserved for the test in turn, while the remaining samples are used for training.
@@ -803,7 +803,7 @@
 	The nodes of $D$ shows the ROIs according to the AAL atlas. The size of each node is proportional to its graph clustering coefficient, i.e. the bigger node demonstrates higher activity in eMCI subjects in the corresponding ROI. 
 	Similar to nodes, the size of each edge is also proportional to the correlation between two ROI's. In addition, the edges are also color-coded in a way that the green edges show the positive edges in $D$ and the orange edges shows the negative edges in $D$. In this manner, the green edges demonstrate decreasing in activity between the corresponding nodes in eMCI subjects and vice versa, the orange edges shows increasing activity between corresponding ROIs in the eMCI subjects.   
 	
-	As it can be seen in the difference graph, the big nodes i.e. ROIs with higher activities does not necessarily establish strong connections with the other nodes. As an obvious example, higher activities in Lingual gyrus(ROI index: 47,48)\cite{r24,r25}, Calcarine sulcus(ROI index: 43, 44)\cite{r26,r27}, Supplementary motor area(ROI index: 19,20)\cite{r27,r28} and Temporal\_mid\_L(ROI index: 85)\cite{r29} are easily detectable. The majority of ROIs located in frontal lobe also shows rather high activities comparing to normal subjects\cite{r30,r04}.
+	As it can be seen in the difference graph, the big nodes i.e. ROIs with higher activities does not necessarily establish strong connections with the other nodes. As an obvious example, higher activities in Lingual gyrus(ROI index: 47,48)\cite{r25}, Calcarine sulcus(ROI index: 43, 44)\cite{r26,r27}, Supplementary motor area(ROI index: 19,20)\cite{r27,r28} and Temporal\_mid\_L(ROI index: 85)\cite{r29} are easily detectable. The majority of ROIs located in frontal lobe also shows rather high activities comparing to normal subjects\cite{r30,r04}.
 	
 	Similar to the nodes, the strong edge between two ROIs does not necessarily require the nodes to be highly active in eMCI. Although a strong edge does indicate high activities and functional connectivity between the two corresponding ROIs. The difference Graph shows a significant increase in connectivity between 
 	Rectus(ROI index: 28, 27 in Frontal lobe) and 
@@ -1199,8 +1199,18 @@
 		\bibitem{r03}
 		Musha, Toshimitsu, et al. "EEG markers for characterizing anomalous activities of cerebral neurons in NAT (neuronal activity topography) method." IEEE Transactions on Biomedical Engineering 60.8 (2013): 2332-2338.
 		
-		\bibitem{r04}
-		Gould, R. L., et al. "Brain mechanisms of successful compensation during learning in Alzheimer disease." Neurology 67.6 (2006): 1011-1017.
+		\bibitem{r21}
+		Nordberg, Agneta. "PET imaging of amyloid in Alzheimer's disease." The lancet neurology 3.9 (2004): 519-527.
+		
+		\bibitem{r22}
+		Jeong, Jaeseung. "EEG dynamics in patients with Alzheimer's disease." Clinical neurophysiology 115.7 (2004): 1490-1505.
+		
+		\bibitem{r23}Golby, Alexandra, et al. "Memory encoding in Alzheimer's disease: an fMRI study of explicit and implicit memory." Brain 128.4 (2005): 773-787.
+		
+		
+		
+%		\bibitem{r04}
+%		Gould, R. L., et al. "Brain mechanisms of successful compensation during learning in Alzheimer disease." Neurology 67.6 (2006): 1011-1017.
 		
 		\bibitem{r04}Dennis, Emily L., and Paul M. Thompson. "Functional brain connectivity using fMRI in aging and Alzheimer’s disease." Neuropsychology review 24.1 (2014): 49-62.
 		
@@ -1215,14 +1225,47 @@
 		compensating eld inhomogeneities in magnetic resonance
 		studies. US Patent No. 8035387, 2011.
 		
+			\bibitem{r33}N. Leonardi et al., “Principal components of functional connectivity: A
+		new approach to study dynamic brain connectivity during rest,” NeuroImage,
+		vol. 83, pp. 937–950, 2013.
+		
+		\bibitem{r34}Cherkassky, Vladimir L., et al. "Functional connectivity in a baseline resting-state network in autism." Neuroreport 17.16 (2006): 1687-1690.
+		
 		%		\bibitem{r08}
 		%		Zhang, Xiaowei, et al. "Resting-state whole-brain functional connectivity networks for mci classification using l2-regularized logistic regression." IEEE transactions on nanobioscience 14.2 (2015): 237-247.
 		
 		\bibitem{r09}
 		Stanley, Matthew Lawrence, et al. "Defining nodes in complex brain networks." Frontiers in computational neuroscience 7 (2013): 169.
 		
+		
+		\bibitem{r35}Du, Yuhui, Zening Fu, and Vince D. Calhoun. "Classification and prediction of brain disorders using functional connectivity: promising but challenging." Frontiers in neuroscience 12 (2018).
+		
+		\bibitem{r36}de Vos, Frank, et al. "A comprehensive analysis of resting state fMRI measures to classify individual patients with Alzheimer's disease." Neuroimage 167 (2018): 62-72.
+		
+		
+			\bibitem{r37}Cuingnet, Rémi, et al. "Automatic classification of patients with Alzheimer's disease from structural MRI: a comparison of ten methods using the ADNI database." neuroimage 56.2 (2011): 766-781.
+		
+		
+		\bibitem{r38}Friston, Karl J. "Functional and effective connectivity: a review." Brain connectivity 1.1 (2011): 13-36.
+		
+		
+		\bibitem{r55}Leonardi, Nora, et al. "Principal components of functional connectivity: a new approach to study dynamic brain connectivity during rest." NeuroImage 83 (2013): 937-950.
+		
+		\bibitem{r53}Supekar, Kaustubh, et al. "Network analysis of intrinsic functional brain connectivity in Alzheimer's disease." PLoS computational biology 4.6 (2008): e1000100.
+		
+		\bibitem{r54}Contreras, Joey A., et al. "Resting state network modularity along the prodromal late onset Alzheimer's disease continuum." NeuroImage: Clinical 22 (2019): 101687.
+		
+		\bibitem{r60}Ahmadi, Soheil, and Mansoor Rezghi. "A novel extension of Generalized Low-Rank Approximation of Matrices based on multiple-pairs of transformations." CoRR (2018).
+		
+		
 		\bibitem{r10}
 		Jie, Biao, et al. "Integration of network topological and connectivity properties for neuroimaging classification." IEEE transactions on biomedical engineering 61.2 (2014): 576-589.
+		
+		
+	
+		
+		
+	
 		
 		\bibitem{r11}
 		Wee, Chong-Yaw, et al. "Resting-state multi-spectrum functional connectivity networks for identification of MCI patients." PloS one 7.5 (2012): e37828.
@@ -1230,17 +1273,81 @@
 		\bibitem{r12}
 		Tibshirani, Robert, et al. "Sparsity and smoothness via the fused lasso." Journal of the Royal Statistical Society: Series B (Statistical Methodology) 67.1 (2005): 91-108.
 		
+		
+		
 		\bibitem{r13}
 		Wright, John, et al. "Robust face recognition via sparse representation." IEEE transactions on pattern analysis and machine intelligence 31.2 (2009): 210-227.
-		
-		\bibitem{r14}
-		Zhang, Jianjia, et al. "Functional brain network classification with compact representation of SICE matrices." IEEE Transactions on Biomedical Engineering 62.6 (2015): 1623-1634.
 		
 		\bibitem{r15}
 		Huang, Shuai, et al. "Learning brain connectivity of Alzheimer's disease by sparse inverse covariance estimation." NeuroImage 50.3 (2010): 935-949.
 		
+		
 		\bibitem{r16}
 		Allen, Elena A., et al. "Tracking whole-brain connectivity dynamics in the resting state." Cerebral cortex 24.3 (2014): 663-676.
+		
+		\bibitem{r19}
+		Leonardi, Nora, et al. "Principal components of functional connectivity: a new approach to study dynamic brain connectivity during rest." NeuroImage 83 (2013): 937-950.
+		
+		\bibitem{r56}Leonardi, Nora, and Dimitri Van De Ville. "On spurious and real fluctuations of dynamic functional connectivity during rest." Neuroimage 104 (2015): 430-436.
+		
+		
+		\bibitem{r58}Barttfeld, Pablo, et al. "Signature of consciousness in the dynamics of resting-state brain activity." Proceedings of the National Academy of Sciences 112.3 (2015): 887-892.
+		
+		\bibitem{r59}Zalesky, Andrew, et al. "Time-resolved resting-state brain networks." Proceedings of the National Academy of Sciences 111.28 (2014): 10341-10346.
+		
+			\bibitem{r57}
+		Hindriks, Rikkert, et al. "Can sliding-window correlations reveal dynamic functional connectivity in resting-state fMRI?." Neuroimage 127 (2016): 242-256.
+		
+		\bibitem{r61}Ng, Bernard, et al. "A novel sparse group Gaussian graphical model for functional connectivity estimation." International Conference on Information Processing in Medical Imaging. Springer, Berlin, Heidelberg, 2013.
+		
+		
+		
+		\bibitem{r62}Colclough, Giles L., et al. "Multi-subject hierarchical inverse covariance modelling improves estimation of functional brain networks." NeuroImage 178 (2018): 370-384.
+		
+		\bibitem{r63}	Foti, Nicholas J., and Emily B. Fox. "Statistical model-based approaches for functional connectivity analysis of neuroimaging data." Current opinion in neurobiology 55 (2019): 48-54.	
+		
+		
+		
+		\bibitem{r14}
+		Zhang, Jianjia, et al. "Functional brain network classification with compact representation of SICE matrices." IEEE Transactions on Biomedical Engineering 62.6 (2015): 1623-1634.
+		
+		
+		
+		
+		\bibitem{r49}V.Arsigny et al.,. (2006). Log-euclidean metrics for fast and simple calculus
+		on diffusion tensors. Magn. Reson. Med.. [Online]. 56(2), pp. 411–421.
+		Available: http://dx.doi.org/10.1002/mrm.20965
+		
+		\bibitem{r50}S. Sra, “A new metric on the manifold of kernel matrices with application
+		to matrix geometric mean,” in Advances in Neural Information Processing
+		Systems 25, F. Pereira, C. J. C. Burges, L. Bottou, K. Q.Weinberger, Eds.,
+		New York, NY: Curran Associates, Inc., 2012, pp. 144–152.
+		
+		\bibitem{r63.5}Chen, Xiaobo, et al. "High‐order resting‐state functional connectivity network for MCI classification." Human brain mapping 37.9 (2016): 3282-3296.
+		
+		\bibitem{r64}Rezghi, Mansoor. "A novel fast tensor-based preconditioner for image restoration." IEEE Transactions on Image Processing 26.9 (2017): 4499-4508.
+		
+		
+		\bibitem{r64.5}Yan, Chaogan, and Yufeng Zang. "DPARSF: a MATLAB toolbox for" pipeline" data analysis of resting-state fMRI." Frontiers in systems neuroscience 4 (2010): 13.
+		
+		
+		\bibitem{r64.7}Tzourio-Mazoyer, Nathalie, et al. "Automated anatomical labeling of activations in SPM using a macroscopic anatomical parcellation of the MNI MRI single-subject brain." Neuroimage 15.1 (2002): 273-289.
+		
+		
+		\bibitem{n1}S. M. Smith et al., “Functional connectomics from resting-state fMRI,”
+		Trends Cognit. Sci., vol. 17, no. 12, pp. 666–682, 2013.
+		
+		\bibitem{n2}N. Leonardi et al., “Principal components of functional connectivity: A
+		new approach to study dynamic brain connectivity during rest,” NeuroImage,
+		vol. 83, pp. 937–950, 2013.
+		
+		\bibitem{n3}C.-Y. Wee et al., “Constrained sparse functional connectivity networks
+		for MCI classification,” in Proc. Med. Image Comput. Comput.-Assisted
+		Intervention Conf., 2012, pp. 212–219.
+		
+		\bibitem{r65}Tan, Pang-Ning. Introduction to data mining. Pearson Education India, 2018.
+		
+		%%%*/*/*/*/*/*/*/*/*/ HERE HRRE
 		
 		%		\bibitem{r17}
 		%		Damaraju, Eswar, et al. "Dynamic functional connectivity analysis reveals transient states of dysconnectivity in schizophrenia." NeuroImage: Clinical 5 (2014): 298-308.
@@ -1248,22 +1355,12 @@
 		%		\bibitem{r18}
 		%		Hutchison, R. Matthew, et al. "Dynamic functional connectivity: promise, issues, and interpretations." Neuroimage 80 (2013): 360-378.
 		
-		\bibitem{r19}
-		Leonardi, Nora, et al. "Principal components of functional connectivity: a new approach to study dynamic brain connectivity during rest." NeuroImage 83 (2013): 937-950.
+		
 		
 		%		\bibitem{r20}
 		%		Leonardi, Nora, et al. "Principal components of functional connectivity: a new approach to study dynamic brain connectivity during rest." NeuroImage 83 (2013): 937-950.
 		
-		\bibitem{r21}
-		Nordberg, Agneta. "PET imaging of amyloid in Alzheimer's disease." The lancet neurology 3.9 (2004): 519-527.
 		
-		\bibitem{r22}
-		Jeong, Jaeseung. "EEG dynamics in patients with Alzheimer's disease." Clinical neurophysiology 115.7 (2004): 1490-1505.
-		
-		\bibitem{r23}
-		Jeong, Jaeseung. "EEG dynamics in patients with Alzheimer's disease." Clinical neurophysiology 115.7 (2004): 1490-1505.
-		
-		\bibitem{r24}Golby, Alexandra, et al. "Memory encoding in Alzheimer's disease: an fMRI study of explicit and implicit memory." Brain 128.4 (2005): 773-787.
 		
 		\bibitem{r25}He, Yong, et al. "Regional coherence changes in the early stages of Alzheimer’s disease: a combined structural and resting-state functional MRI study." Neuroimage 35.2 (2007): 488-500.
 		
@@ -1282,21 +1379,15 @@
 		
 		\bibitem{r32}Jacobs, Heidi IL, et al. "The cerebellum in Alzheimer’s disease: evaluating its role in cognitive decline." Brain 141.1 (2017): 37-47.
 		
-		\bibitem{r33}N. Leonardi et al., “Principal components of functional connectivity: A
-		new approach to study dynamic brain connectivity during rest,” NeuroImage,
-		vol. 83, pp. 937–950, 2013.
-		
-		\bibitem{r34}Cherkassky, Vladimir L., et al. "Functional connectivity in a baseline resting-state network in autism." Neuroreport 17.16 (2006): 1687-1690.
+	
 		
 		
 		
-		\bibitem{r35}Du, Yuhui, Zening Fu, and Vince D. Calhoun. "Classification and prediction of brain disorders using functional connectivity: promising but challenging." Frontiers in neuroscience 12 (2018).
 		
-		\bibitem{r36}de Vos, Frank, et al. "A comprehensive analysis of resting state fMRI measures to classify individual patients with Alzheimer's disease." Neuroimage 167 (2018): 62-72.
 		
-		\bibitem{r37}Cuingnet, Rémi, et al. "Automatic classification of patients with Alzheimer's disease from structural MRI: a comparison of ten methods using the ADNI database." neuroimage 56.2 (2011): 766-781.
 		
-		\bibitem{r38}Friston, Karl J. "Functional and effective connectivity: a review." Brain connectivity 1.1 (2011): 13-36.
+		
+		
 		
 		%		\bibitem{r39}Jones, David T., et al. "Non-stationarity in the “resting brain’s” modular architecture." PloS one 7.6 (2012): e39731.
 		
@@ -1306,7 +1397,7 @@
 		
 		\bibitem{r42}Perani, Daniela, et al. "The impact of bilingualism on brain reserve and metabolic connectivity in Alzheimer's dementia." Proceedings of the National Academy of Sciences 114.7 (2017): 1690-1695.
 		
-		\bibitem{r43}\textcolor{red}{Subcortical} volume changes in dementia with Lewy bodies and Alzheimer's disease. A comparison with healthy aging
+		\bibitem{r43}Watson, Rosie, et al. "Subcortical volume changes in dementia with Lewy bodies and Alzheimer's disease. A comparison with healthy aging." International psychogeriatrics 28.4 (2016): 529-536.
 		
 		\bibitem{r44}Cai, Suping, et al. "Changes in thalamic connectivity in the early and late stages of amnestic mild cognitive impairment: a resting-state functional magnetic resonance study from ADNI." PloS one 10.2 (2015): e0115573.
 		
@@ -1318,14 +1409,6 @@
 		
 		\bibitem{r48}Zhang, Daoqiang, et al. "Multimodal classification of Alzheimer's disease and mild cognitive impairment." Neuroimage 55.3 (2011): 856-867.
 		
-		\bibitem{r49}V.Arsigny et al.,. (2006). Log-euclidean metrics for fast and simple calculus
-		on diffusion tensors. Magn. Reson. Med.. [Online]. 56(2), pp. 411–421.
-		Available: http://dx.doi.org/10.1002/mrm.20965
-		
-		\bibitem{r50}S. Sra, “A new metric on the manifold of kernel matrices with application
-		to matrix geometric mean,” in Advances in Neural Information Processing
-		Systems 25, F. Pereira, C. J. C. Burges, L. Bottou, K. Q.Weinberger, Eds.,
-		New York, NY: Curran Associates, Inc., 2012, pp. 144–152.
 		
 		\bibitem{r51}Allen, Elena A., et al. "Tracking whole-brain connectivity dynamics in the resting state." Cerebral cortex 24.3 (2014): 663-676.
 		
@@ -1333,33 +1416,22 @@
 		
 		\bibitem{r52}Handwerker, Daniel A., et al. "Periodic changes in fMRI connectivity." Neuroimage 63.3 (2012): 1712-1719.
 		
-		\bibitem{r53}Supekar, Kaustubh, et al. "Network analysis of intrinsic functional brain connectivity in Alzheimer's disease." PLoS computational biology 4.6 (2008): e1000100.
-		
-		\bibitem{r54}Contreras, Joey A., et al. "Resting state network modularity along the prodromal late onset Alzheimer's disease continuum." NeuroImage: Clinical 22 (2019): 101687.
-		
-		\bibitem{r55}Leonardi, Nora, et al. "Principal components of functional connectivity: a new approach to study dynamic brain connectivity during rest." NeuroImage 83 (2013): 937-950.
-		
-		\bibitem{r56}Leonardi, Nora, and Dimitri Van De Ville. "On spurious and real fluctuations of dynamic functional connectivity during rest." Neuroimage 104 (2015): 430-436.
-		
-		\bibitem{r57}
-		Hindriks, Rikkert, et al. "Can sliding-window correlations reveal dynamic functional connectivity in resting-state fMRI?." Neuroimage 127 (2016): 242-256.
-		
-		\bibitem{r58}Barttfeld, Pablo, et al. "Signature of consciousness in the dynamics of resting-state brain activity." Proceedings of the National Academy of Sciences 112.3 (2015): 887-892.
-		
-		\bibitem{r59}Zalesky, Andrew, et al. "Time-resolved resting-state brain networks." Proceedings of the National Academy of Sciences 111.28 (2014): 10341-10346.
-		
-		\bibitem{r60}Ahmadi, Soheil, and Mansoor Rezghi. "A novel extension of Generalized Low-Rank Approximation of Matrices based on multiple-pairs of transformations." CoRR (2018).
-		
-		\bibitem{r61}Ng, Bernard, et al. "A novel sparse group Gaussian graphical model for functional connectivity estimation." International Conference on Information Processing in Medical Imaging. Springer, Berlin, Heidelberg, 2013.
-		
-		\bibitem{r62}Colclough, Giles L., et al. "Multi-subject hierarchical inverse covariance modelling improves estimation of functional brain networks." NeuroImage 178 (2018): 370-384.
-		
-		\bibitem{r63}	Foti, Nicholas J., and Emily B. Fox. "Statistical model-based approaches for functional connectivity analysis of neuroimaging data." Current opinion in neurobiology 55 (2019): 48-54.	
-		
-		\bibitem{r64}Rezghi, Mansoor. "A novel fast tensor-based preconditioner for image restoration." IEEE Transactions on Image Processing 26.9 (2017): 4499-4508.
 		
 		
-		\bibitem{r65}Tan, Pang-Ning. Introduction to data mining. Pearson Education India, 2018.
+		
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 	\end{thebibliography}
