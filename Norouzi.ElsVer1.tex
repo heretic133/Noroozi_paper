@@ -325,7 +325,7 @@
 	
 	$\mathbf{High~Order~Networks(HON):}$
 	This method which is proposed in \cite{r63.5}, belongs to non-stationary paradigm and uses the so called
-	High Order Networks as features for classification purposes. It uses the sliding window technique  in order to split the time-series into smaller pieces and then find the relation between them\cite{r51,r52}. Let $x_{i}^{(l)}(k) \in \mathbb{R}^N$ denotes the $k$-th segment
+	High Order Networks as features for classification purposes. It uses the sliding window technique  in order to split the time-series into smaller pieces and then find the relation between them\cite{r51,r51.5,r52}. Let $x_{i}^{(l)}(k) \in \mathbb{R}^N$ denotes the $k$-th segment
 	of the $i$-th region in the $l$-th sample. For each sample a network with  nodes $x_{i}^{(l)}(k)$ could be constructed which its edge weights are obtained as
 	\[
 	C_{ij}^{(l)}(k) = \operatorname{corr}\left(x_{i}^{(l)}(k),x_{j}^{(l)}(k).
@@ -400,7 +400,7 @@
 	% would be the Curse of dimensionality that appears when the proportion of the number of features to the number of samples is relatively high (which results in over-fitting). 
 	%Also in this view different kind of features(like \emph{Time} and \emph{region} in our case) would be mixed together which may discard some important information within these features. The second approach is to deploy multilinear methods. 
 	%This vectorizatin forthermore inceasing the computatina coplexity, mixed the metioed two type of vectors. 
-	Recently multilinear dimension reduction methods like MPCA, GLRAM \textcolor{red}{REF}  have been proposed that
+	Recently multilinear dimension reduction methods like MPCA, GLRAM \cite{r60,GLRAM}  have been proposed that
 	could work with multidimensional data, without folding them into vectors.
 	In these methods, there is a freedom to select specific reduction for each kind of feature. In this section, we will use a well-known tensor decomposition named HOSVD for both dimension reduction and classification of fMRI data.
 	
@@ -1325,6 +1325,17 @@
 		
 		\bibitem{r63.5}Chen, Xiaobo, et al. "High‐order resting‐state functional connectivity network for MCI classification." Human brain mapping 37.9 (2016): 3282-3296.
 		
+		\bibitem{r51}Allen, Elena A., et al. "Tracking whole-brain connectivity dynamics in the resting state." Cerebral cortex 24.3 (2014): 663-676.
+		
+		\bibitem{r51.5}Chang, Catie, and Gary H. Glover. "Time–frequency dynamics of resting-state brain connectivity measured with fMRI." Neuroimage 50.1 (2010): 81-98.
+		
+		\bibitem{r52}Handwerker, Daniel A., et al. "Periodic changes in fMRI connectivity." Neuroimage 63.3 (2012): 1712-1719.
+		
+		
+		\bibitem{GLRAM}Ye, Jieping. "Generalized low rank approximations of matrices." Machine Learning 61.1-3 (2005): 167-191.
+		
+	
+		
 		\bibitem{r64}Rezghi, Mansoor. "A novel fast tensor-based preconditioner for image restoration." IEEE Transactions on Image Processing 26.9 (2017): 4499-4508.
 		
 		
@@ -1377,7 +1388,7 @@
 		\bibitem{r30}Salvatore, Christian, et al. "Magnetic resonance imaging biomarkers for the early diagnosis of Alzheimer's disease: a machine learning approach." Frontiers in neuroscience 9 (2015): 307.
 		
 		
-		\bibitem{r32}Jacobs, Heidi IL, et al. "The cerebellum in Alzheimer’s disease: evaluating its role in cognitive decline." Brain 141.1 (2017): 37-47.
+		
 		
 	
 		
@@ -1410,11 +1421,7 @@
 		\bibitem{r48}Zhang, Daoqiang, et al. "Multimodal classification of Alzheimer's disease and mild cognitive impairment." Neuroimage 55.3 (2011): 856-867.
 		
 		
-		\bibitem{r51}Allen, Elena A., et al. "Tracking whole-brain connectivity dynamics in the resting state." Cerebral cortex 24.3 (2014): 663-676.
-		
-		\bibitem{r51}Chang, Catie, and Gary H. Glover. "Time–frequency dynamics of resting-state brain connectivity measured with fMRI." Neuroimage 50.1 (2010): 81-98.
-		
-		\bibitem{r52}Handwerker, Daniel A., et al. "Periodic changes in fMRI connectivity." Neuroimage 63.3 (2012): 1712-1719.
+	\bibitem{r32}Jacobs, Heidi IL, et al. "The cerebellum in Alzheimer’s disease: evaluating its role in cognitive decline." Brain 141.1 (2017): 37-47.	
 		
 		
 		
