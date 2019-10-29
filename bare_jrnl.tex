@@ -389,7 +389,7 @@
 	% Do not put math or special symbols in the title.
 	%\title{Bare Demo of IEEEtran.cls\\ for IEEE Journals}
 	%
-	\title{A Tensor Based Framework for fMRI Classification and Functional Connectivity Construction} 
+	\title{A Tensor Based Framework for rs-fMRI Classification and Functional Connectivity Construction} 
 %	
 %	\title{A tensor based classification and functional connectivity construction for fMRI images of Alzheimer's Disease in Early stages } 
 	%
@@ -406,7 +406,7 @@
 		% \thanks{A. Noroozi was with the Department
 		%		of Computer science , Atlanta,
 		%		GA, 30332 USA e-mail: (see http://www.michaelshell.org/contact.html).}
-		Mansoor Rezghi% <-this % stops a space
+		Mansoor. Rezghi% <-this % stops a space
 		% <-this % stops a space
 		\thanks{A. Noroozi and M. Rezghi are with Computer Science, Tarbiat Modares university, Tehran-Iran.}% <-this % stops a space
 		%\thanks{Manuscript received April 19, 2005; revised August 26, 2015.}
@@ -466,8 +466,8 @@
 	% As a general rule, do not put math, special symbols or citations
 	% in the abstract or keywords.
 	\begin{abstract}
-		Recently machine learning methods had gain lots of publicity among researchers
-		in order to analyze the brain images such as Resting-State Functional
+		Recently machine learning methods has gained lots of publicity among researchers
+		in order to analyze  brain images such as Resting-State Functional
 		Magnetic Resonance Imaging(rs-fMRI) to obtain a better understanding
 		of the brain and its related disease such as Alzheimer’s disease. Finding
 		the common patterns caused by a brain disorder through analyzing the
@@ -475,16 +475,16 @@
 		from normal controls have traditionally been two main goals in studying rs-fMRI
 		data. The majority of techniques for finding an FC, calculate the FC
 		matrix for each subject and then use simple techniques in order to combine
-		them to obtain general functional connectivity. Also, the states of the art classification
+		them to obtain general functional connectivity. Also, the state-of-the-art classification
 		techniques for finding subjects with brain disorders, also rely on
 		calculating an FC for each subject, vectorize them and then feed them to
-		the classifier. Considering these problems and based on multidimensional
+		the classifier. Considering these problems and based on multi-dimensional
 		nature data, we have come up with a novel tensor framework in which the
 		FC calculation for each class is done without the need to construct the FC
 		for each sample, also this framework allows us to reduce the dimensionality,
 		and create a novel discriminant function that avoids vectorization in any step
 		and uses the test data in the training process without forcing any prior
-		knowledge about its label to the classifier  
+		knowledge about its label to the classifier.  
 		Extensive experiments using the ADNI dataset demonstrate that
 		our proposed framework effectively boosts the fMRI classification performance and reveals novel connectivity patterns in Alzheimer's disease at its early stages.
 	\end{abstract}
@@ -520,17 +520,17 @@
 	
 	
 	
-	Functional Magnetic Resonance Imaging (fMRI)\cite{r23}, which is a non-invasive brain imaging technique, is vastly used among researchers in order to monitor brain activities \cite{r04}.
+	Functional Magnetic Resonance Imaging (fMRI)\cite{r23}, which is a non-invasive brain imaging technique, is vastly used by researchers in order to monitor brain activities \cite{r04}.
 %	
 %	 especially in AD and all its stages in which detecting abnormalities within small brain regions is essential 
 %	In recent years, brain imaging techniques like Positron Emission Tomography (PET)\cite{r21}, Electroencephalography (EEG)\cite{r22}
 %	and functional Magnetic Resonance Imaging (fMRI) 
 %	have been used in the analysis of AD. Due to the high spatial resolution and relatively lower costs, fMRI is vastly used among researchers in order to monitor brain activities especially in AD and all its stages in which detecting abnormalities within small brain regions is essential \cite{r04}.
-	An fMRI sample is naturally a 4D tensor consisting of 3D voxels moving in time, and each voxel contains an intensity value that is proportional to the strength of the Blood Oxygenation Level Dependent(BOLD) signal, which is a measure of the changes in blood flow, to estimate the activity of different brain regions\cite{r07}.
+	An fMRI sample is naturally a 4D tensor consisting of 3D time-varying voxels, and each voxel contains an intensity value that is proportional to the strength of the Blood Oxygenation Level Dependent(BOLD) signal, which is a measure of the changes in blood flow, to estimate the activity of different brain regions\cite{r07}.
 	Resting-state fMRI(rs-fMRI) is an fMRI technique in which the patient is asked to rest during the whole scan, focuses on the low-frequency $\left( < 0.1 Hz \right)$  oscillations of BOLD signal, which presents the underlying neuronal activation patterns of brain regions. rs-fMRI is usually used in order to analyze brain diseases like AD or Autism\cite{r33,r34}.
 
 	
-	Since each fMRI volume consist of hundreds of thousands of voxels which are often highly correlated with the surrounding voxels in the brain volume, parcellation of the brain for further analysis has moved toward the use
+	Since each fMRI volume consists of hundreds of thousands of voxels which are often highly correlated with the surrounding voxels in the brain volume, parcellation of the brain for further analysis has moved toward the use
 	of anatomical atlases. These atlases are strictly defined using
 	anatomical features of the brain, like locations of common gyri
 	and do not rely on any functional information.
@@ -551,13 +551,13 @@
 	There are two major studies associated with rs-fMRI data: finding common brain disorders caused by diseases like Alzheimer's, Autism, schizophrenia and etc. and more recently detecting patients with brain disorders using classification techniques \cite{r35,r36}. Due to the high dimensionality of data and the nature of diseases like eMCI which does not show any reliable clinical symptoms,
 	researchers moved towards advanced machine learning techniques in order to achieve more reliable analysis \cite{r37}.
 	
-	A powerful tool that is commonly used in order to achieve aforementioned goals is Functional Connectivity(FC) network.  FC is a $region \times region$ matrix $\bar{X}$ in which $\bar{x}_{ij}$ represents the functional connectivity between the $i$th and $j$th ROI. Functional connectivity is an observable
-	phenomenon quantifiable with measures of statistical dependencies, such as correlations, coherence, or transfer entropy \cite{r38}.  Recent studies have shown that some brain disorders like AD could alter the way that some brain regions interact with each other. For example, compared with the healthy, AD patients have been found decreased functional connectivity between the hippocampus and other brain regions, and MCI patients have been observed increased functional connectivity between the frontal lobe and other brain regions\cite{r04}.
+	A powerful tool that is commonly used in order to achieve aforementioned goals is the Functional Connectivity(FC) network.  FC is a $region \times region$ matrix $\bar{X}$ in which $\bar{x}_{ij}$ represents the functional connectivity between the $i$th and $j$th ROI. Functional connectivity is an observable
+	phenomenon quantifiable with measures of statistical dependencies, such as correlations, coherence, or transfer entropy \cite{r38}.  Recent studies have shown that some brain disorders like AD could alter the way that some brain regions interact with each other. For example, compared with healthy subjects, AD patients have been found decreased functional connectivity between the hippocampus and other brain regions, and MCI patients have been observed increased functional connectivity between the frontal lobe and other brain regions\cite{r04}.
 	So, Finding an FC that highlights the patterns caused by a disease, i.e. a \textbf{General} functional connectivity, has been a common goal in the rs-fMRI study for a long time. Several approaches exist to find common patterns among different brain scans. Data-driven methods such as PCA have been proposed for this task \cite{r55}. But ultimately most of them rely on calculating a network for each volume which may overlook the role of noises or outliers within the data\cite{r54}. 
 	
 	In recent years FCs are also used as features in classification. 
 	So, instead of using $X_i$ as the $i^{th}$ sample,  corresponding  FC i.e. $\bar{X}_i$ is used as a feature. Although FCs show promising results, they bring their own challenges.  The computational cost of FC is usually high and also its quality massively affects the performance of the learning process. Also, Since the conventional classifiers like \textbf{S}upport \textbf{V}ector \textbf{M}achine(SVM) and or k-NN works on data in vector format, these matrix features should be vectorized in order be fed to these classifiers.
-	This vectorization leads to high-dimensional vectors which produce poor performance due to the phenomena known as the Curse of Dimensionality. Alongside the curse of dimensionality, vectorization also destroys potential information that is embedded in the structure of data. 
+	This vectorization leads to high-dimensional vectors which produce poor performance due to the phenomena known as the Curse of Dimensionality. Alongside the curse of dimensionality, vectorization also destroys potential information that is embedded in the structure of the data. 
 	This problem has been studied especially in image data in which vectorization destroys the spatial relations within an image\cite{r60}.
 	
 	
@@ -567,17 +567,17 @@
 	The proposed classifier also outperforms state of the art eMCI classification methods. 
 	
 	Viewing each class as a tensor allows us to work with \textit{time} and \textit{region} features separately but simultaneously. This multilinear view
-	ables us to design a proper dimension reduction relative to the nature of each feature along with a discriminant function based on linear regression on latent space of samples that uses the test data to enhance the quality of the training set without forcing any a prior knowledge to the classifier, a task which is not possible through well known classifiers like SVM, logistic regression or k-NN. It is also notable that the proposed discriminant function directly works with the $X_i$s as features. Having the FC calculation step omitted in classification not only heavily affects the computational performance of the method, but it also saves us from the troubles of FCs which will be discussed in the next section.   
+	ables us to design a proper dimension reduction relative to the nature of each feature along with a discriminant function based on linear regression on latent space of samples that uses the test data to enhance the quality of the training set without forcing any a prior knowledge to the classifier, a task which is not possible through well known classifiers like SVM, logistic regression or k-NN. It is also notable that the proposed discriminant function directly works with the $X_i$s as features. Having the FC calculation step omitted in classification not only heavily affects the computational performance of the method, but it also saves us from the trouble of FCs which will be discussed in the next section.   
 	
 	To verify our approach, we conduct an extensive experimental study on rs-fMRI data from the
-	benchmark dataset.
-	As will be seen, the results demonstrate the effectiveness and advantages of our method. Specifically, the proposed framework, not only grants us superior classification accuracy to that from other methods, but it is also much faster and more stable against different data selection schemes. We have also confirmed our achieved general FC matrix using empirical data on the eMCI and Normal functional connectivity patterns.
+	benchmark dataset ADNI.
+	As will be seen, the results demonstrate the effectiveness and advantages of our method. Specifically, the proposed framework not only grants us superior classification accuracy to that from other methods, but it is also much faster and more stable against different data selection schemes. We have also confirmed our achieved general FC matrix using empirical data on the eMCI and Normal functional connectivity patterns.
 	
 	
 \section{eMCI classification and FC construction techniques}\label{related_works}
 	
 As it was mentioned before, obtaining and classifying FC matrices have become the dominant approach towards eMCI analysis. 
-Variety of methods such as Pairwise Pearson’s correlation coefficient, sparse representation \cite{r10}  and \textbf{S}parse \textbf{I}nverse \textbf{C}ovariance \textbf{E}stimation (SICE)\cite{r15} exists to obtain an FC.
+Variety of methods such as Pairwise Pearson’s correlation coefficient, sparse representation \cite{r10}  and \textbf{S}parse \textbf{I}nverse \textbf{C}ovariance \textbf{E}stimation (SICE)\cite{r15} exist to obtain an FC.
 While the first two are easy to understand and can capture pairwise functional relationship based on a pair of ROIs, the latter can account for more complex interactions among multiple ROIs, but the estimation of partial correlation involves an inversion of a covariance matrix, which may be ill-posed due to the singularity of the covariance matrix. 
 These methods result in vastly different networks\cite{r35}. On the other hand, computing the correlations, based on the entire time series of fMRI data simply measures the FC between ROIs with a scalar value, which is fixed across time. This actually implicitly hypothesizes the \textbf{Stationary} interaction patterns among ROIs which will result in a \textit{static functional connectivity} (sFC). As a result, this method may overlook the complex and dynamic interaction patterns among ROIs, which are essentially time-varying. In order to overcome this issue, \textbf{Non-stationary} methods have been proposed which results in more complex networks also known as dynamic functional connectivity (dFC)\cite{r56}. The most common and straightforward way to investigate dFC is using windowed FC, which consists of calculating a given FC measure, for example, the Pearson correlation coefficient, over consecutive windowed segments of the data\cite{r59}. Although such an analysis seems straightforward, there are also pitfalls associated with it which may cause in a non-accurate FC\cite{r57}.
 
@@ -590,11 +590,12 @@ by Subject and Motor Task. \cite{n3} and \cite{n4} also uses tensors for analyzi
 	All dominant eMCI classification techniques use the FCs as the input feature of the classifier. As a result, the burden of calculating the FC along with its computational complexity is also added to the classification process. 
 	In addition, the quality of the obtained FC heavily affects the classification performance. In this section, we will show that based on a single HOSVD, the following goals could be achieved:
 	
-	\textbullet\ $\mathbf{Classification:}$ Viewing each class as a 3D tensor ables us to separately project each mode into a smaller one, without the necessity of unfolding it into matrices or vectors, and thus preserving the structural integrity of data along with reducing its dimensions. Transferring each sample matrix $X_i\in \mathbb{R}^{T \times R}$ into the new feature space granted by tensor viewpoint, obsoletes the necessity of constructing the FC for each sample by producing a high quality and low-dimensional feature $\bar{X}_i \in \mathbb{R}^{\bar{T} \times \bar{R}}$ in which $\bar{T}$ and $\bar{R}$ are much smaller than $T$ and $R$. This viewpoint also ables us to design a novel discriminant function in which the test data is used in the training process without forcing any prior knowledge about its label to the classifier, a task which is impossible via the conventional classifiers such as SVM, K-NN or logistic regression. \\
+	\textbullet\ $\mathbf{Classification:}$ Viewing each class as a 3D tensor ables us to separately project each mode into a smaller one, without the necessity of unfolding it into matrices or vectors, and thus preserving the structural integrity of data along with reducing its dimensions. Transferring each sample matrix $X_i\in \mathbb{R}^{T \times R}$ into the new feature space granted by the tensor viewpoint, obsoletes the necessity of constructing the FC for each sample by producing a high quality and low-dimensional feature $\bar{X}_i \in \mathbb{R}^{\bar{T} \times \bar{R}}$ in which $\bar{T}$ and $\bar{R}$ are much smaller than $T$ and $R$. This viewpoint also ables us to design a novel discriminant function in which the test data is used in the training process without forcing any prior knowledge about its label to the classifier, a task which is impossible via the conventional classifiers such as SVM, K-NN or logistic regression. \\
 	%	time-region matrices  without folding and construction of FC matrix per-sample. Here data set of each class is denoted by a tensor and by using the HOSVD of such data
 	%	all region-time matrices are projected to smaller ones(without folding the data to vectors). Also based on this HOSVD decpmoistion  we design a tensor based discriminant function for classification.As the first time we propose a novel method that allows test data have a contribution in constructions of discriminant function of each class without using extra information. This idea have a big effect in the quality of propped method.
 	%	
 	%	Since this method directly works on region-time matrices as input features, its computational complexity is more smaller than state of the art methods that use FC matrices as input feature. Also the experimental results confirm the quality of this method in recognition of normal and eMCI data.
+	
 	\textbullet\ $\mathbf{General~FC~Construction:}$
 	Using the components of HOSVD extracted in the previous step, a general FC could be constructed for each class that reveals common patterns shared among all samples within each class. This technique allows us to discard the role of outliers or noisy samples.   
 	
@@ -619,7 +620,7 @@ by Subject and Motor Task. \cite{n3} and \cite{n4} also uses tensors for analyzi
 	%Also in this view different kind of features(like \emph{Time} and \emph{region} in our case) would be mixed together which may discard some important information within these features. The second approach is to deploy multilinear methods. 
 	%This vectorizatin forthermore inceasing the computatina coplexity, mixed the metioed two type of vectors. 
 	Recently multilinear dimension reduction methods like MPCA, GLRAM \cite{r60,GLRAM}  have been proposed that
-	could work with multidimensional data, without folding them into vectors.
+	could work with multi-dimensional data, without folding them into vectors.
 	In these methods, there is a freedom to select specific reduction for each kind of feature. In this section, we will use a well-known tensor decomposition named HOSVD for both dimension reduction and classification of fMRI data.
 	
 	%Let ${X_1,\ldots,X_{s_1}}$ and  ${X_1,\ldots,X_{s_2}}$ be the train data of eMCI and Normal classes, respectively.
@@ -683,7 +684,7 @@ by Subject and Motor Task. \cite{n3} and \cite{n4} also uses tensors for analyzi
 	\end{align*}
 	This means that each sample in the $i^{th}$ class could be represented as linear combination of the slices  of the tensor $\overline{\mathcal{S}}^{(i)}=\mathcal{S}^{(i)}(1:k_1^i, 1:k_2^i, :)$.
 	So if a test data like $X\in \mathbb{R}^{T\times R}$ belongs to the $i^{th}$ class
-	it's natural to expect that its
+	its natural to expect that its
 	projected version into principle region and times spaces, spanned by $U_{k_1^i},V_{k_2^i}$, i.e,
 	\[
 	Z^{(i)}= \left( U_{k_1^i}^{(i)\sf T}, V_{k_2^i}^{(i)\sf T} 
@@ -735,7 +736,8 @@ by Subject and Motor Task. \cite{n3} and \cite{n4} also uses tensors for analyzi
 	%will changed the last Slices  when dose not belong. But in our classification method only the first Slices of core tensor are exits. Also the elements of $S$ in the first and second modes are filtered and we work with $S(1:k_1^i,1:k_2^i,1:k_3^i)$.  This means that by addition of $X$ in both classes for class that it belongs to it, the first slices in \eqref{ls}, will be  adapted to have good reconstruction for this data. But for a class that dose not belong to, this addition have small changes in the slices in \eqref{ls}.
 	%It should be mentioned that
 	%since $X$ added to both data sets, so we did not use its label and the method in true.
-	After computing the HOSDVD of this new data sets $\widetilde{\mathcal{X}}^{(i)}$, we apply the method in \eqref{ls} for classification.  Algorithm 1 summarizes the proposed classification method.
+	After computing the HOSDVD of this new data sets $\widetilde{\mathcal{X}}^{(i)}$, we apply the method in \eqref{ls} for classification.
+%	  Algorithm 1 summarizes the proposed classification method.
 %	\begin{algorithm}[h!]
 %		\label{ATNB}
 %		\caption{\textbf{TNBeMCI}: Tensor based Classification method}
@@ -770,7 +772,8 @@ by Subject and Motor Task. \cite{n3} and \cite{n4} also uses tensors for analyzi
 	\subsection{General Functional Connectivity Calculations based on HOSVD} \label{FC_Construction}
 	
 	
-	As it was mentioned before, one of the main studies associated with rs-fMRI analysis is finding common functional disorders caused by a disease like AD. This can be done by constructing proper FC matrices. The majority of techniques calculate the FC matrix for each individual subject(like SICE). This may overlook tiny but common connectivities shared within a class. It is also noteworthy that the majority of non-stationary methods are not capable of constructing a relatable FC since the concept of a physical ROI is not well defined in them.  
+	As it was mentioned before, one of the main studies associated with rs-fMRI analysis is finding common functional disorders caused by a disease like AD. This can be done by constructing proper FC matrices. The majority of techniques calculate the FC matrix for each individual subject(like SICE). This may overlook tiny but common connectivities shared within a class. 
+%	It is also noteworthy that the majority of non-stationary methods are not capable of constructing a relatable FC since the concept of a physical ROI is not well defined in them.  
 	In this section, we show that based on HOSVD decomposition one general functional connectivity matrix could be obtained for each class without obtaining the per-sample FC of all data separately. 
 	
 %%%%%%%%%%%DELETED%%%%%%%%%%%%%
@@ -783,7 +786,7 @@ by Subject and Motor Task. \cite{n3} and \cite{n4} also uses tensors for analyzi
 	the  behavior of $l^{th}$  region of all samples in all times.    
 	%In tensor  $\mathcal{X}^{(i)}$ of the $l^{th}$ class, the slice $\mathcal{X}^{(i)}(:,l,:)$ denotes
 	%the  behavior of $l^{th}$  region of all samples in all times in the $i^{th}$ class. 
-	This slice could be considered as a feature for the $l^{th}$ region of the $i^{th}$ class so each region is represented as a  Times-sample feature matrix. Viewing each region as a slice would allow us to consider it's behavior in all times and across all samples, which itself allows us to shed more light on common properties and ignore individual differences that are highly possible due to the presence of noise and outliers.
+	This slice could be considered as a feature for the $l^{th}$ region of the $i^{th}$ class so each region is represented as a  Times-sample feature matrix. Viewing each region as a slice would allow us to consider its behavior in all times and across all samples, which itself allows us to shed more light on common properties and ignore individual differences that are highly possible due to the presence of noise and outliers.
 	Thus, by the properties of singular matrices in modes-1,3, and for appropriate values
 	$k_1^i,k_3^i$, each region $\mathcal{X}(:,l,:)$ could be reduced in both time and sample features separately
 	based on mode-1 and mode-3 truncated singular matrices $U_{k_1^i}^{(i)}$ and $W_{k_3}^{(i)}$
@@ -916,7 +919,7 @@ by Subject and Motor Task. \cite{n3} and \cite{n4} also uses tensors for analyzi
 	
 	
 	\subsubsection{Classification performance}
-	The classification accuracy measure(ACC), After fine-tuning the input parameter set for each method, shows that for $16$ out of $18$ different random selected datasets, our approach performs better than k-SICE, the same also holds for $15$ datasets comparing to HON. i.e. in $88.8 \%$ of datasets, proposed method works better than k-SICE and in $83.3 \%$ of datasets, it works better than FON.  
+	The classification accuracy measure(ACC), After fine-tuning the input parameter set for each method, show that for $16$ out of $18$ different random selected datasets, our approach performs better than k-SICE, the same also holds for $15$ datasets comparing to HON. i.e. in $88.8 \%$ of datasets, proposed method works better than k-SICE and in $83.3 \%$ of datasets, it works better than FON.  
 	The highest classification accuracy($86.59\%$) is achieved with the proposed method in the $15$th sample data. The highest accuracy for the HON ($84.15\%$) is achieved in the $14$th, and the highest accuracy for the SICE method ($85.37\%$) is achieved in the $6$th sample data. As it was mentioned before, being stable when the input dataset changes is a very important aspect for a classifier, in order to measure the stability, the standard deviation of accuracy along with other measures are
 	calculated. The std. of accuracy for the proposed method is $0.64$ times less than HON and $1.73$ times less than k-SICE method. Similar results also hold for other classification measures.
 	\begin{figure*}
@@ -927,7 +930,7 @@ by Subject and Motor Task. \cite{n3} and \cite{n4} also uses tensors for analyzi
 			Comparison of proposed method(Prop) with K-SICE and HON 
 			applied on 18 different dataset permutations 
 			in five different classification evaluation measures.
-			Figures \textit{a} through \textit{e} shows \textit{accuracy}, \textit{F-Score}, \textit{balanced accuracy}, \textit{sensitivity} and \textit{Youden Index} respectively
+			Figures \textit{a} through \textit{e} show \textit{accuracy}, \textit{F-Score}, \textit{balanced accuracy}, \textit{sensitivity} and \textit{Youden Index} respectively
 			along with the max, min and standard deviation of each one presented at the embedded table (f). 
 			%=======
 			%		Comparison of proposed method(Prop) with K-SICE and HON in five different classification evaluation measures along with the standard deviation of each one. %As it can be seen, the both the minimum and maximum of the proposed methods in these measurements are higher that the other two. Also the lower std. of our method indicates its stability.   
@@ -937,7 +940,7 @@ by Subject and Motor Task. \cite{n3} and \cite{n4} also uses tensors for analyzi
 	\end{figure*}
 	
 	
-	Figure \eqref{g3.2} shows the performance of these three methods in all five measurements. Some statistical information about these plots is also included in the embedded table. As it can bee seen in this figure, similar to the accuracy, the proposed method in overall works much better than FON and k-SICE. For a better Demonstration, table \eqref{AVG} provides the average of several classification measurements scores for all dataset permutations. 
+	Figure \eqref{g3.2} show the performance of these three methods in all five measurements. Some statistical information about these plots is also included in the embedded table. As it can be seen in this figure, similar to the accuracy, the proposed method in overall works much better than HON and k-SICE. For a better Demonstration, table \eqref{AVG} provides the average of several classification measurements scores for all dataset permutations. 
 	\begin{table}
 		\begin{center}
 			\caption{The Average of Different Classification Measurements in all dataset permutations in \% }
@@ -949,7 +952,7 @@ by Subject and Motor Task. \cite{n3} and \cite{n4} also uses tensors for analyzi
 				\hline
 				k-SICE  &75.57& 77.36 & 78.50 & 72.19 & 50.69 & 75.34 
 				\\
-				FON   &75.66& 77.44 & 78.40 & 72.48 & 50.89 & 75.44  
+				HON   &75.66& 77.44 & 78.40 & 72.48 & 50.89 & 75.44  
 				\\
 				Proposed &\textbf{80.43}& \textbf{82.20} & \textbf{84.60} & \textbf{75.59} & \textbf{60.20} & \textbf{80.09}
 				
@@ -961,7 +964,7 @@ by Subject and Motor Task. \cite{n3} and \cite{n4} also uses tensors for analyzi
 			%}
 		\end{center}
 	\end{table}
-	As it can be seen in this table, the average accuracy of Proposed method which is $80.43 \%$ is $4.77\%$ higher than the next method HON, and $4.86 \%$ better than k-SICE. It is noteworthy that The other two methods i.e HON and SICE shows similar results in average.  
+	As it can be seen in this table, the average accuracy of Proposed method which is $80.43 \%$ is $4.77\%$ higher than the next method HON, and $4.86 \%$ better than k-SICE. It is noteworthy that The other two methods i.e HON and SICE show similar results in average.  
 	
 	\begin{figure*}
 		\centering
@@ -1003,7 +1006,7 @@ by Subject and Motor Task. \cite{n3} and \cite{n4} also uses tensors for analyzi
 		The vector features for both Normal and eMCI classes was obtained via the proposed method as it is described in \eqref{FC_Construction}. Due to the aforementioned qualities of partial correlation, SICE is deployed in order to obtain the final FC.  
 	In order to better highlight the differences between Normal and eMCI subjects, a difference graph $D$ is constructed by subtracting the Normal FC from the eMCI FC. This graph could be seen in Figure\eqref{g3.3}. 
 	The nodes of $D$ shows the ROIs according to the AAL atlas. The size of each node is proportional to its graph clustering coefficient, i.e. the bigger node demonstrates higher activity in eMCI subjects in the corresponding ROI. 
-	Similar to nodes, the size of each edge is also proportional to the correlation between two ROI's. In addition, the edges are also color-coded in a way that the green edges show the positive edges in $D$ and the orange edges shows the negative edges in $D$. In this manner, the green edges demonstrate decreasing in activity between the corresponding nodes in eMCI subjects and vice versa, the orange edges shows increasing activity between corresponding ROIs in the eMCI subjects.   
+	Similar to nodes, the size of each edge is also proportional to the correlation between two ROIs. In addition, the edges are also color-coded in a way that the green edges show the positive edges in $D$ and the red edges show the negative edges in $D$. In this manner, the green edges demonstrate decreasing in activity between the corresponding nodes in eMCI subjects and vice versa, the red edges show increasing activity between corresponding ROIs in the eMCI subjects.   
 	
 	As it can be seen in the difference graph, the big nodes i.e. ROIs with higher activities does not necessarily establish strong connections with the other nodes. As an obvious example, higher activities in Lingual gyrus(ROI index: 47,48)\cite{r25}, Calcarine sulcus(ROI index: 43, 44)\cite{r26,r27}, Supplementary motor area(ROI index: 19,20)\cite{r27,r28} and Temporal\_mid\_L(ROI index: 85)\cite{r29} are easily detectable. The majority of ROIs located in frontal lobe also shows rather high activities comparing to normal subjects\cite{r30,r04}.
 	
@@ -1346,21 +1349,21 @@ by Subject and Motor Task. \cite{n3} and \cite{n4} also uses tensors for analyzi
 	\begin{thebibliography}{1}
 		
 		\bibitem{r01}
-		Caselli, Richard J., et al. "Longitudinal changes in cognition and behavior in asymptomatic carriers of the APOE e4 allele." Neurology 62.11 (2004): 1990-1995.
+		Caselli, Richard J., et al. ``Longitudinal changes in cognition and behavior in asymptomatic carriers of the APOE e4 allele." Neurology 62.11 (2004): 1990-1995.
 		
 		\bibitem{r02}
-		Brookmeyer, Ron, et al. "Forecasting the global burden of Alzheimer’s disease." Alzheimer's \& dementia: the journal of the Alzheimer's Association 3.3 (2007): 186-191.
+		Brookmeyer, Ron, et al. ``Forecasting the global burden of Alzheimer’s disease." Alzheimer's \& dementia: the journal of the Alzheimer's Association 3.3 (2007): 186-191.
 		
 		\bibitem{r03}
-		Musha, Toshimitsu, et al. "EEG markers for characterizing anomalous activities of cerebral neurons in NAT (neuronal activity topography) method." IEEE Transactions on Biomedical Engineering 60.8 (2013): 2332-2338.
+		Musha, Toshimitsu, et al. ``EEG markers for characterizing anomalous activities of cerebral neurons in NAT (neuronal activity topography) method." IEEE Transactions on Biomedical Engineering 60.8 (2013): 2332-2338.
 		
-		\bibitem{r23}Golby, Alexandra, et al. "Memory encoding in Alzheimer's disease: an fMRI study of explicit and implicit memory." Brain 128.4 (2005): 773-787.
+		\bibitem{r23}Golby, Alexandra, et al. ``Memory encoding in Alzheimer's disease: an fMRI study of explicit and implicit memory." Brain 128.4 (2005): 773-787.
 		
-		\bibitem{r04}Dennis, Emily L., and Paul M. Thompson. "Functional brain connectivity using fMRI in aging and Alzheimer’s disease." Neuropsychology review 24.1 (2014): 49-62.
+		\bibitem{r04}Dennis, Emily L., and Paul M. Thompson. ``Functional brain connectivity using fMRI in aging and Alzheimer’s disease." Neuropsychology review 24.1 (2014): 49-62.
 		
 		\bibitem{r07}
-		R. Graaf and K. Kevin. Methods and apparatus for
-		compensating eld inhomogeneities in magnetic resonance
+		R. Graaf and K. Kevin. ``Methods and apparatus for
+		compensating eld inhomogeneities in magnetic resonance"
 		studies. US Patent No. 8035387, 2011.
 		
 		
@@ -1368,34 +1371,34 @@ by Subject and Motor Task. \cite{n3} and \cite{n4} also uses tensors for analyzi
 		new approach to study dynamic brain connectivity during rest,” NeuroImage,
 		vol. 83, pp. 937–950, 2013.
 		
-		\bibitem{r34}Cherkassky, Vladimir L., et al. "Functional connectivity in a baseline resting-state network in autism." Neuroreport 17.16 (2006): 1687-1690.
+		\bibitem{r34}Cherkassky, Vladimir L., et al. ``Functional connectivity in a baseline resting-state network in autism." Neuroreport 17.16 (2006): 1687-1690.
 		
 		\bibitem{r09}
-		Stanley, Matthew Lawrence, et al. "Defining nodes in complex brain networks." Frontiers in computational neuroscience 7 (2013): 169.
+		Stanley, Matthew Lawrence, et al. ``Defining nodes in complex brain networks." Frontiers in computational neuroscience 7 (2013): 169.
 		
-		\bibitem{r35}Du, Yuhui, Zening Fu, and Vince D. Calhoun. "Classification and prediction of brain disorders using functional connectivity: promising but challenging." Frontiers in neuroscience 12 (2018).
+		\bibitem{r35}Du, Yuhui, Zening Fu, and Vince D. Calhoun. ``Classification and prediction of brain disorders using functional connectivity: promising but challenging." Frontiers in neuroscience 12 (2018).
 		
-		\bibitem{r36}de Vos, Frank, et al. "A comprehensive analysis of resting state fMRI measures to classify individual patients with Alzheimer's disease." Neuroimage 167 (2018): 62-72.
+		\bibitem{r36}de Vos, Frank, et al. ``A comprehensive analysis of resting state fMRI measures to classify individual patients with Alzheimer's disease." Neuroimage 167 (2018): 62-72.
 		
-		\bibitem{r37}Cuingnet, Rémi, et al. "Automatic classification of patients with Alzheimer's disease from structural MRI: a comparison of ten methods using the ADNI database." neuroimage 56.2 (2011): 766-781.
+		\bibitem{r37}Cuingnet, Rémi, et al. ``Automatic classification of patients with Alzheimer's disease from structural MRI: a comparison of ten methods using the ADNI database." neuroimage 56.2 (2011): 766-781.
 		
 		
-			\bibitem{r38}Friston, Karl J. "Functional and effective connectivity: a review." Brain connectivity 1.1 (2011): 13-36.
+			\bibitem{r38}Friston, Karl J. ``Functional and effective connectivity: a review." Brain connectivity 1.1 (2011): 13-36.
 			
 			
-		\bibitem{r55}Leonardi, Nora, et al. "Principal components of functional connectivity: a new approach to study dynamic brain connectivity during rest." NeuroImage 83 (2013): 937-950.
+		\bibitem{r55}Leonardi, Nora, et al. ``Principal components of functional connectivity: a new approach to study dynamic brain connectivity during rest." NeuroImage 83 (2013): 937-950.
 	
 	%		\bibitem{r53}Supekar, Kaustubh, et al. "Network analysis of intrinsic functional brain connectivity in Alzheimer's disease." PLoS computational biology 4.6 (2008): e1000100.
 	
-	\bibitem{r54}Contreras, Joey A., et al. "Resting state network modularity along the prodromal late onset Alzheimer's disease continuum." NeuroImage: Clinical 22 (2019): 101687.
+	\bibitem{r54}Contreras, Joey A., et al. ``Resting state network modularity along the prodromal late onset Alzheimer's disease continuum." NeuroImage: Clinical 22 (2019): 101687.
 	
 	
-	\bibitem{r60}Ahmadi, Soheil, and Mansoor Rezghi. "A novel extension of Generalized Low-Rank Approximation of Matrices based on multiple-pairs of transformations." CoRR (2018).
+	\bibitem{r60}Ahmadi, Soheil, and Mansoor Rezghi. ``A novel extension of Generalized Low-Rank Approximation of Matrices based on multiple-pairs of transformations." CoRR (2018).
 	
 	
 	
 	\bibitem{r10}
-	Jie, Biao, et al. "Integration of network topological and connectivity properties for neuroimaging classification." IEEE transactions on biomedical engineering 61.2 (2014): 576-589.
+	Jie, Biao, et al. ``Integration of network topological and connectivity properties for neuroimaging classification." IEEE transactions on biomedical engineering 61.2 (2014): 576-589.
 	
 	%
 	%		\bibitem{r11}
@@ -1410,46 +1413,46 @@ by Subject and Motor Task. \cite{n3} and \cite{n4} also uses tensors for analyzi
 	%		Wright, John, et al. "Robust face recognition via sparse representation." IEEE transactions on pattern analysis and machine intelligence 31.2 (2009): 210-227.
 	
 	\bibitem{r15}
-	Huang, Shuai, et al. "Learning brain connectivity of Alzheimer's disease by sparse inverse covariance estimation." NeuroImage 50.3 (2010): 935-949.
+	Huang, Shuai, et al. ``Learning brain connectivity of Alzheimer's disease by sparse inverse covariance estimation." NeuroImage 50.3 (2010): 935-949.
 	
 	
-	\bibitem{r56}Leonardi, Nora, and Dimitri Van De Ville. "On spurious and real fluctuations of dynamic functional connectivity during rest." Neuroimage 104 (2015): 430-436.
+	\bibitem{r56}Leonardi, Nora, and Dimitri Van De Ville. ``On spurious and real fluctuations of dynamic functional connectivity during rest." Neuroimage 104 (2015): 430-436.
 	
 	
 	%		\bibitem{r58}Barttfeld, Pablo, et al. "Signature of consciousness in the dynamics of resting-state brain activity." Proceedings of the National Academy of Sciences 112.3 (2015): 887-892.
 	
-	\bibitem{r59}Zalesky, Andrew, et al. "Time-resolved resting-state brain networks." Proceedings of the National Academy of Sciences 111.28 (2014): 10341-10346.
+	\bibitem{r59}Zalesky, Andrew, et al. ``Time-resolved resting-state brain networks." Proceedings of the National Academy of Sciences 111.28 (2014): 10341-10346.
 	
 	\bibitem{r57}
-	Hindriks, Rikkert, et al. "Can sliding-window correlations reveal dynamic functional connectivity in resting-state fMRI?." Neuroimage 127 (2016): 242-256.
+	Hindriks, Rikkert, et al. ``Can sliding-window correlations reveal dynamic functional connectivity in resting-state fMRI?." Neuroimage 127 (2016): 242-256.
 		
 		
 		\bibitem{n1}
-	Leonardi, Nora, and Dimitri Van De Ville. "Identifying network correlates of brain states using tensor decompositions of whole-brain dynamic functional connectivity." 2013 International Workshop on Pattern Recognition in Neuroimaging. IEEE, 2013.
+	Leonardi, Nora, and Dimitri Van De Ville. ``Identifying network correlates of brain states using tensor decompositions of whole-brain dynamic functional connectivity." 2013 International Workshop on Pattern Recognition in Neuroimaging. IEEE, 2013.
 	
-	\bibitem{n2} Park, Sung Won. "Multifactor analysis for fmri brain image classification by subject and motor task." Electrical and computer engineering technical report (2011).
-	
-	
-	\bibitem{n3}Al-sharoa, Esraa, Mahmood Al-khassaweneh, and Selin Aviyente. "Tensor Based Temporal and Multilayer Community Detection for Studying Brain Dynamics During Resting State fMRI." IEEE Transactions on Biomedical Engineering 66.3 (2018): 695-709.
-	
-	\bibitem{n4}Ozdemir, Alp, et al. "Multi-scale higher order singular value decomposition (MS-HoSVD) for resting-state FMRI compression and analysis." 2017 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP). IEEE, 2017.
-	
-	\bibitem{n5} He, Lifang, et al. "Multi-way multi-level kernel modeling for neuroimaging classification." Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2017.
-	
-	\bibitem{n6} Ma, Guixiang, et al. "Spatio-temporal tensor analysis for whole-brain fmri classification." Proceedings of the 2016 SIAM International Conference on Data Mining. Society for Industrial and Applied Mathematics, 2016.
+	\bibitem{n2} Park, Sung Won. ``Multifactor analysis for fmri brain image classification by subject and motor task." Electrical and computer engineering technical report (2011).
 	
 	
-	\bibitem{GLRAM}Ye, Jieping. "Generalized low rank approximations of matrices." Machine Learning 61.1-3 (2005): 167-191.
+	\bibitem{n3}Al-sharoa, Esraa, Mahmood Al-khassaweneh, and Selin Aviyente. ``Tensor Based Temporal and Multilayer Community Detection for Studying Brain Dynamics During Resting State fMRI." IEEE Transactions on Biomedical Engineering 66.3 (2018): 695-709.
+	
+	\bibitem{n4}Ozdemir, Alp, et al. ``Multi-scale higher order singular value decomposition (MS-HoSVD) for resting-state FMRI compression and analysis." 2017 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP). IEEE, 2017.
+	
+	\bibitem{n5} He, Lifang, et al. ``Multi-way multi-level kernel modeling for neuroimaging classification." Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2017.
+	
+	\bibitem{n6} Ma, Guixiang, et al. ``Spatio-temporal tensor analysis for whole-brain fmri classification." Proceedings of the 2016 SIAM International Conference on Data Mining. Society for Industrial and Applied Mathematics, 2016.
 	
 	
-		\bibitem{r64}Rezghi, Mansoor. "A novel fast tensor-based preconditioner for image restoration." IEEE Transactions on Image Processing 26.9 (2017): 4499-4508.
+	\bibitem{GLRAM}Ye, Jieping. ``Generalized low rank approximations of matrices." Machine Learning 61.1-3 (2005): 167-191.
+	
+	
+		\bibitem{r64}Rezghi, Mansoor. ``A novel fast tensor-based preconditioner for image restoration." IEEE Transactions on Image Processing 26.9 (2017): 4499-4508.
 		
 		
 	\bibitem{r14}
-	Zhang, Jianjia, et al. "Functional brain network classification with compact representation of SICE matrices." IEEE Transactions on Biomedical Engineering 62.6 (2015): 1623-1634.
+	Zhang, Jianjia, et al. ``Functional brain network classification with compact representation of SICE matrices." IEEE Transactions on Biomedical Engineering 62.6 (2015): 1623-1634.
 	
 	\bibitem{r14a}
-	Chen, Xiaobo, et al. "High‐order resting‐state functional connectivity network for MCI classification." Human brain mapping 37.9 (2016): 3282-3296.
+	Chen, Xiaobo, et al. ``High‐order resting‐state functional connectivity network for MCI classification." Human brain mapping 37.9 (2016): 3282-3296.
 %************************************************		
 		
 %		\bibitem{r21}
@@ -1554,7 +1557,7 @@ by Subject and Motor Task. \cite{n3} and \cite{n4} also uses tensors for analyzi
 %		for MCI classification,” in Proc. Med. Image Comput. Comput.-Assisted
 %		Intervention Conf., 2012, pp. 212–219.
 		
-		\bibitem{r65}Tan, Pang-Ning. Introduction to data mining. Pearson Education India, 2018.
+		\bibitem{r65}Tan, Pang-Ning. ``Introduction to data mining." Pearson Education India, 2018.
 		
 		%%%*/*/*/*/*/*/*/*/*/ HERE HRRE
 		
@@ -1571,19 +1574,19 @@ by Subject and Motor Task. \cite{n3} and \cite{n4} also uses tensors for analyzi
 		
 		
 		
-		\bibitem{r25}He, Yong, et al. "Regional coherence changes in the early stages of Alzheimer’s disease: a combined structural and resting-state functional MRI study." Neuroimage 35.2 (2007): 488-500.
+		\bibitem{r25}He, Yong, et al. ``Regional coherence changes in the early stages of Alzheimer’s disease: a combined structural and resting-state functional MRI study." Neuroimage 35.2 (2007): 488-500.
 		
 		
 		
-		\bibitem{r26}Bakkour, Akram, et al. "The effects of aging and Alzheimer's disease on cerebral cortical anatomy: specificity and differential relationships with cognition." Neuroimage 76 (2013): 332-344.
+		\bibitem{r26}Bakkour, Akram, et al. ``The effects of aging and Alzheimer's disease on cerebral cortical anatomy: specificity and differential relationships with cognition." Neuroimage 76 (2013): 332-344.
 		
-		\bibitem{r27}Brewer, Alyssa A., and Brian Barton. "Visual cortex in aging and Alzheimer's disease: changes in visual field maps and population receptive fields." Frontiers in psychology 5 (2014): 74.
+		\bibitem{r27}Brewer, Alyssa A., and Brian Barton. ``Visual cortex in aging and Alzheimer's disease: changes in visual field maps and population receptive fields." Frontiers in psychology 5 (2014): 74.
 		
-		\bibitem{r28}Jacobsen, Jörn-Henrik, et al. "Why musical memory can be preserved in advanced Alzheimer’s disease." Brain 138.8 (2015): 2438-2450.
+		\bibitem{r28}Jacobsen, Jörn-Henrik, et al. ``Why musical memory can be preserved in advanced Alzheimer’s disease." Brain 138.8 (2015): 2438-2450.
 		
-		\bibitem{r29}Kosicek, Marko, and Silva Hecimovic. "Phospholipids and Alzheimer’s disease: alterations, mechanisms and potential biomarkers." International journal of molecular sciences 14.1 (2013): 1310-1322.
+		\bibitem{r29}Kosicek, Marko, and Silva Hecimovic. ``Phospholipids and Alzheimer’s disease: alterations, mechanisms and potential biomarkers." International journal of molecular sciences 14.1 (2013): 1310-1322.
 		
-		\bibitem{r30}Salvatore, Christian, et al. "Magnetic resonance imaging biomarkers for the early diagnosis of Alzheimer's disease: a machine learning approach." Frontiers in neuroscience 9 (2015): 307.
+		\bibitem{r30}Salvatore, Christian, et al. ``Magnetic resonance imaging biomarkers for the early diagnosis of Alzheimer's disease: a machine learning approach." Frontiers in neuroscience 9 (2015): 307.
 		
 		
 		
@@ -1600,26 +1603,26 @@ by Subject and Motor Task. \cite{n3} and \cite{n4} also uses tensors for analyzi
 		
 		%		\bibitem{r39}Jones, David T., et al. "Non-stationarity in the “resting brain’s” modular architecture." PloS one 7.6 (2012): e39731.
 		
-		\bibitem{r40}Brickman, Adam M., et al. "Reconsidering harbingers of dementia: progression of parietal lobe white matter hyperintensities predicts Alzheimer's disease incidence." Neurobiology of aging 36.1 (2015): 27-32.
+		\bibitem{r40}Brickman, Adam M., et al. ``Reconsidering harbingers of dementia: progression of parietal lobe white matter hyperintensities predicts Alzheimer's disease incidence." Neurobiology of aging 36.1 (2015): 27-32.
 		
-		\bibitem{r41}De Reuck, J., et al. "Topography of cortical microbleeds in Alzheimer’s disease with and without cerebral amyloid angiopathy: a post-mortem 7.0-tesla MRI Study." Aging and disease 6.6 (2015): 437.
+		\bibitem{r41}De Reuck, J., et al. ``Topography of cortical microbleeds in Alzheimer’s disease with and without cerebral amyloid angiopathy: a post-mortem 7.0-tesla MRI Study." Aging and disease 6.6 (2015): 437.
 		
-		\bibitem{r42}Perani, Daniela, et al. "The impact of bilingualism on brain reserve and metabolic connectivity in Alzheimer's dementia." Proceedings of the National Academy of Sciences 114.7 (2017): 1690-1695.
+		\bibitem{r42}Perani, Daniela, et al. ``The impact of bilingualism on brain reserve and metabolic connectivity in Alzheimer's dementia." Proceedings of the National Academy of Sciences 114.7 (2017): 1690-1695.
 		
-		\bibitem{r43}Watson, Rosie, et al. "Subcortical volume changes in dementia with Lewy bodies and Alzheimer's disease. A comparison with healthy aging." International psychogeriatrics 28.4 (2016): 529-536.
+		\bibitem{r43}Watson, Rosie, et al. ``Subcortical volume changes in dementia with Lewy bodies and Alzheimer's disease. A comparison with healthy aging." International psychogeriatrics 28.4 (2016): 529-536.
 		
-		\bibitem{r44}Cai, Suping, et al. "Changes in thalamic connectivity in the early and late stages of amnestic mild cognitive impairment: a resting-state functional magnetic resonance study from ADNI." PloS one 10.2 (2015): e0115573.
+		\bibitem{r44}Cai, Suping, et al. ``Changes in thalamic connectivity in the early and late stages of amnestic mild cognitive impairment: a resting-state functional magnetic resonance study from ADNI." PloS one 10.2 (2015): e0115573.
 		
-		\bibitem{r45}Ortner, Marion, et al. "Progressively Disrupted intrinsic Functional connectivity of Basolateral amygdala in Very early alzheimer’s Disease." Frontiers in neurology 7 (2016): 132.
+		\bibitem{r45}Ortner, Marion, et al. ``Progressively Disrupted intrinsic Functional connectivity of Basolateral amygdala in Very early alzheimer’s Disease." Frontiers in neurology 7 (2016): 132.
 		
-		\bibitem{r46}Steketee, Rebecca ME, et al. "Early-stage differentiation between presenile Alzheimer’s disease and frontotemporal dementia using arterial spin labeling MRI." European radiology 26.1 (2016): 244-253.
+		\bibitem{r46}Steketee, Rebecca ME, et al. ``Early-stage differentiation between presenile Alzheimer’s disease and frontotemporal dementia using arterial spin labeling MRI." European radiology 26.1 (2016): 244-253.
 		
-		\bibitem{r47}Sanz-Arigita, Ernesto J., et al. "Loss of ‘small-world’networks in Alzheimer's disease: graph analysis of FMRI resting-state functional connectivity." PloS one 5.11 (2010): e13788.
+		\bibitem{r47}Sanz-Arigita, Ernesto J., et al. ``Loss of ‘small-world’networks in Alzheimer's disease: graph analysis of FMRI resting-state functional connectivity." PloS one 5.11 (2010): e13788.
 		
-		\bibitem{r48}Zhang, Daoqiang, et al. "Multimodal classification of Alzheimer's disease and mild cognitive impairment." Neuroimage 55.3 (2011): 856-867.
+		\bibitem{r48}Zhang, Daoqiang, et al. ``Multimodal classification of Alzheimer's disease and mild cognitive impairment." Neuroimage 55.3 (2011): 856-867.
 		
 		
-		\bibitem{r32}Jacobs, Heidi IL, et al. "The cerebellum in Alzheimer’s disease: evaluating its role in cognitive decline." Brain 141.1 (2017): 37-47.
+		\bibitem{r32}Jacobs, Heidi IL, et al. ``The cerebellum in Alzheimer’s disease: evaluating its role in cognitive decline." Brain 141.1 (2017): 37-47.
 		
 	
 		
