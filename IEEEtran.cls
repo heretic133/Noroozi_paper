@@ -4788,7 +4788,7 @@ between column types.}%
   \let\thanks\relax}
 
 
-% V1.8 parbox to format \@IEEEtitleabstractindextext
+% V1.8 parbox to format \@IEEEtitlearactindextext
 \long\def\@IEEEtitleabstractindextextbox#1{\parbox{1\textwidth}{#1}}
 % V1.8 compsoc is partial width
 \ifCLASSOPTIONcompsoc
